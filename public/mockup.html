@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>businessQuest — Mockup v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+   Taste Skill: VARIANCE 8 / MOTION 7 / DENSITY 5
+   Vibe: Editorial Luxury (warm creams)
+   Layout: Asymmetrical Bento
+   ═══════════════════════════════════════════ */
+
+:root {
+  --magenta: #E8067A;
+  --magenta-light: #FF4DA6;
+  --magenta-dim: #FFB3D1;
+  --orange: #FF6B2B;
+  --orange-light: #FFAB82;
+
+  --bg: #FAF9F7;
+  --bg-alt: #F3EDE6;
+  --bg-warm: #FFF8F2;
+  --card: #FFFFFF;
+
+  --text: #1A1118;
+  --text-muted: #6B5C66;
+  --text-light: #A3929D;
+
+  --dark: #140A10;
+  --dark-card: #1E1018;
+
+  --gradient-brand: linear-gradient(135deg, #E8067A 0%, #FF6B2B 100%);
+  --gradient-warm: linear-gradient(160deg, #FFE4F0 0%, #FFF3E8 40%, #FAF9F7 100%);
+
+  --ease-expo: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --radius-xl: 2rem;
+  --radius-lg: 1.25rem;
+  --radius-md: 0.75rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Grain overlay — fixed, pointer-events-none (taste skill §5) */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--magenta); border-radius: 2px; }
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+
+@keyframes blobMorph1 {
+  0%, 100% { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; transform: translate(0, 0) scale(1) rotate(0deg); }
+  33%      { border-radius: 50% 50% 40% 60% / 55% 40% 60% 45%; transform: translate(40px, -30px) scale(1.08) rotate(12deg); }
+  66%      { border-radius: 45% 55% 60% 40% / 40% 60% 45% 55%; transform: translate(-30px, 20px) scale(0.96) rotate(-8deg); }
+}
+
+@keyframes blobMorph2 {
+  0%, 100% { border-radius: 45% 55% 40% 60% / 60% 40% 55% 45%; transform: translate(0, 0) scale(1) rotate(0deg); }
+  40%      { border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%; transform: translate(-45px, 35px) scale(1.1) rotate(-15deg); }
+  70%      { border-radius: 40% 60% 50% 50% / 50% 50% 60% 40%; transform: translate(25px, -40px) scale(0.93) rotate(10deg); }
+}
+
+@keyframes blobMorph3 {
+  0%, 100% { border-radius: 55% 45% 45% 55% / 50% 55% 45% 50%; transform: translate(0, 0) scale(1); }
+  50%      { border-radius: 40% 60% 55% 45% / 60% 40% 50% 50%; transform: translate(30px, 30px) scale(1.07); }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeBlurUp {
+  from { opacity: 0; transform: translateY(24px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes rotateBlob {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition: opacity 0.8s var(--ease-expo), transform 0.8s var(--ease-expo), filter 0.8s var(--ease-expo);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Stagger delays */
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+.delay-5 { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════ */
+
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  transition: background 0.5s var(--ease-expo), box-shadow 0.5s var(--ease-expo);
+}
+/* After scroll: frosted glass warm bg */
+.navbar.scrolled {
+  background: rgba(250,249,247,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+.navbar-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+.nav-logo {
+  font-weight: 800; font-size: 1.25rem; color: var(--text);
+  text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+}
+.nav-logo .dots { display: flex; gap: 3px; }
+.nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--magenta); }
+.nav-logo .dot:nth-child(2) { opacity: 0.7; }
+.nav-logo .dot:nth-child(3) { opacity: 0.4; }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+  transition: color 0.3s var(--ease-expo); position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 1.5px; background: var(--magenta);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s var(--ease-expo);
+}
+.nav-links a:hover { color: var(--magenta); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--magenta); color: white;
+  padding: 0.6rem 0.6rem 0.6rem 1.25rem;
+  border-radius: 999px; font-size: 0.85rem; font-weight: 600;
+  text-decoration: none;
+  transition: all 0.4s var(--ease-expo);
+}
+.nav-cta:hover { box-shadow: 0 8px 24px -6px rgba(232,6,122,0.35); }
+.nav-cta:active { transform: scale(0.98); }
+.nav-cta .icon-circle {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.4s var(--ease-expo);
+}
+.nav-cta:hover .icon-circle { transform: translate(1px, -1px) scale(1.08); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .navbar-inner { padding: 0 1.25rem; }
+}
+
+/* ═══════════════════════════════════════════
+   HERO — Giga-style: video bg, text upper-center
+   ═══════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  background: #F5EDE4;
+}
+
+/* Video layer — covers full hero */
+.hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Minimal overlay — just bottom blend into next section */
+.hero-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(0deg, var(--bg) 0%, transparent 8%);
+}
+
+/* Content — upper portion, centered like Giga */
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 780px; margin: 0 auto;
+  padding: 8.5rem 2rem 0;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+}
+
+.hero-content {
+  animation: fadeBlurUp 0.9s var(--ease-expo) both;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  animation: fadeBlurUp 0.7s var(--ease-expo) both;
+  animation-delay: 0.05s;
+}
+.hero-eyebrow .pill {
+  font-size: 0.65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.45);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.hero-eyebrow .pill::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--magenta);
+  display: inline-block;
+  margin-right: 0.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 1rem;
+  animation: fadeBlurUp 0.9s var(--ease-expo) both;
+  animation-delay: 0.12s;
+  text-wrap: balance;
+}
+.hero h1 .accent { color: var(--magenta); }
+
+.hero-sub {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 48ch;
+  margin: 0 auto 1.75rem;
+  animation: fadeBlurUp 0.9s var(--ease-expo) both;
+  animation-delay: 0.2s;
+  text-wrap: pretty;
+}
+
+.hero-cta-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem;
+  animation: fadeBlurUp 0.9s var(--ease-expo) both;
+  animation-delay: 0.3s;
+}
+
+/* Minimal white CTA — Giga style */
+.btn-hero {
+  display: inline-flex; align-items: center;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px; font-size: 0.9rem; font-weight: 600;
+  color: var(--text);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.8);
+  text-decoration: none; cursor: pointer;
+  transition: all 0.5s var(--ease-expo);
+  box-shadow: 0 2px 8px -2px rgba(0,0,0,0.08);
+}
+.btn-hero:hover {
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 8px 24px -6px rgba(0,0,0,0.12);
+}
+.btn-hero:active { transform: scale(0.97); }
+
+/* Button-in-Button — used in other sections */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  background: var(--magenta); color: white;
+  padding: 0.75rem 0.75rem 0.75rem 1.75rem;
+  border-radius: 999px; font-size: 0.95rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.5s var(--ease-expo);
+  position: relative;
+}
+.btn-primary:hover {
+  box-shadow: 0 12px 32px -8px rgba(232,6,122,0.4);
+}
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary .trailing {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.5s var(--ease-expo);
+}
+.btn-primary:hover .trailing {
+  transform: translate(2px, -1px) scale(1.06);
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px; font-size: 0.95rem; font-weight: 600;
+  color: var(--magenta); text-decoration: none;
+  border: 1.5px solid rgba(232,6,122,0.25);
+  transition: all 0.4s var(--ease-expo);
+  cursor: pointer; background: transparent;
+}
+.btn-ghost:hover {
+  border-color: var(--magenta);
+  background: rgba(232,6,122,0.04);
+}
+.btn-ghost:active { transform: scale(0.98); }
+
+/* Client logos bar — bottom of hero, like Giga */
+.hero-logos {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  z-index: 3;
+  padding: 1.25rem 2rem;
+  background: rgba(250,249,247,0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0,0,0,0.04);
+  display: flex; align-items: center; justify-content: center; gap: 3rem;
+  animation: fadeBlurUp 0.7s var(--ease-expo) both 0.8s;
+}
+.hero-logos span {
+  font-size: 0.95rem; font-weight: 700; letter-spacing: 0.01em;
+  color: var(--text-muted);
+  opacity: 0.5;
+  transition: opacity 0.3s var(--ease-expo);
+  white-space: nowrap;
+}
+.hero-logos span:hover { opacity: 0.8; }
+
+@media (max-width: 768px) {
+  .hero-inner { padding: 7rem 1.25rem 0; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-logos { gap: 1.5rem; flex-wrap: wrap; padding: 1rem 1.25rem; }
+  .hero-logos span { font-size: 0.8rem; }
+}
+
+/* ═══════════════════════════════════════════
+   SERVICES — Asymmetric 2+1 grid (no 3-column!)
+   ═══════════════════════════════════════════ */
+
+.services {
+  padding: 6rem 0;
+  background: var(--bg);
+}
+.services-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+}
+.services-header {
+  margin-bottom: 3.5rem;
+}
+.services-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.services-header h2 .accent { color: var(--magenta); }
+
+/* Asymmetric grid — 2 cards left, 1 tall card right */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.25rem;
+}
+.service-card {
+  background: var(--card);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  border: 1px solid rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s var(--ease-expo);
+  cursor: pointer;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 2rem; right: 2rem;
+  height: 3px;
+  background: var(--gradient-brand);
+  border-radius: 0 0 4px 4px;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-expo);
+}
+.service-card:hover::before { opacity: 1; }
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px -15px rgba(232,6,122,0.1);
+}
+
+/* Third card spans full right column */
+.service-card:nth-child(3) {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--dark);
+  color: white;
+}
+.service-card:nth-child(3) .service-title { color: white; }
+.service-card:nth-child(3) .service-desc { color: rgba(255,255,255,0.6); }
+.service-card:nth-child(3) .service-link { color: var(--magenta-dim); }
+.service-card:nth-child(3)::before { background: rgba(255,255,255,0.15); }
+
+.service-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-md);
+  background: var(--gradient-brand);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.service-title {
+  font-size: 1.25rem; font-weight: 700; color: var(--text);
+  margin-bottom: 0.75rem;
+}
+.service-desc {
+  font-size: 0.9rem; line-height: 1.65; color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+.service-link {
+  font-size: 0.85rem; font-weight: 600; color: var(--magenta);
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  transition: gap 0.3s var(--ease-expo);
+}
+.service-link:hover { gap: 0.75rem; }
+
+@media (max-width: 768px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card:nth-child(3) { grid-column: 1; grid-row: auto; }
+}
+
+/* ═══════════════════════════════════════════
+   BENEFITS — Zig-zag, numbered
+   ═══════════════════════════════════════════ */
+
+.benefits {
+  padding: 6rem 0;
+  background: var(--bg-alt);
+}
+.benefits-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+}
+.benefits-header {
+  margin-bottom: 4rem;
+}
+.benefits-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+}
+
+.benefit-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.benefit-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.benefit-row:nth-child(even) { direction: rtl; }
+.benefit-row:nth-child(even) > * { direction: ltr; }
+
+.benefit-number {
+  font-size: clamp(5rem, 10vw, 8rem);
+  font-weight: 900; line-height: 0.85;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.12;
+  user-select: none;
+  margin-bottom: 1rem;
+}
+.benefit-title {
+  font-size: 1.5rem; font-weight: 700; color: var(--text);
+  margin-bottom: 0.75rem;
+}
+.benefit-desc {
+  font-size: 0.95rem; line-height: 1.7; color: var(--text-muted);
+  max-width: 50ch;
+}
+
+.benefit-visual {
+  display: flex; align-items: center; justify-content: center;
+}
+.benefit-visual-blob {
+  width: 200px; height: 200px;
+  background: var(--gradient-brand);
+  border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+  opacity: 0.08;
+  animation: blobMorph1 20s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .benefit-row { grid-template-columns: 1fr; gap: 1rem; }
+  .benefit-row:nth-child(even) { direction: ltr; }
+  .benefit-visual { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS — Horizontal scroll snap
+   ═══════════════════════════════════════════ */
+
+.testimonials {
+  padding: 6rem 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+.testimonials-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+}
+.testimonials-header {
+  margin-bottom: 3rem;
+}
+.testimonials-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+}
+.testimonials-intro {
+  font-size: 0.95rem; line-height: 1.7; color: var(--text-muted);
+  max-width: 60ch; margin-top: 1rem;
+}
+
+.testimonials-scroll {
+  display: flex; gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: 1rem;
+}
+.testimonials-scroll::-webkit-scrollbar { display: none; }
+
+/* Double-Bezel card (high-end-visual-design §4A) */
+.testimonial-outer {
+  flex: 0 0 380px;
+  scroll-snap-align: start;
+  /* Outer shell */
+  background: rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.04);
+  border-radius: var(--radius-xl);
+  padding: 6px;
+  transition: transform 0.5s var(--ease-expo);
+}
+.testimonial-outer:hover { transform: translateY(-4px); }
+
+.testimonial-inner {
+  /* Inner core */
+  background: var(--card);
+  border-radius: calc(var(--radius-xl) - 6px);
+  padding: 2rem;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
+  position: relative;
+  height: 100%;
+  display: flex; flex-direction: column;
+}
+.testimonial-quote-mark {
+  position: absolute; top: 0.75rem; right: 1.25rem;
+  font-size: 5rem; font-weight: 900; line-height: 1;
+  color: var(--magenta); opacity: 0.06;
+  pointer-events: none; user-select: none;
+}
+.testimonial-text {
+  font-size: 0.9rem; line-height: 1.7; color: var(--text);
+  flex: 1; margin-bottom: 1.5rem;
+  position: relative; z-index: 1;
+}
+.testimonial-author {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.testimonial-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--gradient-brand);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.testimonial-name { font-weight: 700; font-size: 0.85rem; color: var(--text); }
+.testimonial-role { font-size: 0.75rem; color: var(--text-light); }
+
+/* ═══════════════════════════════════════════
+   CLIENT LOGOS — Infinite marquee
+   ═══════════════════════════════════════════ */
+
+.logos {
+  padding: 4rem 0;
+  background: var(--bg-alt);
+  overflow: hidden;
+}
+.logos-label {
+  text-align: center;
+  font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+.logos-track {
+  display: flex;
+  animation: marquee 25s linear infinite;
+  width: max-content;
+}
+.logo-item {
+  padding: 0 3rem;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--text-light);
+  white-space: nowrap;
+  opacity: 0.4;
+  transition: opacity 0.4s var(--ease-expo), color 0.4s var(--ease-expo);
+}
+.logo-item:hover { opacity: 1; color: var(--text); }
+
+/* ═══════════════════════════════════════════
+   CASE STUDY — Split with accent border
+   ═══════════════════════════════════════════ */
+
+.case-study {
+  padding: 6rem 0;
+  background: var(--bg);
+}
+.case-study-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+}
+.case-study-content { padding-right: 2rem; }
+.case-study-tag {
+  display: inline-block;
+  font-size: 0.65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--magenta);
+  background: rgba(232,6,122,0.06);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232,6,122,0.12);
+  margin-bottom: 1.25rem;
+}
+.case-study h3 {
+  font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;
+  line-height: 1.2; margin-bottom: 1rem;
+}
+.case-study p {
+  font-size: 0.95rem; line-height: 1.7; color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.case-study-visual {
+  position: relative;
+  /* Double-bezel */
+  background: rgba(232,6,122,0.03);
+  border: 1px solid rgba(232,6,122,0.08);
+  border-radius: var(--radius-xl);
+  padding: 6px;
+}
+.case-study-visual-inner {
+  background: var(--gradient-warm);
+  border-radius: calc(var(--radius-xl) - 6px);
+  aspect-ratio: 16/10;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; color: var(--text-light); font-weight: 500;
+}
+/* Gradient accent border on left */
+.case-study-visual::before {
+  content: '';
+  position: absolute; left: -3px; top: 2rem; bottom: 2rem;
+  width: 4px; border-radius: 2px;
+  background: var(--gradient-brand);
+}
+
+@media (max-width: 768px) {
+  .case-study-inner { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════
+   FAQ — Accordion with spring animation
+   ═══════════════════════════════════════════ */
+
+.faq {
+  padding: 6rem 0;
+  background: var(--bg-alt);
+}
+.faq-inner {
+  max-width: 860px; margin: 0 auto; padding: 0 2rem;
+}
+.faq-header {
+  margin-bottom: 3rem;
+}
+.faq-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.faq-question {
+  width: 100%; text-align: left;
+  background: none; border: none; cursor: pointer;
+  font-family: inherit; font-size: 1rem; font-weight: 600;
+  color: var(--text); padding: 1.5rem 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+  transition: color 0.3s var(--ease-expo);
+}
+.faq-question:hover { color: var(--magenta); }
+
+.faq-question .marker {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(232,6,122,0.06);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.4s var(--ease-spring);
+}
+.faq-item.open .faq-question .marker {
+  background: var(--magenta);
+  transform: rotate(45deg);
+}
+.faq-question .marker svg { transition: stroke 0.3s; stroke: var(--magenta); }
+.faq-item.open .faq-question .marker svg { stroke: white; }
+
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s var(--ease-expo), opacity 0.4s var(--ease-expo);
+  opacity: 0;
+}
+.faq-item.open .faq-answer {
+  max-height: 500px;
+  opacity: 1;
+}
+.faq-answer-text {
+  padding: 0 0 1.5rem 0;
+  font-size: 0.9rem; line-height: 1.7; color: var(--text-muted);
+  max-width: 65ch;
+}
+
+/* ═══════════════════════════════════════════
+   CTA — Dark section with rotating blob
+   ═══════════════════════════════════════════ */
+
+.cta-section {
+  position: relative;
+  padding: 7rem 0;
+  background: var(--dark);
+  overflow: hidden;
+}
+.cta-blob {
+  position: absolute;
+  right: -10%; top: 50%; transform: translateY(-50%);
+  width: 450px; height: 450px;
+  background: var(--gradient-brand);
+  border-radius: 48% 52% 42% 58% / 55% 45% 60% 40%;
+  opacity: 0.2;
+  animation: rotateBlob 22s linear infinite;
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative; z-index: 2;
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+}
+.cta-eyebrow {
+  font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--magenta-dim);
+  margin-bottom: 1rem;
+}
+.cta-section h2 {
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+  color: white; margin-bottom: 1rem;
+  max-width: 600px;
+}
+.cta-section p {
+  font-size: 1.05rem; line-height: 1.7;
+  color: rgba(255,255,255,0.5);
+  max-width: 500px; margin-bottom: 2.5rem;
+}
+.btn-white {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  background: white; color: var(--magenta);
+  padding: 0.85rem 0.85rem 0.85rem 1.75rem;
+  border-radius: 999px; font-size: 0.95rem; font-weight: 700;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.5s var(--ease-expo);
+}
+.btn-white:hover { box-shadow: 0 12px 32px -8px rgba(255,255,255,0.25); }
+.btn-white:active { transform: scale(0.98); }
+.btn-white .trailing {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(232,6,122,0.1);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.5s var(--ease-expo);
+}
+.btn-white:hover .trailing { transform: translate(2px, -1px) scale(1.06); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+
+.footer {
+  background: #0C060A;
+  padding: 5rem 0 2.5rem;
+}
+.footer-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem;
+}
+.footer-brand .logo {
+  font-weight: 800; font-size: 1.1rem; color: white;
+  display: flex; align-items: center; gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.footer-brand .logo .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--magenta); }
+.footer-brand .logo .dot:nth-child(2) { opacity: 0.7; }
+.footer-brand .logo .dot:nth-child(3) { opacity: 0.4; }
+.footer-brand p {
+  font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.4);
+  margin-bottom: 1rem;
+}
+.footer h4 {
+  font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: white; margin-bottom: 1.25rem;
+}
+.footer ul { list-style: none; }
+.footer li { margin-bottom: 0.75rem; }
+.footer a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none; font-size: 0.85rem;
+  transition: color 0.3s;
+}
+.footer a:hover { color: white; }
+
+.footer-bottom {
+  max-width: 1280px; margin: 0 auto; padding: 2rem 2rem 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.75rem; color: rgba(255,255,255,0.2);
+}
+
+@media (max-width: 768px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* ═══════════════════════════════════════════
+   SECTION LABEL (reusable)
+   ═══════════════════════════════════════════ */
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.section-label .dots { display: flex; align-items: end; gap: 2px; }
+.section-label .dots span:nth-child(1) { width: 4px; height: 4px; border-radius: 50%; background: var(--magenta); }
+.section-label .dots span:nth-child(2) { width: 6px; height: 6px; border-radius: 50%; background: var(--magenta); }
+.section-label .dots span:nth-child(3) { width: 8px; height: 8px; border-radius: 50%; background: var(--magenta); }
+.section-label .text {
+  font-size: 0.65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--magenta);
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#" class="nav-logo">
+      <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+      businessQuest
+    </a>
+    <ul class="nav-links">
+      <li><a href="#uslugi">Usługi</a></li>
+      <li><a href="#korzysci">Korzyści</a></li>
+      <li><a href="#opinie">Opinie</a></li>
+      <li><a href="#case-study">Case study</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#kontakt" class="nav-cta">
+      Kontakt
+      <span class="icon-circle">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </span>
+    </a>
+  </div>
+</header>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero">
+  <!-- Background video — illustrated cinemagraph -->
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="/videos/hero-cinemagraph.mp4" type="video/mp4">
+  </video>
+  <!-- Bottom blend overlay -->
+  <div class="hero-overlay"></div>
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="pill">HR Consulting</span>
+      </div>
+      <h1>Twój pierwszy<br>zespół <span class="accent">HR</span></h1>
+      <p class="hero-sub">W wielu małych firmach tematy ludzi trafiają na biurko właściciela. Rekrutacja. Trudna rozmowa z pracownikiem. Decyzja o zmianie w zespole. Pomagamy prowadzić te sprawy tak, żeby właściciel nie musiał zajmować się nimi sam.</p>
+      <div class="hero-cta-row">
+        <a href="#kontakt" class="btn-hero">Porozmawiajmy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client logos bar at bottom — Giga style -->
+  <div class="hero-logos">
+    <span>Vercom</span>
+    <span>Navireo</span>
+    <span>Profitroom</span>
+    <span>RocketJobs</span>
+    <span>Sales Pistol</span>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="services" id="uslugi">
+  <div class="services-inner">
+    <div class="services-header reveal">
+      <div class="section-label">
+        <span class="dots"><span></span><span></span><span></span></span>
+        <span class="text">Nasze usługi</span>
+      </div>
+      <h2>Co możemy razem <span class="accent">zrobić?</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal delay-1">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        </div>
+        <div class="service-title">Prowadzimy procesy HR w Twojej firmie</div>
+        <div class="service-desc">Wykupujesz pakiet godzin i w ramach niego skupiamy się na konkretnych celach — od rekrutacji po offboarding.</div>
+        <a href="#" class="service-link">Dowiedz się więcej <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="service-title">Wprowadzamy zmiany organizacyjne</div>
+        <div class="service-desc">Nie tylko doradzamy — wdrażamy procesy od wewnątrz. Interim Management dla firm w transformacji.</div>
+        <a href="#" class="service-link">Dowiedz się więcej <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="service-card reveal delay-3">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="service-title">Budujemy kompetencje liderskie</div>
+        <div class="service-desc">Warsztaty, coaching, programy rozwojowe — budujemy liderów, którzy potrafią prowadzić zespoły przez zmiany.</div>
+        <a href="#" class="service-link">Dowiedz się więcej <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BENEFITS ═══════════ -->
+<section class="benefits" id="korzysci">
+  <div class="benefits-inner">
+    <div class="benefits-header reveal">
+      <div class="section-label">
+        <span class="dots"><span></span><span></span><span></span></span>
+        <span class="text">Korzyści</span>
+      </div>
+      <h2>Co zyskujesz współpracując<br>z Business Quest</h2>
+    </div>
+
+    <div class="benefit-row reveal">
+      <div>
+        <div class="benefit-number">01</div>
+        <div class="benefit-title">Przejrzysty model rozliczeń</div>
+        <div class="benefit-desc">Wykupujesz pakiet godzin na dany okres czasu i w ramach niego skupiamy się na konkretnych celach.</div>
+      </div>
+      <div class="benefit-visual"><div class="benefit-visual-blob"></div></div>
+    </div>
+
+    <div class="benefit-row reveal">
+      <div>
+        <div class="benefit-number">02</div>
+        <div class="benefit-title">Operacyjne wsparcie</div>
+        <div class="benefit-desc">Nie jesteśmy agencją rekrutacyjną ani firmą szkoleniową, potrafimy nie tylko doradzić, ale też wdrażać procesy.</div>
+      </div>
+      <div class="benefit-visual"><div class="benefit-visual-blob" style="animation-delay: -5s;"></div></div>
+    </div>
+
+    <div class="benefit-row reveal">
+      <div>
+        <div class="benefit-number">03</div>
+        <div class="benefit-title">Elastyczne podejście</div>
+        <div class="benefit-desc">Najbardziej zależy nam na wprowadzeniu realnych zmian w Twojej firmie, dlatego zakres współpracy omawiamy na bieżąco i z uwzględnieniem Twoich potrzeb.</div>
+      </div>
+      <div class="benefit-visual"><div class="benefit-visual-blob" style="animation-delay: -10s;"></div></div>
+    </div>
+
+    <div class="benefit-row reveal">
+      <div>
+        <div class="benefit-number">04</div>
+        <div class="benefit-title">Porozmawiajmy o Twoich celach</div>
+        <div class="benefit-desc">Niezależnie od tego z czym się mierzysz w swojej firmie, pamiętaj, że ktoś już miał podobne wyzwanie. Chętnie pomożemy Ci znaleźć rozwiązanie.</div>
+      </div>
+      <div class="benefit-visual" style="justify-content: flex-start;">
+        <a href="#kontakt" class="btn-primary" style="margin-top: 1rem;">
+          Porozmawiajmy
+          <span class="trailing">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="testimonials" id="opinie">
+  <div class="testimonials-inner">
+    <div class="testimonials-header reveal">
+      <div class="section-label">
+        <span class="dots"><span></span><span></span><span></span></span>
+        <span class="text">Opinie klientów</span>
+      </div>
+      <h2>Klienci o Business Quest</h2>
+      <p class="testimonials-intro">Nasza misja zawsze była jasna: dostarczać klientom rozwiązania o najwyższej jakości i pomagać w osiąganiu celów biznesowych.</p>
+    </div>
+
+    <div class="testimonials-scroll">
+      <!-- Card 1 -->
+      <div class="testimonial-outer">
+        <div class="testimonial-inner">
+          <div class="testimonial-quote-mark">&ldquo;</div>
+          <div class="testimonial-text">Współpracę z zespołem HR cenię ze względu na neutralność w podejściu do kandydatów, oraz zaangażowanie w udzielenie odpowiedzi i feedback.</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M</div>
+            <div>
+              <div class="testimonial-name">Michał Dąbrowski</div>
+              <div class="testimonial-role">HEAD of Marketing · Vercom</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="testimonial-outer">
+        <div class="testimonial-inner">
+          <div class="testimonial-quote-mark">&ldquo;</div>
+          <div class="testimonial-text">Współpraca z Alicją i zespołem w ramach usługi Interim Managementu oparta jest na profesjonalnym podejściu, dobrym poznaniu potrzeb firmy i ciągłym dostosowywaniu rozwiązań do zmieniających się potrzeb biznesowych.</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">T</div>
+            <div>
+              <div class="testimonial-name">Tomasz Czubkowski</div>
+              <div class="testimonial-role">Co-Founder · Contman</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="testimonial-outer">
+        <div class="testimonial-inner">
+          <div class="testimonial-quote-mark">&ldquo;</div>
+          <div class="testimonial-text">Najlepszy zespół w tej branży, z którym do tej pory miałem przyjemność współpracować. Przejmuje inicjatywę w rozpoznawaniu potrzeb organizacji, samodzielny i empatyczny w dostosowaniu usług, konkretny w działaniu. Polecam!</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">D</div>
+            <div>
+              <div class="testimonial-name">Daniel Zawiliński</div>
+              <div class="testimonial-role">COO · SerwerSMS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CLIENT LOGOS ═══════════ -->
+<section class="logos">
+  <div class="logos-label">Firmy, które z nami współpracują</div>
+  <div class="logos-track">
+    <span class="logo-item">Vercom</span>
+    <span class="logo-item">AppChance</span>
+    <span class="logo-item">SerwerSMS</span>
+    <span class="logo-item">Contman</span>
+    <span class="logo-item">Selsey</span>
+    <span class="logo-item">PurePC</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="logo-item">Vercom</span>
+    <span class="logo-item">AppChance</span>
+    <span class="logo-item">SerwerSMS</span>
+    <span class="logo-item">Contman</span>
+    <span class="logo-item">Selsey</span>
+    <span class="logo-item">PurePC</span>
+  </div>
+</section>
+
+<!-- ═══════════ CASE STUDY ═══════════ -->
+<section class="case-study" id="case-study">
+  <div class="case-study-inner">
+    <div class="case-study-content reveal">
+      <span class="case-study-tag">Case Study · HR</span>
+      <h3>Dedykowane wsparcie HR Managera w ramach HR na godziny</h3>
+      <p>Sekret skutecznego offboardingu tkwi w dobrze zaplanowanych i skoordynowanych działaniach kadry managerskiej.</p>
+      <a href="#" class="service-link">Czytaj więcej <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="case-study-visual reveal delay-2">
+      <div class="case-study-visual-inner">Case Study Preview</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="faq-header reveal">
+      <div class="section-label">
+        <span class="dots"><span></span><span></span><span></span></span>
+        <span class="text">FAQ</span>
+      </div>
+      <h2>Często zadawane pytania</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Powierzam Wam wrażliwy obszar w mojej firmie — skąd mogę wiedzieć, że ta współpraca się powiedzie?
+        <span class="marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-text">Zanim rozpoczniemy współpracę zawsze startujemy od ok. 2 godzinnych darmowych konsultacji. To czas, gdy wzajemnie się poznajemy oraz oceniamy, czy jesteśmy w stanie pomóc. Nie podejmujemy się projektów, na które nie mamy sprawdzonego rozwiązania — polecamy wtedy zaprzyjaźnioną firmę.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Wasze doświadczenie jest skupione wokół branży IT — jak możecie mi pomóc?
+        <span class="marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-text">Wyzwania w obszarze ludzkim są podobne w różnych branżach — istotniejsza jest skala organizacji i jej etap rozwoju. Mamy sprawdzone metody, które wdrażaliśmy w kancelariach, software housach, SaaS, a nawet klubie fitness.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Jak szybko możemy zacząć współpracę?
+        <span class="marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-text">W zależności od potrzeb proponujemy konsultanta, który ma największe kompetencje w wymaganym obszarze, co średnio trwa 2–3 tygodnie.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Ile kosztuje konsulting w obszarze HR?
+        <span class="marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-text">HR na godziny jest rozliczany według wybranego pakietu godzin, natomiast współpraca z Interim Managerem poprzez stałą miesięczną opłatę. Koszt zależy od wielkości organizacji i stopnia jej rozwoju. Jeśli chcesz poznać dokładną wycenę — umów się na bezpłatne konsultacje.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Na jak długo podpisujemy umowę?
+        <span class="marker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="faq-answer">
+        <p class="faq-answer-text">Minimalny okres współpracy w HR na godziny to miesiąc, a Interim Management to kwartał. Po przejściu na stałą współpracę podpisujemy ją zazwyczaj na czas nieokreślony z miesięcznym terminem wypowiedzenia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section" id="kontakt">
+  <div class="cta-blob"></div>
+  <div class="cta-inner">
+    <div class="cta-eyebrow reveal">Gotowy na zmianę?</div>
+    <h2 class="reveal delay-1">Porozmawiajmy o Twoich celach biznesowych</h2>
+    <p class="reveal delay-2">Niezależnie od tego z czym się mierzysz w swojej firmie, pamiętaj, że ktoś już miał podobne wyzwanie. Bezpłatna konsultacja — bez zobowiązań.</p>
+    <div class="reveal delay-3">
+      <a href="mailto:hello@businessquest.pl" class="btn-white">
+        Porozmawiajmy
+        <span class="trailing">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8067A" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </span>
+      </a>
+    </div>
+    <p class="reveal delay-4" style="margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.25);">
+      lub zadzwoń: <a href="tel:+48518419150" style="color: rgba(255,255,255,0.4); text-decoration: none;">+48 518 419 150</a>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        businessQuest
+      </div>
+      <p>BUSINESS QUEST SP. Z O.O.<br>Ul. Szewska 10/5, 61-760 Poznań<br>NIP: 7831919560</p>
+      <p><a href="tel:+48518419150">+48 518 419 150</a></p>
+    </div>
+    <div>
+      <h4>Usługi</h4>
+      <ul>
+        <li><a href="#">HR na godziny</a></li>
+        <li><a href="#">Interim Manager</a></li>
+        <li><a href="#">Warsztaty liderskie</a></li>
+        <li><a href="#">Odporność psychiczna</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Firma</h4>
+      <ul>
+        <li><a href="#">O nas</a></li>
+        <li><a href="#">Case study</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Zasoby</h4>
+      <ul>
+        <li><a href="#">Pobierz raport</a></li>
+        <li><a href="#">Polityka prywatności</a></li>
+        <li><a href="#">Regulamin</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; Business Quest 2025. Wszelkie prawa zastrzeżone.</span>
+    <span>Poznań, Polska</span>
+  </div>
+</footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+// Navbar scroll state
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// Scroll reveal (IntersectionObserver — taste skill §5C)
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '-5% 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// FAQ accordion (spring animation via CSS)
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    // Toggle current
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>

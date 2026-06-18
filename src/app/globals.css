@@ -3,25 +3,150 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand primaries */
+  --color-magenta: #F7087F;
+  --color-magenta-light: #FF5AAD;
+  --color-magenta-dim: #FFB3D1;
+  --color-orange: #FF6B2B;
+  --color-orange-light: #FFAB82;
+
+  /* Light mode backgrounds */
+  --color-bg: #FAFAF8;
+  --color-bg-alt: #F5F0EB;
+  --color-bg-card: #FFFFFF;
+
+  /* Text */
+  --color-text: #1A1118;
+  --color-text-muted: #5C4D58;
+  --color-text-light: #9B8A96;
+
+  /* Dark surfaces (CTA, footer) */
+  --color-dark: #1E0A14;
+  --color-dark-card: #2D1020;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #F7087F 0%, #FF6B2B 100%);
+  --gradient-warm-bg: linear-gradient(160deg, #FFE4F0 0%, #FFF8F0 50%, #FAFAF8 100%);
+  --gradient-dark: linear-gradient(135deg, #3D0A2A 0%, #1E0A14 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Outfit Variable', 'Outfit', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-magenta);
+  border-radius: 2px;
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Blob shape animations */
+@keyframes blobFloat1 {
+  0%, 100% {
+    border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    border-radius: 50% 50% 40% 60% / 55% 40% 60% 45%;
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    border-radius: 45% 55% 60% 40% / 40% 60% 45% 55%;
+    transform: translate(-20px, 15px) scale(0.97);
+  }
+}
+
+@keyframes blobFloat2 {
+  0%, 100% {
+    border-radius: 45% 55% 40% 60% / 60% 40% 55% 45%;
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%;
+    transform: translate(-35px, 25px) scale(1.08);
+  }
+  70% {
+    border-radius: 40% 60% 50% 50% / 50% 50% 60% 40%;
+    transform: translate(15px, -30px) scale(0.95);
+  }
+}
+
+@keyframes blobFloat3 {
+  0%, 100% {
+    border-radius: 55% 45% 45% 55% / 50% 55% 45% 50%;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    border-radius: 40% 60% 55% 45% / 60% 40% 50% 50%;
+    transform: translate(20px, 20px) scale(1.06);
+  }
+}
+
+@keyframes blobRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Hero entrance — CSS-driven so above-the-fold content is never gated on JS.
+   Final keyframe state is visible, so content shows even if animation is
+   interrupted (no-JS, slow hydration, backgrounded tab). */
+@keyframes fadeBlurUp {
+  from { opacity: 0; transform: translateY(24px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+}
+.fade-blur-up {
+  animation: fadeBlurUp 0.9s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+.fade-blur-up.d1 { animation-delay: 0.05s; }
+.fade-blur-up.d2 { animation-delay: 0.12s; }
+.fade-blur-up.d3 { animation-delay: 0.2s;  }
+.fade-blur-up.d4 { animation-delay: 0.3s;  }
+.fade-blur-up.d5 { animation-delay: 0.8s;  }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob-animate,
+  [class*="blob"],
+  .fade-blur-up {
+    animation: none !important;
+  }
+}
+
+/* Section base spacing */
+.section-py {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (max-width: 768px) {
+  .section-py {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }
