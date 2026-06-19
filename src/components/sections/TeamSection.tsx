@@ -7,8 +7,10 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import { team, teamPhoto } from "@/data/team";
 
 /* Panel = trzecia część zdjęcia 2000×1414 (aspect ~1.414); szer. = wys. * 0.4715.
-   Wysokość skaluje się z viewportem (większe zdjęcia na dużych ekranach). */
-const PANEL_H = "clamp(300px, 42vh, 600px)";
+   Kolumna = szerokość panelu (bez odstępu) → 3 panele stykają się w jedno zdjęcie.
+   Podpisy/bio są szersze i wystają poza kolumnę (centrowane) — mieszczą się
+   w przerwach, które powstają po rozjeździe. */
+const PANEL_H = "clamp(300px, 46vh, 500px)";
 const PANEL_W = `calc(${PANEL_H} * 0.4715)`;
 const POS_X = ["0%", "50%", "100%"];
 
@@ -28,40 +30,36 @@ export default function TeamSection() {
     offset: ["start start", "end end"],
   });
 
-  // Nagłówek wjeżdża do góry, gdy zaczyna się efekt
-  const headY = useTransform(scrollYProgress, [0, 0.2], [56, 0]);
-  const headOpacity = useTransform(scrollYProgress, [0, 0.12], [0, 1]);
-  // Rozjazd jednego zdjęcia na 3
-  const xLeft = useTransform(scrollYProgress, [0.1, 0.45], [0, -54]);
-  const xRight = useTransform(scrollYProgress, [0.1, 0.45], [0, 54]);
-  const yCenter = useTransform(scrollYProgress, [0.1, 0.45], [0, -34]); // CEO wyżej
-  const radius = useTransform(scrollYProgress, [0.1, 0.45], [0, 20]);
-  // Podpisy po rozjeździe, biogramy na końcu
-  const capOpacity = useTransform(scrollYProgress, [0.42, 0.58], [0, 1]);
-  const capY = useTransform(scrollYProgress, [0.42, 0.58], [14, 0]);
-  const bioOpacity = useTransform(scrollYProgress, [0.62, 0.82], [0, 1]);
-  const bioY = useTransform(scrollYProgress, [0.62, 0.82], [16, 0]);
+  // Jedno zdjęcie → rozjazd na 3 (nagłówek statyczny)
+  const xLeft = useTransform(scrollYProgress, [0.12, 0.5], [0, -88]);
+  const xRight = useTransform(scrollYProgress, [0.12, 0.5], [0, 88]);
+  const yCenter = useTransform(scrollYProgress, [0.12, 0.5], [0, -40]); // CEO wyżej
+  const radius = useTransform(scrollYProgress, [0.12, 0.5], [0, 20]);
+  // Podpisy + bio pojawiają się po rozjeździe, pod każdym zdjęciem
+  const capOpacity = useTransform(scrollYProgress, [0.5, 0.66], [0, 1]);
+  const capY = useTransform(scrollYProgress, [0.5, 0.66], [14, 0]);
+  const bioOpacity = useTransform(scrollYProgress, [0.62, 0.8], [0, 1]);
 
   const xByIndex = [xLeft, undefined, xRight];
 
   return (
     <section id="zespol" className="bg-brand-bg-subtle">
-      {/* Desktop — choreografia scroll */}
-      <div ref={ref} className="relative hidden lg:block h-[300vh]">
-        <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center px-8 pt-24">
-          <motion.div style={{ y: headY, opacity: headOpacity }} className="text-center mb-10">
+      {/* Desktop — rozjazd jednego zdjęcia na 3 + podpisy/bio pod zdjęciami */}
+      <div ref={ref} className="relative hidden lg:block h-[260vh]">
+        <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center px-8">
+          <div className="text-center mb-10">
             <SectionLabel className="justify-center mb-4">Poznaj nas</SectionLabel>
             <h2 className="text-5xl xl:text-6xl font-extrabold text-brand-text tracking-tight leading-[1.02]">
-              Ludzie za businessQuest
+              Zespół businessQuest
             </h2>
-          </motion.div>
+          </div>
 
-          <div className="flex justify-center items-start gap-6">
+          <div className="flex justify-center items-start">
             {team.map((m, i) => (
               <motion.div
                 key={m.name}
-                style={{ x: xByIndex[i], y: m.featured ? yCenter : undefined }}
-                className="flex flex-col items-center w-[300px] xl:w-[340px]"
+                style={{ x: xByIndex[i], y: m.featured ? yCenter : undefined, width: PANEL_W }}
+                className="flex flex-col items-center"
               >
                 <motion.div
                   style={{
@@ -73,9 +71,9 @@ export default function TeamSection() {
                     backgroundPositionX: POS_X[i],
                     backgroundRepeat: "no-repeat",
                   }}
-                  className="overflow-hidden bg-white"
+                  className="overflow-hidden bg-white flex-shrink-0"
                 />
-                <motion.div style={{ opacity: capOpacity, y: capY }} className="text-center mt-5">
+                <motion.div style={{ opacity: capOpacity, y: capY }} className="text-center mt-5 w-[240px] xl:w-[280px]">
                   <h3 className="font-bold text-brand-text text-xl">{m.name}</h3>
                   <p className="text-magenta text-sm font-medium mt-1">{m.role}</p>
                   <a
@@ -89,8 +87,8 @@ export default function TeamSection() {
                   </a>
                 </motion.div>
                 <motion.p
-                  style={{ opacity: bioOpacity, y: bioY }}
-                  className="text-center mt-4 text-brand-body text-[13.5px] leading-relaxed"
+                  style={{ opacity: bioOpacity }}
+                  className="text-center mt-3 w-[240px] xl:w-[280px] text-brand-body text-[13px] leading-relaxed"
                 >
                   {m.bio}
                 </motion.p>
@@ -106,7 +104,7 @@ export default function TeamSection() {
           <ScrollReveal className="mb-10">
             <SectionLabel className="mb-4">Poznaj nas</SectionLabel>
             <h2 className="text-4xl sm:text-5xl font-extrabold text-brand-text tracking-tight leading-[1.02]">
-              Ludzie za businessQuest
+              Zespół businessQuest
             </h2>
           </ScrollReveal>
           <div className="relative w-full aspect-[1.414] rounded-[1.5rem] overflow-hidden bg-white mb-10">

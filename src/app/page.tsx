@@ -14,9 +14,9 @@ export default function Home() {
       <ProblemSection />
       <ValueProposition />
       <ServicesSection />
+      <TeamSection />
       <QualificationSection />
       <TestimonialsSection />
-      <TeamSection />
       <CtaSection />
     </>
   );
