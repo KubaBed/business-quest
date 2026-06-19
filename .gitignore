@@ -37,3 +37,10 @@ next-env.d.ts
 
 # Personal research/bookmarks stash — not part of the site
 stash/
+
+# Surowe materiały klienta — zoptymalizowane wersje żyją w public/images/
+/Zdjęcia founderek/
+/Logotypy klient*/
+/Internet-*.jpg
+/*.pdf
+/*.docx

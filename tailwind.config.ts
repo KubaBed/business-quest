@@ -14,28 +14,34 @@ const config: Config = {
           light: "#FF5AAD",
           dim: "#FFB3D1",
         },
+        purple: {
+          DEFAULT: "#8B3FE8",
+        },
+        red: {
+          DEFAULT: "#FB3B2F",
+        },
         orange: {
           DEFAULT: "#FF6B2B",
           light: "#FFAB82",
         },
         brand: {
-          bg: "#FAFAF8",
-          "bg-alt": "#F5F0EB",
+          bg: "#FFFFFF",
+          "bg-subtle": "#F7F7F8",
           card: "#FFFFFF",
-          text: "#1A1118",
-          muted: "#5C4D58",
-          light: "#9B8A96",
-          dark: "#1E0A14",
-          "dark-card": "#2D1020",
+          border: "#ECECEE",
+          text: "#0E0E10",
+          body: "#3F3F46",
+          muted: "#71717A",
+          dark: "#0E0E10",
         },
       },
       fontFamily: {
         sans: ["Outfit Variable", "Outfit", "sans-serif"],
       },
       backgroundImage: {
+        "gradient-magenta": "linear-gradient(160deg, #F7087F 0%, #8B3FE8 100%)",
+        "gradient-orange": "linear-gradient(160deg, #FB3B2F 0%, #FF8A3D 100%)",
         "gradient-brand": "linear-gradient(135deg, #F7087F 0%, #FF6B2B 100%)",
-        "gradient-warm": "linear-gradient(160deg, #FFE4F0 0%, #FFF8F0 50%, #FAFAF8 100%)",
-        "gradient-dark": "linear-gradient(135deg, #3D0A2A 0%, #1E0A14 100%)",
       },
       animation: {
         "blob1": "blobFloat1 22s ease-in-out infinite",

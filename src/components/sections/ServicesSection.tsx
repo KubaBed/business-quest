@@ -1,111 +1,190 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { services } from "@/data/services";
 
-const iconSvgs: Record<string, React.ReactNode> = {
-  Briefcase: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="7" width="20" height="14" rx="2" />
-      <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
-      <path d="M12 12v4M8 14h8" />
+/* ---------- Ilustrowane mockupy (inline SVG, kolory brandu) ---------- */
+
+function RecruitMockup() {
+  const rows = [
+    { active: true },
+    { active: false },
+    { active: false },
+  ];
+  return (
+    <svg viewBox="0 0 360 240" className="w-full h-auto" role="img" aria-label="Lista kandydatów">
+      <defs>
+        <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#F7087F" />
+          <stop offset="1" stopColor="#8B3FE8" />
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="360" height="240" rx="16" fill="#fff" />
+      <rect x="20" y="20" width="120" height="10" rx="5" fill="#0E0E10" opacity="0.8" />
+      <rect x="270" y="16" width="70" height="22" rx="11" fill="url(#rg)" />
+      <rect x="286" y="24" width="38" height="6" rx="3" fill="#fff" />
+      {rows.map((r, i) => {
+        const y = 56 + i * 58;
+        return (
+          <g key={i}>
+            <rect x="20" y={y} width="320" height="46" rx="10" fill={r.active ? "#FDEAF3" : "#F7F7F8"} stroke={r.active ? "#F7087F" : "transparent"} strokeWidth="1.5" />
+            <circle cx="46" cy={y + 23} r="14" fill={r.active ? "url(#rg)" : "#D9D9DE"} />
+            <rect x="72" y={y + 13} width="110" height="8" rx="4" fill="#0E0E10" opacity="0.65" />
+            <rect x="72" y={y + 27} width="70" height="6" rx="3" fill="#0E0E10" opacity="0.3" />
+            {r.active ? (
+              <g>
+                <circle cx="312" cy={y + 23} r="13" fill="#F7087F" />
+                <path d={`M306 ${y + 23} l4 4 8 -8`} stroke="#fff" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              </g>
+            ) : (
+              <rect x="288" y={y + 18} width="48" height="10" rx="5" fill="#0E0E10" opacity="0.12" />
+            )}
+          </g>
+        );
+      })}
     </svg>
-  ),
-  Users: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+  );
+}
+
+function ChatMockup() {
+  return (
+    <svg viewBox="0 0 320 200" className="w-full h-auto" role="img" aria-label="Rozmowa">
+      <defs>
+        <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#F7087F" />
+          <stop offset="1" stopColor="#8B3FE8" />
+        </linearGradient>
+      </defs>
+      {/* incoming */}
+      <g>
+        <rect x="16" y="24" width="190" height="58" rx="16" fill="#F1F1F3" />
+        <rect x="32" y="40" width="150" height="8" rx="4" fill="#0E0E10" opacity="0.4" />
+        <rect x="32" y="56" width="110" height="8" rx="4" fill="#0E0E10" opacity="0.25" />
+      </g>
+      {/* outgoing */}
+      <g>
+        <rect x="100" y="104" width="204" height="72" rx="16" fill="url(#cg)" />
+        <rect x="118" y="122" width="168" height="8" rx="4" fill="#fff" opacity="0.95" />
+        <rect x="118" y="140" width="168" height="8" rx="4" fill="#fff" opacity="0.8" />
+        <rect x="118" y="158" width="96" height="8" rx="4" fill="#fff" opacity="0.6" />
+      </g>
     </svg>
-  ),
-  Monitor: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M8 21h8M12 17v4" />
+  );
+}
+
+function ProcessMockup() {
+  const node = (x: number, y: number, w: number, accent?: boolean) => (
+    <g>
+      <rect x={x} y={y} width={w} height="40" rx="10" fill={accent ? "#FFF3EC" : "#F7F7F8"} stroke={accent ? "#FF6B2B" : "#ECECEE"} strokeWidth="1.5" />
+      <rect x={x + 14} y={y + 12} width={w - 48} height="7" rx="3.5" fill="#0E0E10" opacity="0.55" />
+      <rect x={x + 14} y={y + 24} width={w - 70} height="6" rx="3" fill="#0E0E10" opacity="0.25" />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 460 200" className="w-full h-auto" role="img" aria-label="Struktura zespołu">
+      {/* connectors */}
+      <path d="M230 60 V90 M230 90 H90 V110 M230 90 H230 V110 M230 90 H370 V110" stroke="#D9D9DE" strokeWidth="2" fill="none" />
+      {node(150, 20, 160, true)}
+      {node(20, 110, 140)}
+      {node(160, 110, 140)}
+      {node(300, 110, 140)}
     </svg>
-  ),
-  TrendingUp: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-      <polyline points="17 6 23 6 23 12" />
-    </svg>
-  ),
-};
+  );
+}
+
+/* ---------- Sekcja ---------- */
 
 export default function ServicesSection() {
-  return (
-    <section className="section-py bg-brand-bg-alt" id="uslugi">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start">
-          {/* Left: headline */}
-          <ScrollReveal direction="right" className="lg:sticky lg:top-32">
-            <SectionLabel className="mb-5">Nasze usługi</SectionLabel>
-            <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-bold text-brand-text tracking-tight leading-tight mb-6">
-              Co robimy{" "}
-              <span className="text-gradient">najlepiej</span>
-            </h2>
-            <p className="text-brand-muted text-[15px] leading-relaxed max-w-sm">
-              Kompleksowe podejście do HR — od procesów rekrutacji przez development liderów po kulturę organizacyjną.
-            </p>
+  const [rekrutacje, sparing, procesy] = services;
 
-            {/* Three-dot decorative divider */}
-            <div className="flex flex-col gap-2 mt-8 opacity-20" aria-hidden>
-              <div className="w-2 h-2 rounded-full bg-magenta" />
-              <div className="w-1.5 h-1.5 rounded-full bg-magenta" />
-              <div className="w-1 h-1 rounded-full bg-magenta" />
-            </div>
+  return (
+    <section className="section-py bg-brand-bg-subtle" id="uslugi">
+      <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8">
+        <ScrollReveal className="mb-12 lg:mb-14 max-w-2xl">
+          <SectionLabel className="mb-4">Zakres współpracy</SectionLabel>
+          <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-brand-text tracking-tight leading-[1.02]">
+            W jakich obszarach działamy?
+          </h2>
+          <p className="mt-5 text-brand-body text-base lg:text-lg leading-relaxed">
+            Zakres dopasowujemy do sytuacji firmy. Najczęściej obejmuje trzy
+            obszary.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid lg:grid-cols-3 gap-5 lg:gap-6">
+          {/* Rekrutacje — szeroki */}
+          <ScrollReveal className="lg:col-span-2">
+            <BentoCard className="h-full">
+              <div className="grid md:grid-cols-2 gap-8 items-center h-full">
+                <div>
+                  <CardHead title={rekrutacje.title} desc={rekrutacje.description} />
+                  <BulletList items={rekrutacje.bullets} />
+                </div>
+                <div className="rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5">
+                  <RecruitMockup />
+                </div>
+              </div>
+            </BentoCard>
           </ScrollReveal>
 
-          {/* Right: 2×2 grid */}
-          <div className="grid sm:grid-cols-2 gap-5">
-            {services.map((service, i) => (
-              <ServiceCard key={service.id} service={service} delay={i * 0.1} />
-            ))}
-          </div>
+          {/* Sparing partner — wąski */}
+          <ScrollReveal delay={0.1} className="lg:col-span-1">
+            <BentoCard className="h-full flex flex-col">
+              <CardHead title={sparing.title} desc={sparing.description} />
+              <BulletList items={sparing.bullets} />
+              <div className="mt-auto pt-6 rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5">
+                <ChatMockup />
+              </div>
+            </BentoCard>
+          </ScrollReveal>
+
+          {/* Procesy HR — pełna szerokość */}
+          <ScrollReveal delay={0.15} className="lg:col-span-3">
+            <BentoCard>
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <CardHead title={procesy.title} desc={procesy.description} />
+                  <BulletList items={procesy.bullets} cols2 />
+                </div>
+                <div className="rounded-2xl bg-gradient-to-br from-orange/[0.07] to-magenta/[0.05] p-6">
+                  <ProcessMockup />
+                </div>
+              </div>
+            </BentoCard>
+          </ScrollReveal>
         </div>
       </div>
     </section>
   );
 }
 
-function ServiceCard({
-  service,
-  delay,
-}: {
-  service: (typeof services)[number];
-  delay: number;
-}) {
+function BentoCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <ScrollReveal delay={delay}>
-      <motion.div
-        className="bg-brand-card rounded-2xl p-7 shadow-sm border border-black/[0.04] group cursor-pointer h-full"
-        whileHover={{ y: -4, boxShadow: "0 12px 40px -8px rgba(247,8,127,0.15)" }}
-        transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-      >
-        {/* Icon */}
-        <div
-          className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
-          style={{ background: "var(--gradient-brand)" }}
-        >
-          {iconSvgs[service.icon]}
-        </div>
+    <div className={`rounded-[1.5rem] border border-brand-border bg-brand-card p-7 lg:p-9 shadow-sm ${className}`}>
+      {children}
+    </div>
+  );
+}
 
-        <h3 className="font-bold text-brand-text text-[17px] mb-2">{service.title}</h3>
-        <p className="text-brand-muted text-[14px] leading-relaxed mb-5">{service.description}</p>
+function CardHead({ title, desc }: { title: string; desc: string }) {
+  return (
+    <>
+      <h3 className="text-xl lg:text-2xl font-bold text-brand-text leading-snug">{title}</h3>
+      <p className="mt-2.5 text-brand-body text-[15px] leading-relaxed">{desc}</p>
+    </>
+  );
+}
 
-        <Link
-          href={service.href}
-          className="inline-flex items-center gap-1.5 text-magenta text-[13px] font-semibold group-hover:gap-2.5 transition-all duration-200"
-        >
-          Dowiedz się więcej
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </Link>
-      </motion.div>
-    </ScrollReveal>
+function BulletList({ items, cols2 = false }: { items: string[]; cols2?: boolean }) {
+  return (
+    <ul className={`mt-5 grid gap-x-6 gap-y-2.5 ${cols2 ? "sm:grid-cols-2" : ""}`}>
+      {items.map((b) => (
+        <li key={b} className="flex items-center gap-2.5 text-brand-body text-[14px]">
+          <span className="block w-1.5 h-1.5 rounded-full bg-magenta flex-shrink-0" />
+          {b}
+        </li>
+      ))}
+    </ul>
   );
 }

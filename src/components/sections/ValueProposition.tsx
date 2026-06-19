@@ -8,37 +8,48 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 const values = [
   {
     num: "01",
-    title: "Relacje",
+    title: "Nie zostajesz sam z tematami ludzi",
     description:
-      "Rekrutujemy i rozwijamy z myślą o długoterminowej współpracy, nie jednorazowej transakcji. Budujemy zaufanie, które procentuje latami.",
+      "Masz partnera, z którym przegadasz decyzje o zespole — i który pomaga je wprowadzić w życie, nie tylko nazwać.",
   },
   {
     num: "02",
-    title: "Wyniki",
+    title: "Wsparcie w realnych sytuacjach",
     description:
-      "Każde działanie jest mierzone. Dostarczamy raporty, dane i realne KPIs — bo decyzje HR powinny być oparte na faktach.",
+      "Rekrutacje, zmiany w zespole, trudne rozmowy, rozstania z pracownikiem. Jesteśmy obok właśnie wtedy, gdy robi się niewygodnie.",
   },
   {
     num: "03",
-    title: "Wzrost",
+    title: "Zrealizowane zadania, nie tylko doradztwo",
     description:
-      "Od onboardingu po program rozwoju liderów — towarzyszymy firmom na każdym etapie skalowania. Razem idziemy do przodu.",
+      "Jeśli trzeba, prowadzimy rekrutację, przygotowujemy procesy i checklisty albo wdrażamy ustalenia w zespole. Nasza rola nie kończy się na rekomendacji.",
+  },
+  {
+    num: "04",
+    title: "Proste i użyteczne rozwiązania",
+    description:
+      "Mała firma nie potrzebuje skomplikowanych procesów HR. Wprowadzamy tylko to, co realnie ułatwia pracę i da się utrzymać na co dzień.",
+  },
+  {
+    num: "05",
+    title: "Doświadczenie z wielu firm",
+    description:
+      "Pracujemy z różnymi organizacjami i branżami, więc schematy problemów rozpoznajemy szybciej — często zanim urosną.",
   },
 ];
 
 export default function ValueProposition() {
   return (
-    <section className="section-py bg-brand-bg" id="o-nas">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <ScrollReveal className="text-center mb-16 lg:mb-20">
-          <SectionLabel className="justify-center mb-4">Dlaczego BusinessQuest</SectionLabel>
-          <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-bold text-brand-text tracking-tight leading-tight max-w-2xl mx-auto">
-            Budujemy fundamenty,{" "}
-            <span className="text-gradient">które działają</span>
+    <section className="section-py bg-brand-bg" id="wartosci">
+      <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8">
+        <ScrollReveal className="mb-16 lg:mb-20 max-w-3xl">
+          <SectionLabel className="mb-4">Dlaczego my</SectionLabel>
+          <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-brand-text tracking-tight leading-[1.02]">
+            Co zyskujesz?
           </h2>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 lg:gap-x-12 lg:gap-y-16">
           {values.map((val, i) => (
             <ValueCard key={val.num} {...val} delay={i * 0.15} />
           ))}

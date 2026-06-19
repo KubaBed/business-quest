@@ -1,30 +1,32 @@
+// Prawdziwe opinie klientów (ze strony businessquest.pl + materiały klienta).
+// Autorzy pokrywają się z logotypami klientów: Contman, Vercom/Messageflow, Appchance, LexMotion.
 export const testimonials = [
   {
     quote:
-      "BusinessQuest pomogło nam zbudować strukturę HR od podstaw. W ciągu 6 miesięcy obniżyliśmy rotację o 30% i skróciliśmy onboarding o połowę. Naprawdę działają.",
-    author: "Michał Kowalski",
+      "Bardzo cenimy elastyczność zespołu BQ i ich operacyjne podejście do działań.",
+    author: "Tomasz Czubkowski",
+    role: "Co-Founder",
+    company: "Contman",
+  },
+  {
+    quote:
+      "Zespół BQ pomógł nam znaleźć osobę odpowiedzialną za sprzedaż w kanale partnerskim i sprawnie przeprowadzić cały proces rekrutacji.",
+    author: "Karolina Antonowicz",
+    role: "CRO Messageflow",
+    company: "Vercom",
+  },
+  {
+    quote:
+      "Szukaliśmy czegoś pomiędzy współpracą z konsultantem a wewnętrznym działem HR – dziś zespół BQ pełni u nas właśnie taką rolę.",
+    author: "Grzegorz Skibiński",
     role: "CTO",
-    company: "SaaS startup, 80 osób",
+    company: "Appchance",
   },
   {
     quote:
-      "Warsztat liderski PCM kompletnie zmienił podejście naszych team leadów. Teraz rozmawiają z ludźmi, a nie wydają polecenia. Efekty widać w każdym przeglądzie kwartalnym.",
-    author: "Anna Wiśniewska",
-    role: "Head of People",
-    company: "E-commerce, 200+ osób",
-  },
-  {
-    quote:
-      "Profesjonalizm na każdym etapie. Od audytu po wdrożenie — Asia i jej zespół wiedzą dokładnie, czego potrzebuje rosnąca firma technologiczna.",
-    author: "Paweł Nowak",
-    role: "CEO",
-    company: "Software House, Warszawa",
-  },
-  {
-    quote:
-      "Webinary BusinessQuest to najlepiej zainwestowane godziny w tym roku. Konkretna wiedza, zero lania wody, od razu do zastosowania.",
-    author: "Karolina Mazur",
-    role: "HR Manager",
-    company: "Kancelaria prawna, 50 osób",
+      "Dziękuję za wsparcie w rekrutacji, profesjonalizm, zaangażowanie oraz partnerskie podejście. Współpraca z Wami miała dla mnie dużą wartość.",
+    author: "Marcin Wesołowski",
+    role: "Dyrektor Operacyjny",
+    company: "LexMotion",
   },
 ];

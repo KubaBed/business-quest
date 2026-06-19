@@ -1,34 +1,41 @@
 export const services = [
   {
-    id: "consulting",
-    icon: "Briefcase",
-    title: "Konsulting HR",
-    description:
-      "Audyty procesów, polityki HR, wsparcie rekrutacyjne dla firm technologicznych, e-commerce i kancelarii.",
-    href: "#uslugi",
-  },
-  {
-    id: "workshops",
+    id: "rekrutacje",
     icon: "Users",
-    title: "Warsztaty liderskie",
+    title: "Rekrutacje i zatrudnianie",
     description:
-      "Programy rozwojowe PCM, delegowanie, komunikacja pod presją, zarządzanie stresem — dla liderów na każdym poziomie.",
-    href: "#warsztaty",
+      "Prowadzimy procesy, które zwykle zjadają najwięcej Twojego czasu i energii.",
+    bullets: [
+      "przygotowanie ogłoszeń rekrutacyjnych",
+      "selekcja kandydatów",
+      "organizacja procesu rozmów",
+      "wsparcie w decyzji o zatrudnieniu",
+    ],
   },
   {
-    id: "webinars",
-    icon: "Monitor",
-    title: "Webinary",
+    id: "sparing",
+    icon: "MessageCircle",
+    title: "Twój sparing partner w decyzjach personalnych",
     description:
-      "Eksperckie sesje online dostępne dla całego zespołu. Tematy dobierane do aktualnych wyzwań organizacji.",
-    href: "#webinary",
+      "Druga perspektywa w momentach, w których trudno decydować w pojedynkę.",
+    bullets: [
+      "trudne rozmowy z pracownikami",
+      "zmiana roli lub zakresu odpowiedzialności",
+      "sytuacje konfliktowe w zespole",
+      "decyzje o rozstaniu z pracownikiem",
+      "rozmowy o wynagrodzeniach i zmianach w zespole",
+    ],
   },
   {
-    id: "development",
-    icon: "TrendingUp",
-    title: "Rozwój zespołów",
-    description:
-      "Badania satysfakcji, feedback 360°, programy retencji i onboarding — budujemy kulturę, która zatrzymuje talent.",
-    href: "#rozwoj",
+    id: "procesy",
+    icon: "Layers",
+    title: "Procesy HR — skuteczność operacyjna zespołu",
+    description: "Porządkujemy sposób pracy zespołu, gdy firma rośnie.",
+    bullets: [
+      "doprecyzowanie zakresów odpowiedzialności",
+      "uporządkowanie struktury zespołu",
+      "ścieżki rozwoju",
+      "podstawowe zasady współpracy",
+    ],
   },
 ];

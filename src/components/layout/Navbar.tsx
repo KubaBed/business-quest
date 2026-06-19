@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const navLinks = [
   { label: "Usługi", href: "#uslugi" },
-  { label: "Warsztaty", href: "#warsztaty" },
+  { label: "Dla kogo", href: "#dla-kogo" },
   { label: "O nas", href: "#zespol" },
   { label: "Opinie", href: "#opinie" },
   { label: "Kontakt", href: "#kontakt" },
@@ -42,7 +42,7 @@ export default function Navbar() {
           className="absolute bottom-0 left-0 right-0 h-px bg-magenta-dim"
           style={{ opacity: borderOpacity }}
         />
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
+        <div className="relative max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
@@ -99,7 +99,7 @@ export default function Navbar() {
       {/* Mobile menu overlay */}
       <motion.div
         className="fixed inset-0 z-40 lg:hidden flex flex-col"
-        style={{ background: "var(--gradient-dark)" }}
+        style={{ background: "var(--gradient-magenta)" }}
         initial={{ opacity: 0, y: "-100%" }}
         animate={menuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: "-100%" }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}

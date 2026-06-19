@@ -3,31 +3,30 @@
 @tailwind utilities;
 
 :root {
-  /* Brand primaries */
+  /* Brand accents (kolor = akcent, nie tło) */
   --color-magenta: #F7087F;
   --color-magenta-light: #FF5AAD;
   --color-magenta-dim: #FFB3D1;
+  --color-purple: #8B3FE8;
+  --color-red: #FB3B2F;
   --color-orange: #FF6B2B;
   --color-orange-light: #FFAB82;
 
-  /* Light mode backgrounds */
-  --color-bg: #FAFAF8;
-  --color-bg-alt: #F5F0EB;
+  /* Light theme — białe tło */
+  --color-bg: #FFFFFF;
+  --color-bg-subtle: #F7F7F8;
   --color-bg-card: #FFFFFF;
+  --color-border: #ECECEE;
 
   /* Text */
-  --color-text: #1A1118;
-  --color-text-muted: #5C4D58;
-  --color-text-light: #9B8A96;
+  --color-text: #0E0E10;
+  --color-text-body: #3F3F46;
+  --color-text-muted: #71717A;
 
-  /* Dark surfaces (CTA, footer) */
-  --color-dark: #1E0A14;
-  --color-dark-card: #2D1020;
-
-  /* Gradients */
+  /* Gradients (z prezentacji) */
+  --gradient-magenta: linear-gradient(160deg, #F7087F 0%, #8B3FE8 100%);
+  --gradient-orange: linear-gradient(160deg, #FB3B2F 0%, #FF8A3D 100%);
   --gradient-brand: linear-gradient(135deg, #F7087F 0%, #FF6B2B 100%);
-  --gradient-warm-bg: linear-gradient(160deg, #FFE4F0 0%, #FFF8F0 50%, #FAFAF8 100%);
-  --gradient-dark: linear-gradient(135deg, #3D0A2A 0%, #1E0A14 100%);
 }
 
 * {
@@ -149,4 +148,16 @@ body {
     padding-top: 4rem;
     padding-bottom: 4rem;
   }
+}
+
+/* Marquee logotypów */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
 }

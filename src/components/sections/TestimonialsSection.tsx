@@ -5,89 +5,55 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { testimonials } from "@/data/testimonials";
 
+const ease = [0.32, 0.72, 0, 1] as const;
+
 export default function TestimonialsSection() {
   return (
     <section className="section-py bg-brand-bg overflow-hidden" id="opinie">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <ScrollReveal className="mb-12">
+      <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8">
+        <ScrollReveal className="mb-12 lg:mb-16 max-w-2xl">
           <SectionLabel className="mb-4">Opinie klientów</SectionLabel>
-          <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-bold text-brand-text tracking-tight leading-tight max-w-xl">
-            Co mówią o nas{" "}
-            <span className="text-gradient">nasi klienci</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-brand-text tracking-tight leading-[1.02]">
+            Co mówią o nas klienci
           </h2>
         </ScrollReveal>
 
-        {/* Scrollable testimonial row */}
-        <div
-          className="flex gap-5 overflow-x-auto pb-4 -mx-6 px-6 lg:-mx-8 lg:px-8"
-          style={{
-            scrollSnapType: "x mandatory",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          }}
-        >
+        <div className="grid sm:grid-cols-2 gap-5 lg:gap-6">
           {testimonials.map((t, i) => (
-            <TestimonialCard key={i} testimonial={t} index={i} />
+            <motion.figure
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10% 0px" }}
+              transition={{ duration: 0.6, ease, delay: (i % 2) * 0.08 }}
+              className="flex flex-col justify-between rounded-2xl border border-brand-border bg-brand-bg-subtle p-8 lg:p-9"
+            >
+              {/* Quote mark */}
+              <svg
+                className="text-magenta/25 mb-5"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden
+              >
+                <path d="M9.5 7H5a1 1 0 00-1 1v5a1 1 0 001 1h3v3a1 1 0 01-1 1H6a1 1 0 100 2h1a3 3 0 003-3V8a1 1 0 00-.5-1zm9 0H14a1 1 0 00-1 1v5a1 1 0 001 1h3v3a1 1 0 01-1 1h-1a1 1 0 100 2h1a3 3 0 003-3V8a1 1 0 00-.5-1z" />
+              </svg>
+
+              <blockquote className="text-brand-text text-lg lg:text-xl leading-relaxed font-medium flex-1">
+                {t.quote}
+              </blockquote>
+
+              <figcaption className="mt-7 pt-6 border-t border-brand-border">
+                <p className="font-bold text-brand-text">{t.author}</p>
+                <p className="text-brand-muted text-sm mt-0.5">
+                  {t.role} · {t.company}
+                </p>
+              </figcaption>
+            </motion.figure>
           ))}
         </div>
-
-        {/* Scroll hint */}
-        <p className="text-brand-light text-xs mt-4 text-center lg:hidden">
-          Przesuń, żeby zobaczyć więcej →
-        </p>
       </div>
     </section>
-  );
-}
-
-function TestimonialCard({
-  testimonial,
-  index,
-}: {
-  testimonial: (typeof testimonials)[number];
-  index: number;
-}) {
-  return (
-    <ScrollReveal
-      direction="left"
-      delay={index * 0.1}
-      className="flex-none w-[85vw] sm:w-[420px] lg:w-[400px]"
-    >
-      <motion.div
-        className="bg-brand-card rounded-3xl p-8 shadow-sm border border-black/[0.04] h-full relative overflow-hidden"
-        whileHover={{ y: -4, boxShadow: "0 16px 40px -12px rgba(247,8,127,0.12)" }}
-        transition={{ duration: 0.25 }}
-        style={{ scrollSnapAlign: "start" }}
-      >
-        {/* Decorative quote mark */}
-        <div
-          className="absolute top-4 right-6 text-[8rem] font-extrabold leading-none pointer-events-none select-none"
-          style={{ color: "#F7087F", opacity: 0.06 }}
-          aria-hidden
-        >
-          &ldquo;
-        </div>
-
-        <p className="text-brand-text text-[15px] leading-relaxed mb-8 relative z-10">
-          &#8220;{testimonial.quote}&#8221;
-        </p>
-
-        <div className="flex items-center gap-3">
-          {/* Avatar placeholder */}
-          <div
-            className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0"
-            style={{ background: "var(--gradient-brand)" }}
-          >
-            {testimonial.author.charAt(0)}
-          </div>
-          <div>
-            <p className="font-semibold text-brand-text text-sm">{testimonial.author}</p>
-            <p className="text-brand-muted text-xs">
-              {testimonial.role} · {testimonial.company}
-            </p>
-          </div>
-        </div>
-      </motion.div>
-    </ScrollReveal>
   );
 }
