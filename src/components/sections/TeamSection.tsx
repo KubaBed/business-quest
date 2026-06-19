@@ -10,7 +10,7 @@ import { team, teamPhoto } from "@/data/team";
    Kolumna = szerokość panelu (bez odstępu) → 3 panele stykają się w jedno zdjęcie.
    Podpisy/bio są szersze i wystają poza kolumnę (centrowane) — mieszczą się
    w przerwach, które powstają po rozjeździe. */
-const PANEL_H = "clamp(300px, 46vh, 500px)";
+const PANEL_H = "clamp(360px, 52vh, 600px)";
 const PANEL_W = `calc(${PANEL_H} * 0.4715)`;
 const POS_X = ["0%", "50%", "100%"];
 
@@ -31,14 +31,14 @@ export default function TeamSection() {
   });
 
   // Jedno zdjęcie → rozjazd na 3 (nagłówek statyczny)
-  const xLeft = useTransform(scrollYProgress, [0.12, 0.5], [0, -88]);
-  const xRight = useTransform(scrollYProgress, [0.12, 0.5], [0, 88]);
+  const xLeft = useTransform(scrollYProgress, [0.12, 0.5], [0, -130]);
+  const xRight = useTransform(scrollYProgress, [0.12, 0.5], [0, 130]);
   const yCenter = useTransform(scrollYProgress, [0.12, 0.5], [0, -40]); // CEO wyżej
   const radius = useTransform(scrollYProgress, [0.12, 0.5], [0, 20]);
   // Podpisy + bio pojawiają się po rozjeździe, pod każdym zdjęciem
   const capOpacity = useTransform(scrollYProgress, [0.5, 0.66], [0, 1]);
   const capY = useTransform(scrollYProgress, [0.5, 0.66], [14, 0]);
-  const bioOpacity = useTransform(scrollYProgress, [0.62, 0.8], [0, 1]);
+  const bioOpacity = useTransform(scrollYProgress, [0.52, 0.68], [0, 1]);
 
   const xByIndex = [xLeft, undefined, xRight];
 
@@ -46,8 +46,8 @@ export default function TeamSection() {
     <section id="zespol" className="bg-brand-bg-subtle">
       {/* Desktop — rozjazd jednego zdjęcia na 3 + podpisy/bio pod zdjęciami */}
       <div ref={ref} className="relative hidden lg:block h-[260vh]">
-        <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center px-8">
-          <div className="text-center mb-10">
+        <div className="sticky top-20 h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-8">
+          <div className="text-center mb-8">
             <SectionLabel className="justify-center mb-4">Poznaj nas</SectionLabel>
             <h2 className="text-5xl xl:text-6xl font-extrabold text-brand-text tracking-tight leading-[1.02]">
               Zespół businessQuest
@@ -88,7 +88,7 @@ export default function TeamSection() {
                 </motion.div>
                 <motion.p
                   style={{ opacity: bioOpacity }}
-                  className="text-center mt-3 w-[240px] xl:w-[280px] text-brand-body text-[13px] leading-relaxed"
+                  className="text-center mt-3 w-[240px] xl:w-[280px] text-brand-body text-sm leading-relaxed"
                 >
                   {m.bio}
                 </motion.p>

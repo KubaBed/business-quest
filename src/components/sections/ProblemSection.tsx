@@ -81,7 +81,7 @@ export default function ProblemSection() {
             className="lg:pt-4"
           >
             <p className="text-lg lg:text-xl leading-relaxed opacity-80">
-              Tego nie da się odłożyć „na później" — a pojawia się między
+              Tego nie da się odłożyć {`„na później"`} — a pojawia się między
               sprzedażą, klientami, finansami i&nbsp;projektami.
             </p>
             <p className="mt-6 text-lg lg:text-xl leading-relaxed opacity-80">
