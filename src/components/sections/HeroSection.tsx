@@ -17,7 +17,7 @@ const fadeBlur = {
 export default function HeroSection() {
   return (
     <section className="relative min-h-[100dvh] overflow-hidden bg-[#F7F2EA] pt-20">
-      <div className="relative z-10 w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 lg:min-h-[calc(100dvh-5rem)]">
+      <div className="relative z-10 w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8 grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 lg:min-h-[calc(100dvh-5rem)]">
 
           {/* Left — tekst */}
           <div className="flex flex-col justify-center order-2 lg:order-1 pb-14 lg:pb-0">
@@ -78,7 +78,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 1, ease, delay: 0.2 }}
           >
-            <div className="w-full max-w-[420px] aspect-[4/5] lg:max-w-[520px] 2xl:max-w-[620px] lg:aspect-auto lg:h-[90%]">
+            <div className="w-full max-w-[460px] aspect-[4/5] lg:max-w-[600px] 2xl:max-w-[720px] lg:aspect-auto lg:h-[90%]">
               <RotatingPhotos className="rounded-[2rem] lg:rounded-b-none lg:rounded-t-[2.5rem]" />
             </div>
           </motion.div>

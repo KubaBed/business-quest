@@ -35,7 +35,7 @@ export default function RotatingPhotos({ className = "" }: { className?: string 
           fill
           sizes="(max-width: 1024px) 90vw, 45vw"
           priority={i === 0}
-          className="object-cover object-top transition-opacity duration-[1100ms] ease-[cubic-bezier(0.32,0.72,0,1)]"
+          className="object-cover object-[center_30%] transition-opacity duration-[1100ms] ease-[cubic-bezier(0.32,0.72,0,1)]"
           style={{ opacity: i === active ? 1 : 0 }}
         />
       ))}
