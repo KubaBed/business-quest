@@ -6,11 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Usługi", href: "#uslugi" },
-  { label: "Dla kogo", href: "#dla-kogo" },
-  { label: "O nas", href: "#zespol" },
-  { label: "Opinie", href: "#opinie" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Usługi", href: "/#uslugi" },
+  { label: "O nas", href: "/o-nas" },
+  { label: "Case study", href: "/case-study" },
+  { label: "Blog", href: "/blog" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
 
 export default function Navbar() {
@@ -72,7 +72,7 @@ export default function Navbar() {
           {/* CTA + hamburger */}
           <div className="flex items-center gap-4">
             <Link
-              href="#kontakt"
+              href="/kontakt"
               className="hidden lg:inline-flex items-center px-5 py-2.5 rounded-full text-[14px] font-semibold text-white bg-magenta hover:bg-magenta-light transition-all duration-200 shadow-sm hover:shadow-md hover:shadow-magenta/25"
             >
               Umów rozmowę
@@ -127,7 +127,7 @@ export default function Navbar() {
             transition={{ delay: menuOpen ? navLinks.length * 0.07 + 0.15 : 0, duration: 0.4 }}
           >
             <Link
-              href="#kontakt"
+              href="/kontakt"
               className="inline-flex items-center px-8 py-4 rounded-full text-[16px] font-semibold text-white bg-magenta hover:bg-magenta-light transition-colors mt-4"
               onClick={() => setMenuOpen(false)}
             >

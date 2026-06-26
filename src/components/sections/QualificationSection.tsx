@@ -49,7 +49,7 @@ export default function QualificationSection() {
         <div className="max-w-2xl mb-14">
           <SectionLabel className="mb-6">Dla kogo</SectionLabel>
           <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.02] text-brand-text">
-            Kiedy ta usługa jest dla&nbsp;Ciebie?
+            W jakich sytuacjach możemy Ci&nbsp;pomóc?
           </h2>
           <p className="mt-6 text-brand-body text-lg leading-relaxed">
             Najczęściej zaczynamy współpracę, gdy tematy zespołu zajmują coraz

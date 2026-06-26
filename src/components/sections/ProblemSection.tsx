@@ -81,8 +81,12 @@ export default function ProblemSection() {
             className="lg:pt-4"
           >
             <p className="text-lg lg:text-xl leading-relaxed opacity-80">
-              Tego nie da się odłożyć {`„na później"`} — a pojawia się między
-              sprzedażą, klientami, finansami i&nbsp;projektami.
+              Tego{" "}
+              <span className="font-semibold opacity-100 underline decoration-magenta decoration-2 underline-offset-[6px]">
+                nie da się odłożyć na później
+              </span>
+              . Pojawia się między sprzedażą, klientami, finansami
+              i&nbsp;projektami.
             </p>
             <p className="mt-6 text-lg lg:text-xl leading-relaxed opacity-80">
               Usługa{" "}
@@ -90,7 +94,7 @@ export default function ProblemSection() {
                 Twój pierwszy zespół HR
               </span>{" "}
               powstała dokładnie dla takich sytuacji. Prowadzimy tematy ludzi
-              razem z Tobą — czasem to rekrutacja, czasem uporządkowanie ról,
+              razem z&nbsp;Tobą. Czasem to rekrutacja, czasem uporządkowanie ról,
               a&nbsp;czasem po prostu spokojne spojrzenie z&nbsp;zewnątrz.
             </p>
           </motion.div>

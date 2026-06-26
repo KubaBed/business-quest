@@ -3,15 +3,15 @@ import Link from "next/link";
 
 const footerLinks = {
   uslugi: [
-    { label: "Rekrutacje i zatrudnianie", href: "#uslugi" },
-    { label: "Sparing partner", href: "#uslugi" },
-    { label: "Procesy HR", href: "#uslugi" },
+    { label: "Rekrutacje i zatrudnianie", href: "/#uslugi" },
+    { label: "Sparing partner", href: "/#uslugi" },
+    { label: "Procesy HR", href: "/#uslugi" },
   ],
   firma: [
-    { label: "Dla kogo", href: "#dla-kogo" },
-    { label: "O nas", href: "#zespol" },
-    { label: "Opinie", href: "#opinie" },
-    { label: "Kontakt", href: "#kontakt" },
+    { label: "O nas", href: "/o-nas" },
+    { label: "Case study", href: "/case-study" },
+    { label: "Blog", href: "/blog" },
+    { label: "Kontakt", href: "/kontakt" },
   ],
 };
 

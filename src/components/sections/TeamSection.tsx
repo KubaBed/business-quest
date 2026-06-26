@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
@@ -24,17 +25,16 @@ function LinkedInIcon() {
 }
 
 function ReadMoreButton() {
-  // Placeholder — docelowo link do strony „O nas".
   return (
-    <button
-      type="button"
+    <Link
+      href="/o-nas"
       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold text-magenta border border-magenta/30 hover:border-magenta hover:bg-magenta/5 transition-colors"
     >
       Poczytaj więcej
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <path d="M5 12h14M13 6l6 6-6 6" />
       </svg>
-    </button>
+    </Link>
   );
 }
 

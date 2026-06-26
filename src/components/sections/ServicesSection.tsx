@@ -113,23 +113,8 @@ export default function ServicesSection() {
         </ScrollReveal>
 
         <div className="grid lg:grid-cols-3 gap-5 lg:gap-6">
-          {/* Rekrutacje — szeroki */}
-          <ScrollReveal className="lg:col-span-2">
-            <BentoCard className="h-full">
-              <div className="grid md:grid-cols-2 gap-8 items-center h-full">
-                <div>
-                  <CardHead title={rekrutacje.title} desc={rekrutacje.description} />
-                  <BulletList items={rekrutacje.bullets} />
-                </div>
-                <div className="rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5">
-                  <RecruitMockup />
-                </div>
-              </div>
-            </BentoCard>
-          </ScrollReveal>
-
-          {/* Sparing partner — wąski */}
-          <ScrollReveal delay={0.1} className="lg:col-span-1">
+          {/* Sparing partner — wąski, po lewej */}
+          <ScrollReveal className="lg:col-span-1">
             <BentoCard className="h-full flex flex-col">
               <CardHead title={sparing.title} desc={sparing.description} />
               <BulletList items={sparing.bullets} />
@@ -139,16 +124,31 @@ export default function ServicesSection() {
             </BentoCard>
           </ScrollReveal>
 
-          {/* Procesy HR — pełna szerokość */}
-          <ScrollReveal delay={0.15} className="lg:col-span-3">
-            <BentoCard>
-              <div className="grid md:grid-cols-2 gap-8 items-center">
+          {/* Procesy HR — szeroki, po prawej */}
+          <ScrollReveal delay={0.1} className="lg:col-span-2">
+            <BentoCard className="h-full">
+              <div className="grid md:grid-cols-2 gap-8 items-center h-full">
                 <div>
                   <CardHead title={procesy.title} desc={procesy.description} />
                   <BulletList items={procesy.bullets} cols2 />
                 </div>
                 <div className="rounded-2xl bg-gradient-to-br from-orange/[0.07] to-magenta/[0.05] p-6">
                   <ProcessMockup />
+                </div>
+              </div>
+            </BentoCard>
+          </ScrollReveal>
+
+          {/* Rekrutacje — pełna szerokość, na dole */}
+          <ScrollReveal delay={0.15} className="lg:col-span-3">
+            <BentoCard>
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <CardHead title={rekrutacje.title} desc={rekrutacje.description} />
+                  <BulletList items={rekrutacje.bullets} cols2 />
+                </div>
+                <div className="rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5">
+                  <RecruitMockup />
                 </div>
               </div>
             </BentoCard>
