@@ -4,7 +4,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import LogoStrip from "@/components/sections/LogoStrip";
 import CtaBanner from "@/components/sections/CtaBanner";
-import { team } from "@/data/team";
+import { teamFull } from "@/data/teamFull";
 
 export const metadata: Metadata = {
   title: "O nas — businessQuest",
@@ -31,19 +31,29 @@ const principles = [
   {
     num: "04",
     title: "Doświadczenie z wielu firm i branż",
-    text: "Pracowałyśmy z technologią, e-commerce, produkcją i kancelariami. Schematy problemów rozpoznajemy szybciej — często zanim urosną.",
+    text: "Pracowaliśmy z technologią, kancelariami, produkcją i software house'ami. Schematy problemów rozpoznajemy szybciej — często zanim urosną.",
   },
 ];
 
+const stats = [
+  { value: "Średnio rok", label: "tyle trwa współpraca z naszymi klientami" },
+  { value: "100%", label: "klientów trafia do nas z polecenia" },
+  { value: "2 z 3", label: "klientów poszerza z nami współpracę" },
+  { value: "24 dni", label: "rocznie poświęcamy na rozwój zespołu" },
+];
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
 function LinkedInIcon() {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
       <circle cx="4" cy="4" r="2" />
     </svg>
@@ -86,10 +96,10 @@ export default function ONasPage() {
                   klientami i&nbsp;finansami.
                 </p>
                 <p>
-                  Stworzyłyśmy businessQuest, żeby te sprawy przestały lądować
+                  Stworzyliśmy businessQuest, żeby te sprawy przestały lądować
                   tylko na Twoim biurku. Nie sprzedajemy gotowego działu HR ani
                   grubych procedur. Wchodzimy tam, gdzie realnie jesteśmy
-                  potrzebne — i wychodzimy, gdy temat jest ogarnięty.
+                  potrzebni — i wychodzimy, gdy temat jest ogarnięty.
                 </p>
                 <p className="text-brand-text font-semibold">
                   Chcemy być Twoim pierwszym zespołem HR — takim, który rozumie,
@@ -97,6 +107,38 @@ export default function ONasPage() {
                 </p>
               </div>
             </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Statystyki */}
+      <section className="relative overflow-hidden py-16 lg:py-20">
+        <div
+          className="absolute inset-0"
+          style={{ background: "var(--gradient-brand)" }}
+          aria-hidden
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, #fff 1.5px, transparent 1.5px)",
+            backgroundSize: "22px 22px",
+          }}
+        />
+        <div className="relative max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <p className="text-white text-3xl lg:text-[2.75rem] font-extrabold leading-none">
+                  {s.value}
+                </p>
+                <p className="text-white/80 text-sm mt-3 leading-snug max-w-[22ch]">
+                  {s.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -140,29 +182,37 @@ export default function ONasPage() {
           <ScrollReveal className="mb-12 lg:mb-16 max-w-2xl">
             <SectionLabel className="mb-4">Poznaj nas</SectionLabel>
             <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-brand-text tracking-tight leading-[1.02]">
-              Zespół businessQuest
+              Twoi ludzie od biznesu
             </h2>
             <p className="mt-5 text-brand-body text-lg leading-relaxed">
-              Trzy osoby, kilkanaście lat doświadczenia w HR, rekrutacji
-              i&nbsp;rozwoju zespołów — i jedno podejście: blisko ludzi.
+              Interdyscyplinarny zespół konsultantów — HR, rekrutacja, procesy,
+              strategia i zarządzanie projektami. Łączymy doświadczenie z wielu
+              branż i jedno podejście: blisko ludzi.
             </p>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
-            {team.map((m, i) => (
+            {teamFull.map((m, i) => (
               <ScrollReveal key={m.name} delay={(i % 3) * 0.1}>
                 <article className="h-full flex flex-col rounded-[1.5rem] border border-brand-border bg-brand-card overflow-hidden shadow-sm">
-                  <div className="relative aspect-[4/5] bg-brand-bg-subtle overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={m.photo}
-                      alt={m.name}
-                      className="w-full h-full object-cover object-top"
-                    />
-                    {m.featured && (
-                      <span className="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full bg-magenta text-white text-[11px] font-semibold uppercase tracking-wide">
-                        {m.role}
-                      </span>
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    {m.photo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={m.photo}
+                        alt={m.name}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    ) : (
+                      <div
+                        className="w-full h-full flex items-center justify-center"
+                        style={{ background: "var(--gradient-magenta)" }}
+                        aria-hidden
+                      >
+                        <span className="text-white/95 text-5xl font-extrabold tracking-tight">
+                          {initials(m.name)}
+                        </span>
+                      </div>
                     )}
                   </div>
                   <div className="flex flex-col flex-1 p-6 lg:p-7">
@@ -172,18 +222,20 @@ export default function ONasPage() {
                           {m.name}
                         </h3>
                         <p className="text-magenta text-sm font-medium mt-1">
-                          {m.role}
+                          {m.specialization}
                         </p>
                       </div>
-                      <a
-                        href={m.linkedin}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
-                        aria-label={`LinkedIn — ${m.name}`}
-                      >
-                        <LinkedInIcon />
-                      </a>
+                      {m.linkedin && (
+                        <a
+                          href={m.linkedin}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
+                          aria-label={`LinkedIn — ${m.name}`}
+                        >
+                          <LinkedInIcon />
+                        </a>
+                      )}
                     </div>
                     <p className="mt-4 text-brand-muted text-[14px] leading-relaxed">
                       {m.bio}

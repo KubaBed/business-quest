@@ -49,27 +49,24 @@ export default function BlogPostPage({ params }: Params) {
 
       <article className="pb-20 lg:pb-28 bg-brand-bg">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <div className="space-y-8">
-            {post.content.map((block, i) => (
-              <div key={i}>
-                {block.heading && (
-                  <h2 className="text-2xl lg:text-[1.85rem] font-bold text-brand-text tracking-tight leading-snug mb-4">
-                    {block.heading}
-                  </h2>
-                )}
-                {block.paragraphs?.map((p, j) => (
-                  <p
-                    key={j}
-                    className="text-brand-body text-lg leading-relaxed mb-4 last:mb-0"
+          <div>
+            {post.content.map((node, i) => {
+              if (node.type === "h") {
+                return (
+                  <h2
+                    key={i}
+                    className="text-2xl lg:text-[1.85rem] font-bold text-brand-text tracking-tight leading-snug mt-10 mb-4 first:mt-0"
                   >
-                    {p}
-                  </p>
-                ))}
-                {block.bullets && (
-                  <ul className="mt-4 space-y-3">
-                    {block.bullets.map((b) => (
+                    {node.text}
+                  </h2>
+                );
+              }
+              if (node.type === "ul") {
+                return (
+                  <ul key={i} className="my-5 space-y-3">
+                    {node.items.map((b, j) => (
                       <li
-                        key={b}
+                        key={j}
                         className="flex items-start gap-3 text-brand-body text-lg leading-relaxed"
                       >
                         <span className="mt-2.5 block w-1.5 h-1.5 rounded-full bg-magenta flex-shrink-0" />
@@ -77,9 +74,17 @@ export default function BlogPostPage({ params }: Params) {
                       </li>
                     ))}
                   </ul>
-                )}
-              </div>
-            ))}
+                );
+              }
+              return (
+                <p
+                  key={i}
+                  className="text-brand-body text-lg leading-relaxed mb-5"
+                >
+                  {node.text}
+                </p>
+              );
+            })}
           </div>
 
           {/* Powrót */}

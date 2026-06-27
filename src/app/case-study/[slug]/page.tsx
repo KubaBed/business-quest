@@ -44,7 +44,7 @@ export default function CaseStudyDetailPage({ params }: Params) {
       <article className="pb-20 lg:pb-28 bg-brand-bg">
         <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8">
           {/* W skrócie */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-brand-border bg-brand-border mb-12 lg:mb-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-brand-border bg-brand-border mb-10 lg:mb-12">
             {study.facts.map((f) => (
               <div key={f.label} className="bg-brand-card p-6">
                 <p className="text-sm text-brand-muted mb-1">{f.label}</p>
@@ -52,6 +52,39 @@ export default function CaseStudyDetailPage({ params }: Params) {
               </div>
             ))}
           </div>
+
+          {/* Kluczowe metryki */}
+          {study.metrics && study.metrics.length > 0 && (
+            <div
+              className="relative overflow-hidden rounded-2xl px-7 py-8 lg:px-10 lg:py-9 mb-12 lg:mb-16"
+              style={{ background: "var(--gradient-magenta)" }}
+            >
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.12]"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle, #fff 1.5px, transparent 1.5px)",
+                  backgroundSize: "22px 22px",
+                }}
+              />
+              <p className="relative text-white/80 text-sm font-semibold uppercase tracking-widest mb-6">
+                Kluczowe metryki projektu
+              </p>
+              <div className="relative grid sm:grid-cols-3 gap-8">
+                {study.metrics.map((m) => (
+                  <div key={m.label}>
+                    <p className="text-white text-4xl lg:text-5xl font-extrabold leading-none">
+                      {m.value}
+                    </p>
+                    <p className="text-white/85 text-sm mt-2 leading-snug">
+                      {m.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16">
             {/* Lewa — wyzwanie / efekt w skrócie */}
