@@ -4,7 +4,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import LogoStrip from "@/components/sections/LogoStrip";
 import CtaBanner from "@/components/sections/CtaBanner";
-import { teamFull } from "@/data/teamFull";
+import { team } from "@/data/team";
 
 export const metadata: Metadata = {
   title: "O nas — businessQuest",
@@ -31,7 +31,7 @@ const principles = [
   {
     num: "04",
     title: "Doświadczenie z wielu firm i branż",
-    text: "Pracowaliśmy z technologią, kancelariami, produkcją i software house'ami. Schematy problemów rozpoznajemy szybciej — często zanim urosną.",
+    text: "Pracowałyśmy z technologią, software house'ami, kancelariami i produkcją. Schematy problemów rozpoznajemy szybciej — często zanim urosną.",
   },
 ];
 
@@ -41,15 +41,6 @@ const stats = [
   { value: "2 z 3", label: "klientów poszerza z nami współpracę" },
   { value: "24 dni", label: "rocznie poświęcamy na rozwój zespołu" },
 ];
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((p) => p[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-}
 
 function LinkedInIcon() {
   return (
@@ -96,10 +87,10 @@ export default function ONasPage() {
                   klientami i&nbsp;finansami.
                 </p>
                 <p>
-                  Stworzyliśmy businessQuest, żeby te sprawy przestały lądować
+                  Stworzyłyśmy businessQuest, żeby te sprawy przestały lądować
                   tylko na Twoim biurku. Nie sprzedajemy gotowego działu HR ani
                   grubych procedur. Wchodzimy tam, gdzie realnie jesteśmy
-                  potrzebni — i wychodzimy, gdy temat jest ogarnięty.
+                  potrzebne — i wychodzimy, gdy temat jest ogarnięty.
                 </p>
                 <p className="text-brand-text font-semibold">
                   Chcemy być Twoim pierwszym zespołem HR — takim, który rozumie,
@@ -182,37 +173,29 @@ export default function ONasPage() {
           <ScrollReveal className="mb-12 lg:mb-16 max-w-2xl">
             <SectionLabel className="mb-4">Poznaj nas</SectionLabel>
             <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-brand-text tracking-tight leading-[1.02]">
-              Twoi ludzie od biznesu
+              Zespół businessQuest
             </h2>
             <p className="mt-5 text-brand-body text-lg leading-relaxed">
-              Interdyscyplinarny zespół konsultantów — HR, rekrutacja, procesy,
-              strategia i zarządzanie projektami. Łączymy doświadczenie z wielu
-              branż i jedno podejście: blisko ludzi.
+              Trzy founderki, kilkanaście lat doświadczenia w HR, rekrutacji
+              i&nbsp;rozwoju zespołów — i jedno podejście: blisko ludzi.
             </p>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
-            {teamFull.map((m, i) => (
+            {team.map((m, i) => (
               <ScrollReveal key={m.name} delay={(i % 3) * 0.1}>
                 <article className="h-full flex flex-col rounded-[1.5rem] border border-brand-border bg-brand-card overflow-hidden shadow-sm">
-                  <div className="relative aspect-[4/5] overflow-hidden">
-                    {m.photo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={m.photo}
-                        alt={m.name}
-                        className="w-full h-full object-cover object-top"
-                      />
-                    ) : (
-                      <div
-                        className="w-full h-full flex items-center justify-center"
-                        style={{ background: "var(--gradient-magenta)" }}
-                        aria-hidden
-                      >
-                        <span className="text-white/95 text-5xl font-extrabold tracking-tight">
-                          {initials(m.name)}
-                        </span>
-                      </div>
+                  <div className="relative aspect-[4/5] bg-brand-bg-subtle overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={m.photo}
+                      alt={m.name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                    {m.featured && (
+                      <span className="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full bg-magenta text-white text-[11px] font-semibold uppercase tracking-wide">
+                        {m.role}
+                      </span>
                     )}
                   </div>
                   <div className="flex flex-col flex-1 p-6 lg:p-7">
@@ -222,20 +205,18 @@ export default function ONasPage() {
                           {m.name}
                         </h3>
                         <p className="text-magenta text-sm font-medium mt-1">
-                          {m.specialization}
+                          {m.role}
                         </p>
                       </div>
-                      {m.linkedin && (
-                        <a
-                          href={m.linkedin}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
-                          aria-label={`LinkedIn — ${m.name}`}
-                        >
-                          <LinkedInIcon />
-                        </a>
-                      )}
+                      <a
+                        href={m.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
+                        aria-label={`LinkedIn — ${m.name}`}
+                      >
+                        <LinkedInIcon />
+                      </a>
                     </div>
                     <p className="mt-4 text-brand-muted text-[14px] leading-relaxed">
                       {m.bio}
