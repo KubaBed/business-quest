@@ -11,7 +11,7 @@ import { team, teamPhoto } from "@/data/team";
    Kolumna = szerokość panelu (bez odstępu) → 3 panele stykają się w jedno zdjęcie.
    Podpisy są szersze i wystają poza kolumnę (centrowane) — mieszczą się
    w przerwach, które powstają po rozjeździe. */
-const PANEL_H = "clamp(340px, 46vh, 560px)";
+const PANEL_H = "clamp(420px, 64vh, 820px)";
 const PANEL_W = `calc(${PANEL_H} * 0.4715)`;
 const POS_X = ["0%", "50%", "100%"];
 
@@ -64,9 +64,9 @@ export default function TeamSection() {
           className="sticky top-20 h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-8"
           style={{ clipPath: "inset(0 -300px)" }}
         >
-          <div className="text-center mb-10">
-            <SectionLabel className="justify-center mb-4">Poznaj nas</SectionLabel>
-            <h2 className="text-5xl xl:text-6xl font-extrabold text-brand-text tracking-tight leading-[1.02]">
+          <div className="text-center mb-6 xl:mb-7">
+            <SectionLabel className="justify-center mb-3">Poznaj nas</SectionLabel>
+            <h2 className="text-4xl xl:text-5xl font-extrabold text-brand-text tracking-tight leading-[1.02]">
               Zespół businessQuest
             </h2>
           </div>
