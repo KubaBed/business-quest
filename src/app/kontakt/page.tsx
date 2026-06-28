@@ -67,7 +67,7 @@ export default function KontaktPage() {
                     rel={c.href.startsWith("http") ? "noreferrer" : undefined}
                     className="group flex items-center gap-4 rounded-2xl border border-brand-border bg-brand-card p-5 hover:border-magenta/40 hover:shadow-sm transition-all"
                   >
-                    <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-magenta/10 text-magenta flex-shrink-0">
+                    <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-magenta/10 text-magenta-deep flex-shrink-0">
                       <svg
                         width="20"
                         height="20"
@@ -86,7 +86,7 @@ export default function KontaktPage() {
                       <span className="block text-sm text-brand-muted">
                         {c.label}
                       </span>
-                      <span className="block text-brand-text font-semibold group-hover:text-magenta transition-colors truncate">
+                      <span className="block text-brand-text font-semibold group-hover:text-magenta-deep transition-colors truncate">
                         {c.value}
                       </span>
                     </span>

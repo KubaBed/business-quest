@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { team, teamPhoto } from "@/data/team";
@@ -31,7 +31,7 @@ function ReadMoreButton() {
   return (
     <Link
       href="/o-nas"
-      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold text-magenta border border-magenta/30 hover:border-magenta hover:bg-magenta/5 transition-colors"
+      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold text-magenta-deep border border-magenta/30 hover:border-magenta hover:bg-magenta/5 transition-colors"
     >
       Poczytaj więcej
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -48,6 +48,7 @@ export default function TeamSection() {
     offset: ["start start", "end end"],
   });
 
+  const reduce = useReducedMotion();
   // Jedno zdjęcie → rozjazd na 3 (nagłówek statyczny)
   const xLeft = useTransform(scrollYProgress, [0.12, 0.52], [0, -130]);
   const xRight = useTransform(scrollYProgress, [0.12, 0.52], [0, 130]);
@@ -78,14 +79,14 @@ export default function TeamSection() {
             {team.map((m, i) => (
               <motion.div
                 key={m.name}
-                style={{ x: xByIndex[i], y: m.featured ? yCenter : undefined, width: PANEL_W }}
+                style={{ x: reduce ? 0 : xByIndex[i], y: reduce ? 0 : m.featured ? yCenter : undefined, width: PANEL_W }}
                 className="flex flex-col items-center"
               >
                 <motion.div
                   style={{
                     width: PANEL_W,
                     height: PANEL_H,
-                    borderRadius: radius,
+                    borderRadius: reduce ? 16 : radius,
                     backgroundImage: `url(${teamPhoto})`,
                     backgroundSize: "300% 100%",
                     backgroundPositionX: POS_X[i],
@@ -93,15 +94,15 @@ export default function TeamSection() {
                   }}
                   className="overflow-hidden bg-white flex-shrink-0"
                 />
-                <motion.div style={{ opacity: capOpacity, y: capY }} className="text-center mt-6 w-[240px] xl:w-[280px]">
+                <motion.div style={{ opacity: reduce ? 1 : capOpacity, y: reduce ? 0 : capY }} className="text-center mt-6 w-[240px] xl:w-[280px]">
                   <h3 className="font-bold text-brand-text text-xl xl:text-2xl">{m.name}</h3>
-                  <p className="text-magenta text-sm font-medium mt-1">{m.role}</p>
+                  <p className="text-magenta-deep text-sm font-medium mt-1">{m.role}</p>
                   <div className="flex items-center justify-center gap-3 mt-4">
                     <a
                       href={m.linkedin}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
+                      className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-brand-border text-brand-muted hover:text-magenta-deep hover:border-magenta transition-colors"
                       aria-label={`LinkedIn — ${m.name}`}
                     >
                       <LinkedInIcon />
@@ -133,14 +134,14 @@ export default function TeamSection() {
               <div key={m.name} className="flex items-center justify-between gap-3">
                 <div>
                   <h3 className="font-bold text-brand-text text-lg leading-tight">{m.name}</h3>
-                  <p className="text-magenta text-sm font-medium mt-0.5">{m.role}</p>
+                  <p className="text-magenta-deep text-sm font-medium mt-0.5">{m.role}</p>
                 </div>
                 <div className="flex items-center gap-3 flex-shrink-0">
                   <a
                     href={m.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
+                    className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-brand-border text-brand-muted hover:text-magenta-deep hover:border-magenta transition-colors"
                     aria-label={`LinkedIn — ${m.name}`}
                   >
                     <LinkedInIcon />

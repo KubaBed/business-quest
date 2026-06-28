@@ -91,7 +91,7 @@ export default function BlogPostPage({ params }: Params) {
           <div className="mt-12 pt-8 border-t border-brand-border">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-magenta font-semibold hover:gap-3 transition-all"
+              className="inline-flex items-center gap-2 text-magenta-deep font-semibold hover:gap-3 transition-all"
             >
               <svg
                 width="16"
@@ -124,12 +124,12 @@ export default function BlogPostPage({ params }: Params) {
                 <Link key={p.slug} href={`/blog/${p.slug}`} className="group block">
                   <article className="h-full flex flex-col rounded-[1.5rem] border border-brand-border bg-brand-card p-7 shadow-sm transition-all group-hover:border-magenta/40 group-hover:shadow-md">
                     <div className="flex items-center gap-3 text-sm">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta text-[12px] font-semibold">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta-deep text-[12px] font-semibold">
                         {p.category}
                       </span>
                       <span className="text-brand-muted">{p.readingTime}</span>
                     </div>
-                    <h3 className="mt-4 text-xl font-bold text-brand-text leading-snug group-hover:text-magenta transition-colors">
+                    <h3 className="mt-4 text-xl font-bold text-brand-text leading-snug group-hover:text-magenta-deep transition-colors">
                       {p.title}
                     </h3>
                     <p className="mt-3 text-brand-muted text-[15px] leading-relaxed flex-1">

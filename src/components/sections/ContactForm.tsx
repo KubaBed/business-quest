@@ -101,7 +101,7 @@ export default function ContactForm() {
                 className={`px-4 py-2 rounded-full text-[13px] font-semibold border transition-colors ${
                   active
                     ? "bg-magenta text-white border-magenta"
-                    : "bg-white text-brand-muted border-brand-border hover:border-magenta hover:text-magenta"
+                    : "bg-white text-brand-muted border-brand-border hover:border-magenta hover:text-magenta-deep"
                 }`}
               >
                 {t}

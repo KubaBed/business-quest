@@ -82,7 +82,7 @@ export default function FounderHero() {
               className="fade-blur-up flex items-center gap-2 text-sm text-brand-muted mb-6"
               aria-label="Ścieżka"
             >
-              <Link href="/" className="hover:text-magenta transition-colors">
+              <Link href="/" className="hover:text-magenta-deep transition-colors">
                 Start
               </Link>
               <span className="text-brand-border">/</span>
@@ -101,7 +101,7 @@ export default function FounderHero() {
             <figure className="fade-blur-up d3 mt-8 relative pl-6 border-l-2 border-magenta">
               <span
                 aria-hidden
-                className="absolute -top-4 left-4 text-magenta/20 text-6xl font-serif leading-none select-none"
+                className="absolute -top-4 left-4 text-magenta-deep/20 text-6xl font-serif leading-none select-none"
               >
                 &ldquo;
               </span>
@@ -113,7 +113,7 @@ export default function FounderHero() {
               <figcaption className="mt-6 flex items-center gap-4">
                 <div>
                   <p className="font-bold text-brand-text">Zuzanna Woźniak</p>
-                  <p className="text-magenta text-sm font-medium">
+                  <p className="text-magenta-deep text-sm font-medium">
                     CEO i&nbsp;założycielka businessQuest
                   </p>
                 </div>
@@ -121,7 +121,7 @@ export default function FounderHero() {
                   href="https://www.linkedin.com/in/zuzawozprzyb/"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta-deep hover:border-magenta transition-colors"
                   aria-label="LinkedIn — Zuzanna Woźniak"
                 >
                   <LinkedInIcon />

@@ -140,7 +140,7 @@ export default function ONasPage() {
               <ScrollReveal key={p.num} delay={(i % 2) * 0.1}>
                 <div className="relative pt-3">
                   <div className="inline-flex items-center gap-2 mb-4">
-                    <span className="text-magenta font-bold text-sm tracking-widest">
+                    <span className="text-magenta-deep font-bold text-sm tracking-widest">
                       {p.num}
                     </span>
                     <span className="w-8 h-px bg-magenta/30" />
@@ -195,7 +195,7 @@ export default function ONasPage() {
                         <h3 className="text-xl font-bold text-brand-text leading-tight">
                           {m.name}
                         </h3>
-                        <p className="text-magenta text-sm font-medium mt-1">
+                        <p className="text-magenta-deep text-sm font-medium mt-1">
                           {m.role}
                         </p>
                       </div>
@@ -203,7 +203,7 @@ export default function ONasPage() {
                         href={m.linkedin}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
+                        className="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta-deep hover:border-magenta transition-colors"
                         aria-label={`LinkedIn — ${m.name}`}
                       >
                         <LinkedInIcon />

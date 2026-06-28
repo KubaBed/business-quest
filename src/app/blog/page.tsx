@@ -31,7 +31,7 @@ function Arrow() {
 function Meta({ post }: { post: Post }) {
   return (
     <div className="flex items-center gap-3 text-sm">
-      <span className="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta text-[12px] font-semibold">
+      <span className="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta-deep text-[12px] font-semibold">
         {post.category}
       </span>
       <span className="text-brand-muted">{post.dateLabel}</span>
@@ -83,13 +83,13 @@ export default function BlogPage() {
 
               <div className="order-2 lg:order-1">
                 <Meta post={featured} />
-                <h2 className="mt-5 text-3xl lg:text-[2.5rem] font-extrabold text-brand-text leading-[1.05] tracking-tight group-hover:text-magenta transition-colors">
+                <h2 className="mt-5 text-3xl lg:text-[2.5rem] font-extrabold text-brand-text leading-[1.05] tracking-tight group-hover:text-magenta-deep transition-colors">
                   {featured.title}
                 </h2>
                 <p className="mt-4 text-brand-body text-lg leading-relaxed">
                   {featured.excerpt}
                 </p>
-                <span className="mt-7 inline-flex items-center gap-2 text-magenta font-semibold">
+                <span className="mt-7 inline-flex items-center gap-2 text-magenta-deep font-semibold">
                   Czytaj dalej
                   <span className="transition-transform group-hover:translate-x-1">
                     <Arrow />
@@ -112,13 +112,13 @@ export default function BlogPage() {
               >
                 <article className="h-full flex flex-col rounded-[1.5rem] border border-brand-border bg-brand-card p-7 shadow-sm transition-all group-hover:border-magenta/40 group-hover:shadow-md">
                   <Meta post={post} />
-                  <h3 className="mt-4 text-xl lg:text-[1.4rem] font-bold text-brand-text leading-snug group-hover:text-magenta transition-colors">
+                  <h3 className="mt-4 text-xl lg:text-[1.4rem] font-bold text-brand-text leading-snug group-hover:text-magenta-deep transition-colors">
                     {post.title}
                   </h3>
                   <p className="mt-3 text-brand-muted text-[15px] leading-relaxed flex-1">
                     {post.excerpt}
                   </p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-magenta font-semibold text-[15px]">
+                  <span className="mt-6 inline-flex items-center gap-2 text-magenta-deep font-semibold text-[15px]">
                     Czytaj dalej
                     <span className="transition-transform group-hover:translate-x-1">
                       <Arrow />

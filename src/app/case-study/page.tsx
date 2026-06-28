@@ -31,7 +31,7 @@ function Arrow() {
 function FactsRow({ study }: { study: CaseStudy }) {
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-      <span className="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta text-[12px] font-semibold">
+      <span className="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta-deep text-[12px] font-semibold">
         {study.service}
       </span>
       <span className="text-brand-muted">{study.client}</span>
@@ -83,13 +83,13 @@ export default function CaseStudyPage() {
 
               <div className="order-2 lg:order-1">
                 <FactsRow study={featured} />
-                <h2 className="mt-5 text-3xl lg:text-[2.4rem] font-extrabold text-brand-text leading-[1.06] tracking-tight group-hover:text-magenta transition-colors">
+                <h2 className="mt-5 text-3xl lg:text-[2.4rem] font-extrabold text-brand-text leading-[1.06] tracking-tight group-hover:text-magenta-deep transition-colors">
                   {featured.title}
                 </h2>
                 <p className="mt-4 text-brand-body text-lg leading-relaxed">
                   {featured.excerpt}
                 </p>
-                <span className="mt-7 inline-flex items-center gap-2 text-magenta font-semibold">
+                <span className="mt-7 inline-flex items-center gap-2 text-magenta-deep font-semibold">
                   Zobacz case study
                   <span className="transition-transform group-hover:translate-x-1">
                     <Arrow />
@@ -113,7 +113,7 @@ export default function CaseStudyPage() {
               >
                 <article className="h-full flex flex-col rounded-[1.5rem] border border-brand-border bg-brand-card p-7 lg:p-8 shadow-sm transition-all group-hover:border-magenta/40 group-hover:shadow-md">
                   <FactsRow study={study} />
-                  <h3 className="mt-4 text-xl lg:text-[1.5rem] font-bold text-brand-text leading-snug group-hover:text-magenta transition-colors">
+                  <h3 className="mt-4 text-xl lg:text-[1.5rem] font-bold text-brand-text leading-snug group-hover:text-magenta-deep transition-colors">
                     {study.title}
                   </h3>
                   <p className="mt-3 text-brand-muted text-[15px] leading-relaxed flex-1">
@@ -124,7 +124,7 @@ export default function CaseStudyPage() {
                       „{study.quote.text}”
                     </p>
                   )}
-                  <span className="mt-6 inline-flex items-center gap-2 text-magenta font-semibold text-[15px]">
+                  <span className="mt-6 inline-flex items-center gap-2 text-magenta-deep font-semibold text-[15px]">
                     Zobacz case study
                     <span className="transition-transform group-hover:translate-x-1">
                       <Arrow />

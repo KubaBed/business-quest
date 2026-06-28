@@ -98,7 +98,7 @@ export default function CaseStudyDetailPage({ params }: Params) {
                 </p>
               </div>
               <div className="rounded-2xl border border-magenta/20 bg-magenta/[0.04] p-6">
-                <p className="text-sm font-semibold uppercase tracking-widest text-magenta mb-2">
+                <p className="text-sm font-semibold uppercase tracking-widest text-magenta-deep mb-2">
                   Efekt
                 </p>
                 <p className="text-brand-text leading-relaxed">
@@ -144,7 +144,7 @@ export default function CaseStudyDetailPage({ params }: Params) {
               {study.quote && (
                 <figure className="mt-12 rounded-[1.5rem] border border-brand-border bg-brand-bg-subtle p-8 lg:p-10">
                   <svg
-                    className="text-magenta/25 mb-4"
+                    className="text-magenta-deep/25 mb-4"
                     width="36"
                     height="36"
                     viewBox="0 0 24 24"
@@ -171,7 +171,7 @@ export default function CaseStudyDetailPage({ params }: Params) {
               <div className="mt-12 pt-8 border-t border-brand-border">
                 <Link
                   href="/case-study"
-                  className="inline-flex items-center gap-2 text-magenta font-semibold hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-magenta-deep font-semibold hover:gap-3 transition-all"
                 >
                   <svg
                     width="16"
@@ -209,10 +209,10 @@ export default function CaseStudyDetailPage({ params }: Params) {
                   className="group block"
                 >
                   <article className="h-full flex flex-col rounded-[1.5rem] border border-brand-border bg-brand-card p-7 shadow-sm transition-all group-hover:border-magenta/40 group-hover:shadow-md">
-                    <span className="inline-flex w-fit items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta text-[12px] font-semibold">
+                    <span className="inline-flex w-fit items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta-deep text-[12px] font-semibold">
                       {c.service}
                     </span>
-                    <h3 className="mt-4 text-xl font-bold text-brand-text leading-snug group-hover:text-magenta transition-colors">
+                    <h3 className="mt-4 text-xl font-bold text-brand-text leading-snug group-hover:text-magenta-deep transition-colors">
                       {c.title}
                     </h3>
                     <p className="mt-3 text-brand-muted text-[15px] leading-relaxed flex-1">

@@ -65,7 +65,7 @@ export default function PageHeader({
                   {c.href ? (
                     <Link
                       href={c.href}
-                      className="hover:text-magenta transition-colors"
+                      className="hover:text-magenta-deep transition-colors"
                     >
                       {c.label}
                     </Link>
