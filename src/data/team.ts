@@ -4,7 +4,7 @@ export const teamPhoto = "/images/team/founders.webp";
 export const team = [
   {
     name: "Joanna Nowak",
-    role: "Współzałożycielka",
+    role: "Konsultantka",
     featured: false,
     photo: "/images/team/asia.webp",
     linkedin: "http://www.linkedin.com/in/joanna-nowakpcm",
@@ -20,7 +20,7 @@ export const team = [
   },
   {
     name: "Marta Pigla",
-    role: "Współzałożycielka",
+    role: "Konsultantka",
     featured: false,
     photo: "/images/team/marta.webp",
     linkedin: "https://www.linkedin.com/in/martapigla/",
