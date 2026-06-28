@@ -11,11 +11,14 @@ Projekt klienta — firma szkoleniowa / HR / leadership.
 
 - Next.js (App Router), TypeScript, Tailwind CSS
 - Skills plugin zainstalowany (`skills/`, `skills-lock.json`)
-- Deployment: [do uzupełnienia]
+- Deployment: Vercel (repo github.com/KubaBed/business-quest, branch main)
 
 ## Current Focus
 
-[Uzupełnij: co jest aktualnie robione]
+Redesign homepage na `main` (light theme, Amby-style) — wdrożony na Vercel.
+Ostatnia sesja (2026-06-19): poprawki sekcji Zespół (usunięte bio, większe zdjęcia, scroll-split fixy)
++ reframe zdjęć Hero. Następny krok: strona `/o-nas` z pełnymi bio + podpięcie przycisku „Poczytaj więcej".
+Szczegóły: NOTES.md, PROJECT.md.
 
 ## Key Decisions Made
 

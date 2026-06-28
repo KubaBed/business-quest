@@ -3,6 +3,7 @@ import "@fontsource-variable/outfit";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import MotionProvider from "@/components/providers/MotionProvider";
 
 export const metadata: Metadata = {
   title: "businessQuest — HR Consulting & Leadership Development",
@@ -29,9 +30,11 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className="antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

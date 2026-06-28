@@ -43,7 +43,7 @@ export default function HeroSectionFirewatch() {
         <h1 className="fade-blur-up d2 text-[2.2rem] sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-brand-text text-balance mb-4">
           Twój pierwszy
           <br />
-          zespół <span className="text-magenta">HR</span>
+          zespół <span className="text-magenta-deep">HR</span>
         </h1>
 
         {/* Sub — original businessquest copy */}

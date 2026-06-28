@@ -61,7 +61,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-brand-muted hover:text-magenta text-[15px] font-medium transition-colors duration-200 relative group"
+                className="text-brand-muted hover:text-magenta-deep text-[15px] font-medium transition-colors duration-200 relative group"
               >
                 {link.label}
                 <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-magenta scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />

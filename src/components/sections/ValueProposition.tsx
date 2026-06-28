@@ -92,7 +92,7 @@ function ValueCard({
 
       <div className="relative">
         <div className="inline-flex items-center gap-2 mb-4">
-          <span className="text-magenta font-bold text-sm tracking-widest">{num}</span>
+          <span className="text-magenta-deep font-bold text-sm tracking-widest">{num}</span>
           <span className="w-8 h-px bg-magenta/30" />
         </div>
         <h3 className="text-[1.5rem] font-bold text-brand-text mb-3">{title}</h3>

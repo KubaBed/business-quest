@@ -30,7 +30,7 @@ export default function TestimonialsSection() {
             >
               {/* Quote mark */}
               <svg
-                className="text-magenta/25 mb-5"
+                className="text-magenta-deep/25 mb-5"
                 width="40"
                 height="40"
                 viewBox="0 0 24 24"

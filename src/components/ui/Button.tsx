@@ -27,9 +27,9 @@ export default function Button({
     primary:
       "text-white bg-magenta hover:bg-magenta-light shadow-sm hover:shadow-lg hover:shadow-magenta/30 active:scale-[0.98]",
     ghost:
-      "text-magenta border border-magenta/30 hover:border-magenta hover:bg-magenta/5 active:scale-[0.98]",
+      "text-magenta-deep border border-magenta/30 hover:border-magenta hover:bg-magenta/5 active:scale-[0.98]",
     white:
-      "text-magenta bg-white hover:bg-white/90 shadow-sm active:scale-[0.98]",
+      "text-magenta-deep bg-white hover:bg-white/90 shadow-sm active:scale-[0.98]",
     "white-ghost":
       "text-white border border-white/30 hover:border-white hover:bg-white/10 active:scale-[0.98]",
   };

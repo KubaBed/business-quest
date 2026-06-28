@@ -26,9 +26,10 @@ Design system: docs/DESIGN-SYSTEM.md. Pozycjonowanie: mikro/małe firmy (NIE tec
 
 ## Next Action
 
-Review po stronie klienta (rano). Do uzupełnienia: nazwisko Asi, role/bio zespołu, linki LinkedIn,
-realny email/telefon/kalendarz w CTA. Zweryfikować NA ŻYWO efekt scroll-split w sekcji Zespół
-(preview w sesji nie renderuje animacji scroll — patrz NOTES).
+Zbudować stronę „O nas" (`/o-nas`) z pełnymi bio zespołu i podpiąć przycisk „Poczytaj więcej"
+z sekcji Zespół (teraz placeholder bez linku — bio usunięte ze strony głównej, żyją w src/data/team.ts).
+Do uzupełnienia: realny email/telefon/kalendarz w CTA; ciemne wersje 2 logo klientów.
+Zweryfikować NA ŻYWO efekt scroll-split w sekcji Zespół (preview w sesji nie renderuje animacji scroll — patrz NOTES).
 
 ## Links & Resources
 

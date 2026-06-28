@@ -13,6 +13,7 @@ const config: Config = {
           DEFAULT: "#F7087F",
           light: "#FF5AAD",
           dim: "#FFB3D1",
+          deep: "#C20066", // ciemniejszy do tekstu — WCAG AA (~5.9:1 na białym)
         },
         purple: {
           DEFAULT: "#8B3FE8",

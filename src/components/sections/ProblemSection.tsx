@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 const ease = [0.32, 0.72, 0, 1] as const;
@@ -16,6 +16,7 @@ const fragments = [
 
 export default function ProblemSection() {
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -37,7 +38,7 @@ export default function ProblemSection() {
     <motion.section
       ref={ref}
       id="problem"
-      style={{ backgroundColor, color }}
+      style={reduce ? { backgroundColor: "#FFFFFF", color: "#0E0E10" } : { backgroundColor, color }}
       className="relative section-py overflow-hidden"
     >
       <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8">

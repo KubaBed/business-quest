@@ -12,7 +12,7 @@ export default function SectionLabel({ children, className = "" }: SectionLabelP
         <span className="block w-1.5 h-1.5 rounded-full bg-magenta" />
         <span className="block w-2 h-2 rounded-full bg-magenta" />
       </div>
-      <span className="text-magenta text-[11px] font-semibold uppercase tracking-[0.14em]">
+      <span className="text-magenta-deep text-xs font-semibold uppercase tracking-[0.14em]">
         {children}
       </span>
     </div>

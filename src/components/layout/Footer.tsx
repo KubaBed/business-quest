@@ -29,22 +29,10 @@ export default function Footer() {
               height={48}
               className="h-8 w-auto object-contain mb-4"
             />
-            <p className="text-brand-body text-sm leading-relaxed mb-6 max-w-xs">
+            <p className="text-brand-body text-sm leading-relaxed max-w-xs">
               Twój pierwszy zespół HR. Proste i użyteczne rozwiązania dla mikro
               i małych firm.
             </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full border border-brand-border flex items-center justify-center text-brand-muted hover:text-magenta hover:border-magenta transition-all duration-200"
-                aria-label="LinkedIn"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </a>
-            </div>
           </div>
 
           {/* Usługi */}
@@ -53,7 +41,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.uslugi.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-brand-muted hover:text-magenta text-sm transition-colors duration-200">
+                  <Link href={l.href} className="text-brand-muted hover:text-magenta-deep text-sm transition-colors duration-200">
                     {l.label}
                   </Link>
                 </li>
@@ -67,7 +55,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.firma.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-brand-muted hover:text-magenta text-sm transition-colors duration-200">
+                  <Link href={l.href} className="text-brand-muted hover:text-magenta-deep text-sm transition-colors duration-200">
                     {l.label}
                   </Link>
                 </li>
@@ -80,7 +68,7 @@ export default function Footer() {
             <h4 className="text-brand-text font-semibold text-sm uppercase tracking-widest mb-5">Kontakt</h4>
             <ul className="space-y-3 text-sm text-brand-muted">
               <li>
-                <a href="mailto:kontakt@businessquest.pl" className="hover:text-magenta transition-colors duration-200">
+                <a href="mailto:kontakt@businessquest.pl" className="hover:text-magenta-deep transition-colors duration-200">
                   kontakt@businessquest.pl
                 </a>
               </li>
@@ -93,10 +81,10 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-brand-border flex flex-col sm:flex-row items-center justify-between gap-4 text-brand-muted text-xs">
           <span>© {new Date().getFullYear()} businessQuest. Wszelkie prawa zastrzeżone.</span>
           <div className="flex items-center gap-6">
-            <Link href="/polityka-prywatnosci" className="hover:text-magenta transition-colors">
+            <Link href="/polityka-prywatnosci" className="hover:text-magenta-deep transition-colors">
               Polityka prywatności
             </Link>
-            <Link href="/regulamin" className="hover:text-magenta transition-colors">
+            <Link href="/regulamin" className="hover:text-magenta-deep transition-colors">
               Regulamin
             </Link>
           </div>
