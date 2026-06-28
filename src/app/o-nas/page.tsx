@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
@@ -5,6 +7,13 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import LogoStrip from "@/components/sections/LogoStrip";
 import CtaBanner from "@/components/sections/CtaBanner";
 import { team } from "@/data/team";
+
+// Jeśli w public/images/team/ znajdzie się wycięta sylwetka Zuzanny
+// (zuzia.png, przezroczyste tło) — hero automatycznie pokaże ją na kole
+// gradientowym. W innym wypadku używamy portretu studyjnego (zuzia.webp).
+const hasZuziaCutout = fs.existsSync(
+  path.join(process.cwd(), "public", "images", "team", "zuzia.png")
+);
 
 export const metadata: Metadata = {
   title: "O nas — businessQuest",
@@ -48,6 +57,81 @@ function LinkedInIcon() {
       <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
       <circle cx="4" cy="4" r="2" />
     </svg>
+  );
+}
+
+/** Portret studyjny w karcie (gdy brak wyciętej sylwetki). */
+function ZuziaPortrait() {
+  return (
+    <div className="relative flex justify-center lg:justify-end">
+      <div className="relative w-full max-w-[400px] lg:max-w-[440px]">
+        {/* Koło gradientowe + przesunięty pierścień (sygnatura marki) */}
+        <div
+          aria-hidden
+          className="absolute -top-7 -right-6 w-40 h-40 lg:w-52 lg:h-52 rounded-full"
+          style={{ background: "var(--gradient-magenta)" }}
+        />
+        <div
+          aria-hidden
+          className="absolute -top-[1.15rem] -right-[0.6rem] w-40 h-40 lg:w-52 lg:h-52 rounded-full border border-brand-text/70"
+        />
+        {/* Tekstura kropek */}
+        <div
+          aria-hidden
+          className="absolute -bottom-6 -left-6 w-28 h-28 opacity-60"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(14,14,16,0.22) 1.25px, transparent 1.25px)",
+            backgroundSize: "14px 14px",
+          }}
+        />
+        {/* Portret */}
+        <div className="relative rounded-[2rem] overflow-hidden border border-brand-border shadow-xl aspect-[4/5] bg-brand-bg-subtle">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/team/zuzia.webp"
+            alt="Zuzanna Woźniak — CEO i założycielka businessQuest"
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Wycięta sylwetka na kole gradientowym (gdy istnieje zuzia.png). */
+function ZuziaCutout() {
+  return (
+    <div className="relative flex justify-center lg:justify-end">
+      <div className="relative w-full max-w-[440px] lg:max-w-[480px] flex items-end justify-center">
+        {/* Koło gradientowe + przesunięty pierścień */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full aspect-square rounded-full"
+          style={{ background: "var(--gradient-magenta)" }}
+        />
+        <div
+          aria-hidden
+          className="absolute bottom-3 left-[calc(50%+12px)] -translate-x-1/2 w-full aspect-square rounded-full border border-brand-text/15"
+        />
+        {/* Tekstura kropek */}
+        <div
+          aria-hidden
+          className="absolute -bottom-4 -left-4 w-24 h-24 opacity-50"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(14,14,16,0.22) 1.25px, transparent 1.25px)",
+            backgroundSize: "14px 14px",
+          }}
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/team/zuzia.png"
+          alt="Zuzanna Woźniak — CEO i założycielka businessQuest"
+          className="relative z-10 w-full max-w-[420px] lg:max-w-[460px] h-auto object-contain drop-shadow-2xl"
+        />
+      </div>
+    </div>
   );
 }
 
@@ -117,43 +201,8 @@ export default function ONasPage() {
               </figure>
             </div>
 
-            {/* Prawa — portret Zuzanny z gradientowym akcentem.
-                TODO: gdy w public/images/team/ pojawi się wycięta sylwetka
-                (PNG z przezroczystym tłem), można przełączyć ten blok na
-                swobodnie stojącą sylwetkę na kole gradientowym. */}
-            <div className="relative flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-[400px] lg:max-w-[440px]">
-                {/* Koło gradientowe + przesunięty pierścień (sygnatura marki) */}
-                <div
-                  aria-hidden
-                  className="absolute -top-7 -right-6 w-40 h-40 lg:w-52 lg:h-52 rounded-full"
-                  style={{ background: "var(--gradient-magenta)" }}
-                />
-                <div
-                  aria-hidden
-                  className="absolute -top-[1.15rem] -right-[0.6rem] w-40 h-40 lg:w-52 lg:h-52 rounded-full border border-brand-text/70"
-                />
-                {/* Tekstura kropek */}
-                <div
-                  aria-hidden
-                  className="absolute -bottom-6 -left-6 w-28 h-28 opacity-60"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle, rgba(14,14,16,0.22) 1.25px, transparent 1.25px)",
-                    backgroundSize: "14px 14px",
-                  }}
-                />
-                {/* Portret */}
-                <div className="relative rounded-[2rem] overflow-hidden border border-brand-border shadow-xl aspect-[4/5] bg-brand-bg-subtle">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/team/zuzia.webp"
-                    alt="Zuzanna Woźniak — CEO i założycielka businessQuest"
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
-              </div>
-            </div>
+            {/* Prawa — sylwetka / portret Zuzanny */}
+            {hasZuziaCutout ? <ZuziaCutout /> : <ZuziaPortrait />}
           </div>
         </div>
       </header>
