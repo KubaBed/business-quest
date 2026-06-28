@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PageHeader from "@/components/layout/PageHeader";
+import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import LogoStrip from "@/components/sections/LogoStrip";
@@ -54,17 +54,109 @@ function LinkedInIcon() {
 export default function ONasPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="O nas"
-        crumbs={[{ label: "Start", href: "/" }, { label: "O nas" }]}
-        title={
-          <>
-            Prowadzimy tematy ludzi{" "}
-            <span className="text-gradient">razem z&nbsp;Tobą</span>.
-          </>
-        }
-        lead="businessQuest powstał z prostego przekonania: rozwój małej firmy nie powinien rozbijać się o to, że na wszystkie sprawy zespołu brakuje czasu, rąk i doświadczenia."
-      />
+      {/* Founder hero — sylwetka Zuzanny + cytat założycielki */}
+      <header className="relative overflow-hidden bg-brand-bg pt-28 lg:pt-32">
+        <div
+          aria-hidden
+          className="absolute -top-32 -right-24 w-[460px] h-[460px] rounded-full opacity-[0.07] blur-3xl"
+          style={{ background: "var(--gradient-magenta)" }}
+        />
+        <div className="relative max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-12 items-center pb-16 lg:pb-24">
+            {/* Lewa — tekst + cytat */}
+            <div className="max-w-xl">
+              <nav
+                className="fade-blur-up flex items-center gap-2 text-sm text-brand-muted mb-6"
+                aria-label="Ścieżka"
+              >
+                <Link href="/" className="hover:text-magenta transition-colors">
+                  Start
+                </Link>
+                <span className="text-brand-border">/</span>
+                <span className="text-brand-body">O nas</span>
+              </nav>
+
+              <div className="fade-blur-up d1">
+                <SectionLabel className="mb-5">O nas</SectionLabel>
+              </div>
+
+              <h1 className="fade-blur-up d2 text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight leading-[1.03] text-brand-text">
+                Zaczęło się od&nbsp;prostego{" "}
+                <span className="text-gradient">przekonania</span>.
+              </h1>
+
+              <figure className="fade-blur-up d3 mt-8 relative pl-6 border-l-2 border-magenta">
+                <span
+                  aria-hidden
+                  className="absolute -top-4 left-4 text-magenta/20 text-6xl font-serif leading-none select-none"
+                >
+                  &ldquo;
+                </span>
+                <blockquote className="text-xl lg:text-[1.6rem] text-brand-text font-medium leading-snug">
+                  W małej firmie wszystkie sprawy ludzi lądują na jednym
+                  biurku — najczęściej właściciela. Założyłam businessQuest, żeby
+                  nikt nie musiał być z&nbsp;tym sam.
+                </blockquote>
+                <figcaption className="mt-6 flex items-center gap-4">
+                  <div>
+                    <p className="font-bold text-brand-text">Zuzanna Woźniak</p>
+                    <p className="text-magenta text-sm font-medium">
+                      CEO i&nbsp;założycielka businessQuest
+                    </p>
+                  </div>
+                  <a
+                    href="https://www.linkedin.com/in/zuzawozprzyb/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-brand-border text-brand-muted hover:text-magenta hover:border-magenta transition-colors"
+                    aria-label="LinkedIn — Zuzanna Woźniak"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                </figcaption>
+              </figure>
+            </div>
+
+            {/* Prawa — portret Zuzanny z gradientowym akcentem.
+                TODO: gdy w public/images/team/ pojawi się wycięta sylwetka
+                (PNG z przezroczystym tłem), można przełączyć ten blok na
+                swobodnie stojącą sylwetkę na kole gradientowym. */}
+            <div className="relative flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-[400px] lg:max-w-[440px]">
+                {/* Koło gradientowe + przesunięty pierścień (sygnatura marki) */}
+                <div
+                  aria-hidden
+                  className="absolute -top-7 -right-6 w-40 h-40 lg:w-52 lg:h-52 rounded-full"
+                  style={{ background: "var(--gradient-magenta)" }}
+                />
+                <div
+                  aria-hidden
+                  className="absolute -top-[1.15rem] -right-[0.6rem] w-40 h-40 lg:w-52 lg:h-52 rounded-full border border-brand-text/70"
+                />
+                {/* Tekstura kropek */}
+                <div
+                  aria-hidden
+                  className="absolute -bottom-6 -left-6 w-28 h-28 opacity-60"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(circle, rgba(14,14,16,0.22) 1.25px, transparent 1.25px)",
+                    backgroundSize: "14px 14px",
+                  }}
+                />
+                {/* Portret */}
+                <div className="relative rounded-[2rem] overflow-hidden border border-brand-border shadow-xl aspect-[4/5] bg-brand-bg-subtle">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/team/zuzia.webp"
+                    alt="Zuzanna Woźniak — CEO i założycielka businessQuest"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
       {/* Historia / misja */}
       <section className="section-py bg-brand-bg-subtle">
