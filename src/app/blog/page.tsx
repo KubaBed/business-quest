@@ -34,8 +34,6 @@ function Meta({ post }: { post: Post }) {
       <span className="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta-deep text-[12px] font-semibold">
         {post.category}
       </span>
-      <span className="text-brand-muted">{post.dateLabel}</span>
-      <span className="text-brand-border">·</span>
       <span className="text-brand-muted">{post.readingTime}</span>
     </div>
   );

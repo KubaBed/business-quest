@@ -41,8 +41,6 @@ export default function BlogPostPage({ params }: Params) {
         lead={post.excerpt}
       >
         <div className="flex items-center gap-3 text-sm text-brand-muted">
-          <span>{post.dateLabel}</span>
-          <span className="text-brand-border">·</span>
           <span>{post.readingTime}</span>
         </div>
       </PageHeader>
