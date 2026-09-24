@@ -164,7 +164,7 @@ const sections: { title: string; body: React.ReactNode }[] = [
       <p>
         Politykę aktualizujemy, gdy zmieniają się przepisy lub sposób, w jaki
         przetwarzamy dane. Aktualna wersja jest zawsze dostępna na tej stronie.
-        Ostatnia aktualizacja: 23 września 2026 r.
+        Ostatnia aktualizacja: 24 września 2026 r.
       </p>
     ),
   },
