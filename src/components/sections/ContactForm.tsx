@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const CONTACT_EMAIL = "kontakt@businessquest.pl";
+const CONTACT_EMAIL = "zuzanna.wozniak@businessquest.pl";
 
 const topics = [
   "Rekrutacja",

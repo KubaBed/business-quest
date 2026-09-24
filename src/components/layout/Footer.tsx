@@ -68,8 +68,8 @@ export default function Footer() {
             <h4 className="text-brand-text font-semibold text-sm uppercase tracking-widest mb-5">Kontakt</h4>
             <ul className="space-y-3 text-sm text-brand-muted">
               <li>
-                <a href="mailto:kontakt@businessquest.pl" className="hover:text-magenta-deep transition-colors duration-200">
-                  kontakt@businessquest.pl
+                <a href="mailto:zuzanna.wozniak@businessquest.pl" className="hover:text-magenta-deep transition-colors duration-200">
+                  zuzanna.wozniak@businessquest.pl
                 </a>
               </li>
               <li>Polska</li>

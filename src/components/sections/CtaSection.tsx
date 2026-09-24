@@ -52,7 +52,7 @@ export default function CtaSection() {
                   </Button>
                 </MagneticButton>
                 <Button
-                  href="mailto:kontakt@businessquest.pl"
+                  href="mailto:zuzanna.wozniak@businessquest.pl"
                   variant="white-ghost"
                   size="lg"
                 >

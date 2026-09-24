@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Porozmawiajmy o Twoim zespole. Umów bezpłatną, niezobowiązującą rozmowę — wspólnie zobaczymy, czy i jak możemy pomóc.",
 };
 
-const CONTACT_EMAIL = "kontakt@businessquest.pl";
+const CONTACT_EMAIL = "zuzanna.wozniak@businessquest.pl";
 
 const channels = [
   {
@@ -22,7 +22,7 @@ const channels = [
   {
     label: "LinkedIn",
     value: "businessQuest",
-    href: "https://www.linkedin.com/company/business-quest-pl/",
+    href: "https://www.linkedin.com/company/business-quest-consulting",
     icon: (
       <>
         <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
@@ -86,7 +86,7 @@ export default function KontaktPage() {
                       <span className="block text-sm text-brand-muted">
                         {c.label}
                       </span>
-                      <span className="block text-brand-text font-semibold group-hover:text-magenta-deep transition-colors truncate">
+                      <span className="block text-brand-text font-semibold group-hover:text-magenta-deep transition-colors [overflow-wrap:anywhere]">
                         {c.value}
                       </span>
                     </span>

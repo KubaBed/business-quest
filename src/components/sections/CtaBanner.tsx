@@ -24,7 +24,7 @@ export default function CtaBanner({
   text = "Opowiedz, co najbardziej zajmuje Ci teraz głowę w temacie zespołu. Wspólnie zobaczymy, czy i jak możemy pomóc — bezpłatnie i bez zobowiązań.",
   primaryHref = "/kontakt",
   primaryLabel = "Umów bezpłatną rozmowę",
-  secondaryHref = "mailto:kontakt@businessquest.pl",
+  secondaryHref = "mailto:zuzanna.wozniak@businessquest.pl",
   secondaryLabel = "Napisz do nas",
 }: CtaBannerProps) {
   return (

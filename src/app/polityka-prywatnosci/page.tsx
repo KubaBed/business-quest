@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Jak Business Quest sp. z o.o. przetwarza dane osobowe osób, które kontaktują się z nami przez stronę, e-mail i formularze.",
 };
 
-const CONTACT_EMAIL = "kontakt@businessquest.pl";
+const CONTACT_EMAIL = "zuzanna.wozniak@businessquest.pl";
 
 const sections: { title: string; body: React.ReactNode }[] = [
   {
