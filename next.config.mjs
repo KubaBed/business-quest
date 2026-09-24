@@ -25,7 +25,7 @@ const legacyMap = {
   "cechy-lidera-raport-z-konferencji-perspektywy-women-in-tech-summit": "/blog",
   "sciezki-rozwoju-w-kancelarii-prawniczej": "/blog",
 
-  "consulting-w-spolce-gieldowej-vercom": "/case-study/hr-recruitment-consulting-vercom",
+  "consulting-w-spolce-gieldowej-vercom": "/case-study",
   "operacyjne-wsparcie-zarzadu-w-dzialaniach-w-obszarze-ludzkim":
     "/case-study/operacyjne-wsparcie-zarzadu-appchance",
   "niestandardowe-podejscie-do-niestandardowej-potrzeby-rekrutacji-genealoga":
@@ -60,6 +60,8 @@ const nextConfig = {
         destination,
         permanent: true,
       })),
+      // Case study Vercom zdjęte ze strony 2026-09-24.
+      { source: "/case-study/hr-recruitment-consulting-vercom", destination: "/case-study", permanent: true },
       { source: "/hr-na-godziny/:path*", destination: "/#uslugi", permanent: true },
       { source: "/category/:path*", destination: "/blog", permanent: true },
       { source: "/tag/:path*", destination: "/blog", permanent: true },

@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import MotionProvider from "@/components/providers/MotionProvider";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://businessquest.pl"),
   title: "businessQuest — HR Consulting & Leadership Development",
   description:
     "Wspieramy firmy technologiczne, e-commerce i kancelarie w budowaniu skutecznych zespołów i liderów. Relacje. Wyniki. Wzrost.",
@@ -16,9 +17,6 @@ export const metadata: Metadata = {
     locale: "pl_PL",
     type: "website",
     url: "https://businessquest.pl",
-  },
-  icons: {
-    icon: "/images/logo-square.png",
   },
 };
 
