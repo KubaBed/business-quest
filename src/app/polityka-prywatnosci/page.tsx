@@ -103,6 +103,7 @@ const sections: { title: string; body: React.ReactNode }[] = [
         <ul>
           <li>Google (poczta e-mail w usłudze Google Workspace),</li>
           <li>Vercel (hosting strony),</li>
+          <li>Web3Forms (przekazywanie wiadomości z formularza kontaktowego na naszą skrzynkę),</li>
           <li>Meta Platforms (formularze w reklamach na Facebooku i Instagramie),</li>
           <li>MailerLite (wysyłka newslettera),</li>
           <li>biuro rachunkowe, jeśli dochodzi do współpracy.</li>
