@@ -21,7 +21,10 @@ export default function ServicePricing({ blocks }: { blocks: PricingBlock[] }) {
 
           <div className="mt-6">
             {block.kind === "table" && (
-              <PriceTable columns={block.columns} rows={block.rows} />
+              <>
+                {block.milestones && <Milestones {...block.milestones} />}
+                <PriceTable columns={block.columns} rows={block.rows} />
+              </>
             )}
             {block.kind === "packages" && <PackageGrid packages={block.packages} />}
             {block.kind === "text" && (
@@ -31,6 +34,18 @@ export default function ServicePricing({ blocks }: { blocks: PricingBlock[] }) {
                     {p}
                   </p>
                 ))}
+                {block.chips && (
+                  <ul className="flex flex-wrap gap-2 pt-1">
+                    {block.chips.map((c) => (
+                      <li
+                        key={c}
+                        className="rounded-full border border-magenta/25 bg-magenta/[0.05] px-3.5 py-1.5 text-sm font-semibold text-magenta-deep"
+                      >
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             )}
           </div>
@@ -42,6 +57,41 @@ export default function ServicePricing({ blocks }: { blocks: PricingBlock[] }) {
           )}
         </div>
       ))}
+    </div>
+  );
+}
+
+function Milestones({
+  label,
+  items,
+}: {
+  label: string;
+  items: { title: string; detail: string }[];
+}) {
+  return (
+    <div className="mb-8 rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5 sm:p-6">
+      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-muted mb-5">
+        {label}
+      </p>
+      <ol className="grid md:grid-cols-3 gap-4 md:gap-6">
+        {items.map((m, i) => (
+          <li key={m.title} className="relative flex md:flex-col gap-3">
+            <span className="relative z-10 flex flex-shrink-0 w-8 h-8 items-center justify-center rounded-full bg-magenta text-white text-sm font-bold">
+              {i + 1}
+            </span>
+            {i < items.length - 1 && (
+              <span
+                aria-hidden
+                className="hidden md:block absolute top-4 left-11 -right-3 h-px bg-magenta/30"
+              />
+            )}
+            <span>
+              <span className="block font-semibold text-brand-text">{m.title}</span>
+              <span className="block text-sm text-brand-muted mt-0.5">{m.detail}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }

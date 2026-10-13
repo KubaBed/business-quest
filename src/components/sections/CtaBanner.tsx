@@ -1,8 +1,10 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Button from "@/components/ui/Button";
 import MagneticButton from "@/components/animations/MagneticButton";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import GradientCircle from "@/components/decor/GradientCircle";
 
 interface CtaBannerProps {
   eyebrow?: string;
@@ -12,6 +14,8 @@ interface CtaBannerProps {
   primaryLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
+  /** Treść w prawej kolumnie panelu (np. kroki startu); dokłada też pierścienie w rogu. */
+  aside?: ReactNode;
 }
 
 /**
@@ -26,6 +30,7 @@ export default function CtaBanner({
   primaryLabel = "Umów bezpłatną rozmowę",
   secondaryHref = "mailto:zuzanna.wozniak@businessquest.pl",
   secondaryLabel = "Napisz do nas",
+  aside,
 }: CtaBannerProps) {
   return (
     <section className="section-py bg-brand-bg">
@@ -45,39 +50,64 @@ export default function CtaBanner({
             }}
           />
 
-          <div className="relative max-w-2xl">
-            <ScrollReveal>
-              <p className="text-white/80 text-sm font-semibold uppercase tracking-widest mb-4">
-                {eyebrow}
-              </p>
-            </ScrollReveal>
+          {aside && (
+            <>
+              <GradientCircle
+                variant="none"
+                ring="white"
+                className="absolute -right-28 -bottom-40 w-[440px] opacity-70"
+              />
+              <GradientCircle
+                variant="none"
+                ring="white"
+                className="absolute -right-10 -bottom-56 w-[300px] opacity-50"
+              />
+            </>
+          )}
 
-            <ScrollReveal delay={0.1}>
-              <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-white leading-[1.02] tracking-tight mb-6">
-                {title}
-              </h2>
-            </ScrollReveal>
+          <div
+            className={
+              aside
+                ? "relative grid lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-14 items-center"
+                : "relative max-w-2xl"
+            }
+          >
+            <div className={aside ? "max-w-2xl" : undefined}>
+              <ScrollReveal>
+                <p className="text-white/80 text-sm font-semibold uppercase tracking-widest mb-4">
+                  {eyebrow}
+                </p>
+              </ScrollReveal>
 
-            <ScrollReveal delay={0.2}>
-              <p className="text-white/85 text-lg leading-relaxed mb-10 max-w-lg">
-                {text}
-              </p>
-            </ScrollReveal>
+              <ScrollReveal delay={0.1}>
+                <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-white leading-[1.02] tracking-tight mb-6">
+                  {title}
+                </h2>
+              </ScrollReveal>
 
-            <ScrollReveal delay={0.3}>
-              <div className="flex flex-wrap items-center gap-4">
-                <MagneticButton strength={0.25}>
-                  <Button href={primaryHref} variant="white" size="lg">
-                    {primaryLabel}
-                  </Button>
-                </MagneticButton>
-                {secondaryHref && secondaryLabel && (
-                  <Button href={secondaryHref} variant="white-ghost" size="lg">
-                    {secondaryLabel}
-                  </Button>
-                )}
-              </div>
-            </ScrollReveal>
+              <ScrollReveal delay={0.2}>
+                <p className="text-white/85 text-lg leading-relaxed mb-10 max-w-lg">
+                  {text}
+                </p>
+              </ScrollReveal>
+
+              <ScrollReveal delay={0.3}>
+                <div className="flex flex-wrap items-center gap-4">
+                  <MagneticButton strength={0.25}>
+                    <Button href={primaryHref} variant="white" size="lg">
+                      {primaryLabel}
+                    </Button>
+                  </MagneticButton>
+                  {secondaryHref && secondaryLabel && (
+                    <Button href={secondaryHref} variant="white-ghost" size="lg">
+                      {secondaryLabel}
+                    </Button>
+                  )}
+                </div>
+              </ScrollReveal>
+            </div>
+
+            {aside && <ScrollReveal delay={0.3}>{aside}</ScrollReveal>}
           </div>
         </div>
       </div>

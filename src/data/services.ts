@@ -3,9 +3,12 @@
 // Poprawione tylko literówki i interpunkcja; zakresy liczbowe zapisane z "-".
 // Pola id/icon/title/description/bullets zasilają karty na stronie głównej.
 
+export type ServiceIconName = "target" | "clipboard" | "refresh" | "chat";
+
 export interface ServiceOffering {
   title: string;
   text: string;
+  icon?: ServiceIconName;
 }
 
 export interface PricePackage {
@@ -23,6 +26,8 @@ export type PricingBlock =
       columns: string[];
       rows: string[][];
       note?: string;
+      /** Etapy rozliczenia pokazane nad tabelą. */
+      milestones?: { label: string; items: { title: string; detail: string }[] };
     }
   | {
       kind: "packages";
@@ -31,7 +36,7 @@ export type PricingBlock =
       packages: PricePackage[];
       note?: string;
     }
-  | { kind: "text"; title: string; paragraphs: string[] };
+  | { kind: "text"; title: string; paragraphs: string[]; chips?: string[] };
 
 export interface Service {
   id: string;
@@ -46,13 +51,15 @@ export interface Service {
   tagline: string;
   metaDescription: string;
   intro: string[];
+  /** Kroki procesu (stepper obok opisu), słowami z treści klienta. */
+  process?: { label: string; steps: string[] };
   offeringsLabel: string;
   offerings: ServiceOffering[];
   pricingIntro?: string;
   pricing: PricingBlock[];
   /** Zdanie pod cennikiem z linkiem do innej usługi. */
   pricingAside?: { text: string; linkLabel: string; href: string };
-  start: { title: string; paragraphs: string[]; ctaLabel: string };
+  start: { title: string; paragraphs: string[]; ctaLabel: string; steps?: string[] };
   /** Slugi case studies pokazywanych na podstronie. */
   caseStudies: string[];
 }
@@ -79,22 +86,36 @@ export const services: Service[] = [
       "W małej firmie rekrutacja dzieje się obok wszystkiego innego, między klientami, sprzedażą i bieżącą pracą. Dlatego proces zwykle się przeciąga, a decyzja zapada pod presją czasu. Odciążymy Cię.",
       "Bierzemy na siebie prowadzenie procesu: od ustalenia, kogo naprawdę potrzebujesz, przez ogłoszenie i selekcję, po rozmowy i rekomendację. Ostateczną decyzję o zatrudnieniu podejmujesz Ty. Podejmujesz ją na podstawie uporządkowanego procesu skupionego wokół celu biznesowego, który jest dla Ciebie ważny.",
     ],
+    process: {
+      label: "Prowadzenie procesu",
+      steps: [
+        "Ustalenie, kogo naprawdę potrzebujesz",
+        "Ogłoszenie i selekcja",
+        "Rozmowy",
+        "Rekomendacja",
+        "Ostateczną decyzję o zatrudnieniu podejmujesz Ty",
+      ],
+    },
     offeringsLabel: "Zakres usługi",
     offerings: [
       {
         title: "Działamy z perspektywą celu",
+        icon: "target",
         text: "Ustalamy, co sprawia, że wypełnienie wakatu jest potrzebne. Sprawdzamy, jaka rola pomoże Ci osiągnąć cel biznesowy, który wyznaczasz w organizacji.",
       },
       {
         title: "Prowadzimy rekrutację od ogłoszenia do oferty",
+        icon: "clipboard",
         text: "Ustalamy profil kandydata i zakres roli, przygotowujemy ogłoszenie, prowadzimy selekcję aplikacji, organizujemy rozmowy i przekazujemy Ci shortlistę z rekomendacją oraz uzasadnieniem.",
       },
       {
         title: "Wchodzimy w proces, który utknął",
+        icon: "refresh",
         text: "Kilkanaście aplikacji i żadnej decyzji. Rekrutacja powtarzana po raz drugi na to samo stanowisko. Sprawdzamy, w którym miejscu proces nie zadziałał, i doprowadzamy go do końca.",
       },
       {
         title: "Przygotowujemy Cię do rozmów z kandydatami",
+        icon: "chat",
         text: "Scenariusz rozmowy, pytania, które dają konkretne informacje zamiast ogólników, i kryteria oceny. Tak, żeby po rozmowie dało się powiedzieć o kandydacie coś więcej niż „fajnie się rozmawiało”. :)",
       },
     ],
@@ -118,6 +139,15 @@ export const services: Service[] = [
           ["Manager", "6 000-8 000 zł", "6 000-8 000 zł", "4-10%"],
         ],
         note: "Widełki zależą od trudności roli i sytuacji na rynku. Ustalamy je przed startem, a nie w trakcie.",
+        // Opis etapów z zakładki „Cennik" w dokumencie klienta.
+        milestones: {
+          label: "Wynagrodzenie dzielimy na trzy części",
+          items: [
+            { title: "Opłata początkowa", detail: "pierwsza faza współpracy" },
+            { title: "Opłata za shortlistę", detail: "po zaprezentowaniu shortlisty" },
+            { title: "Success fee", detail: "po zatrudnieniu wybranej osoby" },
+          ],
+        },
       },
       {
         kind: "text",
@@ -125,6 +155,7 @@ export const services: Service[] = [
         paragraphs: [
           "Jeśli rekrutacja jest jednym z kilku tematów, którymi się dla Ciebie zajmujemy, wchodzi w pakiet godzinowy: 16 h obejmuje jedną rekrutację, 32 h dwie, a 64 h trzy. Powyżej tego ustalamy stałą opłatę za zatrudnienie.",
         ],
+        chips: ["16 h · jedna rekrutacja", "32 h · dwie rekrutacje", "64 h · trzy rekrutacje"],
       },
     ],
     pricingAside: {
@@ -139,6 +170,7 @@ export const services: Service[] = [
         "Po kick-offie dostajesz harmonogram procesu i wycenę.",
       ],
       ctaLabel: "Umów rozmowę",
+      steps: ["Spotkanie kick-off", "Harmonogram procesu i wycena"],
     },
     caseStudies: [
       "niestandardowe-podejscie-do-niestandardowej-potrzeby-rekrutacji-genealoga",

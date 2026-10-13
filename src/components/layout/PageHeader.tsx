@@ -15,6 +15,8 @@ interface PageHeaderProps {
   crumbs?: Crumb[];
   /** Dodatkowa treść pod leadem (np. przyciski). */
   children?: ReactNode;
+  /** Ilustracja w prawej kolumnie (na mobile pod treścią). */
+  aside?: ReactNode;
   align?: "left" | "center";
 }
 
@@ -29,6 +31,7 @@ export default function PageHeader({
   lead,
   crumbs,
   children,
+  aside,
   align = "left",
 }: PageHeaderProps) {
   const centered = align === "center";
@@ -52,51 +55,60 @@ export default function PageHeader({
           centered ? "text-center" : ""
         }`}
       >
-        <div className={`max-w-3xl ${centered ? "mx-auto" : ""}`}>
-          {crumbs && crumbs.length > 0 && (
-            <nav
-              className={`fade-blur-up flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-brand-muted mb-6 ${
-                centered ? "justify-center" : ""
-              }`}
-              aria-label="Ścieżka"
-            >
-              {crumbs.map((c, i) => (
-                <span key={c.label} className="inline-flex items-center gap-2">
-                  {c.href ? (
-                    <Link
-                      href={c.href}
-                      className="hover:text-magenta-deep transition-colors"
-                    >
-                      {c.label}
-                    </Link>
-                  ) : (
-                    <span className="text-brand-body">{c.label}</span>
-                  )}
-                  {i < crumbs.length - 1 && (
-                    <span className="text-brand-border">/</span>
-                  )}
-                </span>
-              ))}
-            </nav>
-          )}
+        <div
+          className={
+            aside
+              ? "grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-10 items-center"
+              : undefined
+          }
+        >
+          <div className={`max-w-3xl ${centered ? "mx-auto" : ""}`}>
+            {crumbs && crumbs.length > 0 && (
+              <nav
+                className={`fade-blur-up flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-brand-muted mb-6 ${
+                  centered ? "justify-center" : ""
+                }`}
+                aria-label="Ścieżka"
+              >
+                {crumbs.map((c, i) => (
+                  <span key={c.label} className="inline-flex items-center gap-2">
+                    {c.href ? (
+                      <Link
+                        href={c.href}
+                        className="hover:text-magenta-deep transition-colors"
+                      >
+                        {c.label}
+                      </Link>
+                    ) : (
+                      <span className="text-brand-body">{c.label}</span>
+                    )}
+                    {i < crumbs.length - 1 && (
+                      <span className="text-brand-border">/</span>
+                    )}
+                  </span>
+                ))}
+              </nav>
+            )}
 
-          <div className="fade-blur-up d1">
-            <SectionLabel className={`mb-5 ${centered ? "justify-center" : ""}`}>
-              {eyebrow}
-            </SectionLabel>
+            <div className="fade-blur-up d1">
+              <SectionLabel className={`mb-5 ${centered ? "justify-center" : ""}`}>
+                {eyebrow}
+              </SectionLabel>
+            </div>
+
+            <h1 className="fade-blur-up d2 text-4xl sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight leading-[1.02] text-brand-text">
+              {title}
+            </h1>
+
+            {lead && (
+              <p className="fade-blur-up d3 mt-6 text-brand-body text-lg lg:text-xl leading-relaxed">
+                {lead}
+              </p>
+            )}
+
+            {children && <div className="fade-blur-up d4 mt-9">{children}</div>}
           </div>
-
-          <h1 className="fade-blur-up d2 text-4xl sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight leading-[1.02] text-brand-text">
-            {title}
-          </h1>
-
-          {lead && (
-            <p className="fade-blur-up d3 mt-6 text-brand-body text-lg lg:text-xl leading-relaxed">
-              {lead}
-            </p>
-          )}
-
-          {children && <div className="fade-blur-up d4 mt-9">{children}</div>}
+          {aside && <div className="relative">{aside}</div>}
         </div>
       </div>
     </header>
