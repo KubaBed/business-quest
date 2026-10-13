@@ -4,6 +4,15 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MotionProvider from "@/components/providers/MotionProvider";
+import { services } from "@/data/services";
+
+// Do menu trafia tylko to, co potrzebne - pełna treść usług nie ląduje w JS każdej strony.
+const navServices = services.map(({ id, slug, name, tagline }) => ({
+  id,
+  slug,
+  name,
+  tagline,
+}));
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://businessquest.pl"),
@@ -29,7 +38,7 @@ export default function RootLayout({
     <html lang="pl">
       <body className="antialiased">
         <MotionProvider>
-          <Navbar />
+          <Navbar services={navServices} />
           <main>{children}</main>
           <Footer />
         </MotionProvider>
