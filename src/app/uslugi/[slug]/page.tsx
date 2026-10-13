@@ -10,9 +10,13 @@ import CtaBanner from "@/components/sections/CtaBanner";
 import ServicePricing from "@/components/sections/ServicePricing";
 import DotGrid from "@/components/decor/DotGrid";
 import ServiceIcon from "@/components/decor/ServiceIcons";
-import RecruitHeroVisual from "@/components/decor/RecruitHeroVisual";
+import {
+  RecruitHeroVisual,
+  SparingHeroVisual,
+  ProcessHeroVisual,
+} from "@/components/decor/ServiceHeroVisuals";
 import { mockupFor } from "@/components/decor/ServiceMockups";
-import { services, getService } from "@/data/services";
+import { services, getService, type Service } from "@/data/services";
 import { caseStudies } from "@/data/caseStudies";
 
 interface Params {
@@ -21,9 +25,11 @@ interface Params {
 
 export const dynamicParams = false;
 
-// Ilustracje do hero - na razie pilotażowo tylko rekrutacje.
+// Ilustracje do hero, po `id` usługi.
 const heroVisuals: Record<string, ReactNode> = {
   rekrutacje: <RecruitHeroVisual />,
+  sparing: <SparingHeroVisual />,
+  procesy: <ProcessHeroVisual />,
 };
 
 export function generateStaticParams() {
@@ -295,7 +301,38 @@ export default function ServicePage({ params }: Params) {
 
 type CaseStudy = (typeof caseStudies)[number];
 
-function ProcessSteps({ label, steps }: { label: string; steps: string[] }) {
+function ProcessSteps({
+  label,
+  steps,
+  variant = "sequence",
+  icons,
+}: NonNullable<Service["process"]>) {
+  if (variant === "options") {
+    return (
+      <div className="rounded-[1.25rem] border border-brand-border bg-brand-bg-subtle p-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-muted mb-5">
+          {label}
+        </p>
+        <ul className="space-y-3">
+          {steps.map((step, i) => (
+            <li key={step} className="flex items-center gap-3">
+              <span className="flex flex-shrink-0 w-9 h-9 items-center justify-center rounded-xl bg-white border border-brand-border text-magenta-deep">
+                {icons?.[i] ? (
+                  <ServiceIcon name={icons[i]} className="w-[18px] h-[18px]" />
+                ) : (
+                  <span className="block w-2 h-2 rounded-full bg-magenta" />
+                )}
+              </span>
+              <span className="text-[15px] leading-snug text-brand-text font-medium">
+                {step}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
   return (
     <div className="rounded-[1.25rem] border border-brand-border bg-brand-bg-subtle p-6">
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-muted mb-5">

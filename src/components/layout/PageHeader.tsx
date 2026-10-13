@@ -96,7 +96,11 @@ export default function PageHeader({
               </SectionLabel>
             </div>
 
-            <h1 className="fade-blur-up d2 text-4xl sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight leading-[1.02] text-brand-text">
+            <h1
+              className={`fade-blur-up d2 text-4xl sm:text-5xl ${
+                aside ? "lg:text-[3.25rem]" : "lg:text-[3.75rem]"
+              } font-extrabold tracking-tight leading-[1.02] text-brand-text`}
+            >
               {title}
             </h1>
 

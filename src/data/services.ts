@@ -3,7 +3,24 @@
 // Poprawione tylko literówki i interpunkcja; zakresy liczbowe zapisane z "-".
 // Pola id/icon/title/description/bullets zasilają karty na stronie głównej.
 
-export type ServiceIconName = "target" | "clipboard" | "refresh" | "chat";
+export type ServiceIconName =
+  | "target"
+  | "clipboard"
+  | "refresh"
+  | "chat"
+  | "check"
+  | "calendar"
+  | "fileText"
+  | "users"
+  | "briefcase"
+  | "trendingUp"
+  | "logout"
+  | "wallet"
+  | "checklist"
+  | "org"
+  | "megaphone"
+  | "star"
+  | "barChart";
 
 export interface ServiceOffering {
   title: string;
@@ -51,8 +68,16 @@ export interface Service {
   tagline: string;
   metaDescription: string;
   intro: string[];
-  /** Kroki procesu (stepper obok opisu), słowami z treści klienta. */
-  process?: { label: string; steps: string[] };
+  /**
+   * Karta obok opisu, słowami z treści klienta: "sequence" to kroki procesu
+   * połączone linią, "options" to lista elementów z ikonami.
+   */
+  process?: {
+    label: string;
+    steps: string[];
+    variant?: "sequence" | "options";
+    icons?: ServiceIconName[];
+  };
   offeringsLabel: string;
   offerings: ServiceOffering[];
   pricingIntro?: string;
@@ -199,30 +224,45 @@ export const services: Service[] = [
       "Część decyzji związanych z zespołem jest trudna nie dlatego, że nie wiesz, co zrobić. Jest trudna dlatego, że nie masz z kim tego przegadać, a przegadanie z kimś z wewnątrz jest niemożliwe. Potrzebujesz bezstronnego eksperta.",
       "Jesteśmy po to, żeby te decyzje miały drugą perspektywę: perspektywę kogoś z doświadczeniem z wielu firm i z dystansem do Twojej sytuacji. Czasem to jedna rozmowa przed trudnym spotkaniem. Czasem stały kontakt przez kilka miesięcy, bo tematów jest więcej.",
     ],
+    process: {
+      label: "Druga perspektywa",
+      variant: "options",
+      steps: [
+        "Jedna rozmowa przed trudnym spotkaniem",
+        "Stały kontakt przez kilka miesięcy",
+      ],
+      icons: ["chat", "calendar"],
+    },
     offeringsLabel: "Przykłady",
     offerings: [
       {
         title: "Pomagamy rozwiązać konflikt w zespole",
+        icon: "users",
         text: "Oddzielamy fakty od emocji, słuchamy obu stron i ustalamy, o co tak naprawdę toczy się spór. Przygotowujemy Cię do rozmowy albo prowadzimy ją razem z Tobą, tak żeby kończyła się konkretnymi ustaleniami, a nie chwilowym zawieszeniem broni.",
       },
       {
         title: "Pomagamy podejmować decyzje biznesowe z myślą o ludziach",
+        icon: "briefcase",
         text: "Nowy dział, reorganizacja, zmiana struktury, cięcie kosztów: sprawdzamy, co każda z tych decyzji oznacza dla zespołu, kogo dotknie najbardziej i jak ją przeprowadzić, żeby nie stracić osób, na których Ci zależy.",
       },
       {
         title: "Podpowiadamy, jak budować w zespole kompetencje i zaangażowanie",
+        icon: "trendingUp",
         text: "Ustalamy, jakich umiejętności zespół potrzebuje teraz i za rok, kogo rozwijać i w jaki sposób, a także jak rozmawiać z ludźmi o ich rozwoju. Bez szkoleń dla samych szkoleń, a z planem, który da się wpisać w codzienną pracę.",
       },
       {
         title: "Przygotowujemy Cię do trudnej rozmowy",
+        icon: "chat",
         text: "Ustalamy fakty, o które chcesz się oprzeć, wpływ sytuacji na zespół i firmę, oczekiwania, które chcesz postawić, i możliwe reakcje drugiej strony. Jeśli potrzebujesz, jesteśmy na tej rozmowie razem z Tobą.",
       },
       {
         title: "Przeprowadzamy Cię przez decyzję o rozstaniu",
+        icon: "logout",
         text: "Od oceny, czy to rzeczywiście ten moment i czy wszystko, co było do zrobienia, zostało zrobione, przez przebieg samej rozmowy, po komunikację do zespołu i przekazanie obowiązków.",
       },
       {
         title: "Pomagamy ułożyć rozmowę o wynagrodzeniu lub zmianie roli",
+        icon: "wallet",
         text: "Co możesz zaoferować, czego lepiej nie obiecywać i jak to powiedzieć, żeby nie zamknąć sobie drogi do kolejnej rozmowy za pół roku.",
       },
     ],
@@ -250,6 +290,11 @@ export const services: Service[] = [
         "Jeśli to jednorazowy temat, często wystarczy jedna rozmowa i nie proponujemy pakietu.",
       ],
       ctaLabel: "Umów bezpłatną konsultację",
+      steps: [
+        "30 min bezpłatnej konsultacji",
+        "Opowiadasz, z czym się mierzysz",
+        "Mówimy wprost, czy i jak możemy pomóc",
+      ],
     },
     caseStudies: ["operacyjne-wsparcie-zarzadu-appchance"],
   },
@@ -274,30 +319,47 @@ export const services: Service[] = [
       "To, co działało przy trzech osobach, przestaje działać przy ośmiu. Zadania zaczynają wisieć między ludźmi, decyzje wracają na Twoje biurko, a kiedy coś nie zostaje zrobione, słyszysz: „myślałam, że robi to ktoś inny”.",
       "Porządkujemy sposób pracy zespołu: zakresy odpowiedzialności, strukturę, ścieżki rozwoju i zasady współpracy. Wprowadzamy tylko te rozwiązania, które realnie ułatwiają pracę i które jesteście w stanie utrzymać bez nas. Małe firmy nie potrzebują rozbudowanych systemów HR. Potrzebują jasności.",
     ],
+    process: {
+      label: "Porządkujemy sposób pracy zespołu",
+      variant: "options",
+      steps: [
+        "Zakresy odpowiedzialności",
+        "Struktura",
+        "Ścieżki rozwoju",
+        "Zasady współpracy",
+      ],
+      icons: ["checklist", "org", "trendingUp", "fileText"],
+    },
     offeringsLabel: "Przykłady",
     offerings: [
       {
         title: "Porządkujemy odpowiedzialności w zespole",
+        icon: "checklist",
         text: "Rozpisujemy konkretne działania i decyzje: kto je wykonuje, kto ostatecznie odpowiada, kogo konsultujemy, a kogo wystarczy poinformować.",
       },
       {
         title: "Układamy strukturę zespołu i ścieżki rozwoju",
+        icon: "org",
         text: "Kto komu raportuje, jak wygląda przejście na kolejny poziom i czego na tym poziomie oczekujecie. To jest też odpowiedź na pytanie, które prędzej czy później usłyszysz: „co dalej, jeśli zostanę tu na kolejne dwa lata?”.",
       },
       {
         title: "Ustalamy zasady współpracy w zespole",
+        icon: "fileText",
         text: "Jak przekazujecie sobie informację zwrotną, gdzie zapisujecie ustalenia, jaki macie rytm spotkań i co robicie, kiedy pojawia się błąd. Wszystko na jednej stronie, nie w regulaminie.",
       },
       {
         title: "Porządkujemy komunikację wewnętrzną",
+        icon: "megaphone",
         text: "Ustalamy, które informacje, jakim kanałem i od kogo mają trafiać do zespołu, żeby ludzie nie dowiadywali się o ważnych sprawach z tzw. kuchni. Wprowadzamy stały rytm spotkań i komunikatów, który działa także wtedy, gdy Ciebie nie ma w biurze.",
       },
       {
         title: "Tworzymy standardy marki pracodawcy",
+        icon: "star",
         text: "Określamy, czym Twoja firma realnie przyciąga i zatrzymuje ludzi, i przekładamy to na spójny przekaz w ogłoszeniach, na stronie, w social mediach i podczas rozmów z kandydatami. Tak, żeby przyciągać najlepsze talenty z rynku.",
       },
       {
         title: "Tworzymy system ocen pracowniczych",
+        icon: "barChart",
         text: "Ustalamy, co i jak oceniasz, jak często rozmawiasz z ludźmi o ich pracy i co z tych rozmów wynika: rozwój, podwyżka, zmiana roli. Projektujemy go tak, żeby był narzędziem do rozmowy, a nie coroczną formalnością, którą wszyscy chcą mieć za sobą.",
       },
     ],
@@ -319,6 +381,7 @@ export const services: Service[] = [
         paragraphs: [
           "Stałe wynagrodzenie miesięczne, które wymiennie przeznaczasz na godziny konsultacji, opłatę rekrutacyjną albo szkolenie dla zespołu. Dobre rozwiązanie, kiedy wiesz, że tematy ludzi będą wracać regularnie, ale nie wiesz jeszcze, które z nich. Wycena po warsztacie kick-starter.",
         ],
+        chips: ["Godziny konsultacji", "Opłata rekrutacyjna", "Szkolenie dla zespołu"],
       },
     ],
     start: {
@@ -328,6 +391,11 @@ export const services: Service[] = [
         "Wychodzisz z niego z listą obszarów do zrobienia, ustaloną kolejnością i wyceną współpracy, nawet jeśli dalej zdecydujesz się działać samodzielnie.",
       ],
       ctaLabel: "Zapytaj o warsztat",
+      steps: [
+        "Warsztat kick-starter",
+        "Lista obszarów do zrobienia",
+        "Ustalona kolejność i wycena współpracy",
+      ],
     },
     caseStudies: [
       "wsparcie-hr-managera-contman",
