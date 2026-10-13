@@ -4,6 +4,8 @@
 
 - Zbudowane `/uslugi/rekrutacje`, `/uslugi/sparing-partner`, `/uslugi/procesy-hr` (trasa `src/app/uslugi/[slug]`, treść w `src/data/services.ts`, cennik w `ServicePricing.tsx`). Źródło: Google Doc „Karta usługi | Twój pierwszy zespół HR", zakładka „Opisy produktów na stronę"; poprawione tylko literówki/interpunkcja.
 - Linki: karty na stronie głównej („Szczegóły i cennik"), stopka, `/kontakt?temat=<id>` preselekcjonuje temat formularza. Redirecty WP: `hr-na-godziny` → procesy-hr, `rekrutacja-do-sprzedazy` → rekrutacje; `/uslugi` → `/#uslugi` (307).
+- Grafiki na podstronach usług (commity `275e0a3`, `2ba2eee`): makiety UI w hero (`src/components/decor/ServiceHeroVisuals.tsx` + `HeroVisualFrame`), karta procesu/obszarów obok opisu, ikony w kartach, case study z metrykami, pasek etapów rozliczenia, kroki w CTA. Zero zdjęć i bibliotek. **Zasada: copy klientek bez zmian; etykiety w grafikach tylko dosłownie z ich tekstu.**
+- Pułapka: `next build` przy działającym `next dev` nadpisuje `.next` i dev serwuje stronę bez CSS. Najpierw zatrzymaj dev.
 - Brakuje 4. podstrony „Twój pierwszy zespół HR" (klient jeszcze nie napisał). Do wyjaśnienia z klientem: „Pakiety od 5 do 20 godzin" vs tabela 1/10/20 h; success fee 4-10% czego (zakładka Cennik mówi: rocznego wynagrodzenia); tabela rekrutacji różni się od tej w zakładce „Cennik".
 
 ## 2026-06-19 (sesja: poprawki Zespół + Hero, deploy)
