@@ -32,7 +32,7 @@ const legacyMap = {
     "/case-study/niestandardowe-podejscie-do-niestandardowej-potrzeby-rekrutacji-genealoga",
   "case-study-wsparcie-hd": "/case-study/wsparcie-hr-managera-contman",
 
-  "hr-na-godziny": "/#uslugi",
+  "hr-na-godziny": "/uslugi/procesy-hr",
   "interim-manager": "/#uslugi",
   warsztaty: "/#uslugi",
   "warsztaty-mtq": "/#uslugi",
@@ -40,7 +40,7 @@ const legacyMap = {
   "webinar-mtq": "/#uslugi",
   webinar_pcm: "/#uslugi",
   "webinar-lider-w-stresie": "/#uslugi",
-  "rekrutacja-do-sprzedazy": "/#uslugi",
+  "rekrutacja-do-sprzedazy": "/uslugi/rekrutacje",
   "budowanie-kultury-w-organizacji": "/#uslugi",
 };
 
@@ -62,7 +62,9 @@ const nextConfig = {
       })),
       // Case study Vercom zdjęte ze strony 2026-09-24.
       { source: "/case-study/hr-recruitment-consulting-vercom", destination: "/case-study", permanent: true },
-      { source: "/hr-na-godziny/:path*", destination: "/#uslugi", permanent: true },
+      { source: "/hr-na-godziny/:path*", destination: "/uslugi/procesy-hr", permanent: true },
+      // Brak strony zbiorczej usług - /uslugi prowadzi do sekcji na stronie głównej.
+      { source: "/uslugi", destination: "/#uslugi", permanent: false },
       { source: "/category/:path*", destination: "/blog", permanent: true },
       { source: "/tag/:path*", destination: "/blog", permanent: true },
       { source: "/author/:path*", destination: "/blog", permanent: true },

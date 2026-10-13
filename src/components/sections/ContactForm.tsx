@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const CONTACT_EMAIL = "zuzanna.wozniak@businessquest.pl";
@@ -17,11 +17,23 @@ const topics = [
   "Coś innego",
 ];
 
+// Podstrony usług linkują do /kontakt?temat=<id usługi> - wstępnie zaznaczamy temat.
+const topicByService: Record<string, string> = {
+  rekrutacje: topics[0],
+  sparing: topics[1],
+  procesy: topics[2],
+};
+
 type Status = "idle" | "sending" | "sent" | "error" | "mailto";
 
 export default function ContactForm() {
   const [topic, setTopic] = useState(topics[0]);
   const [status, setStatus] = useState<Status>("idle");
+
+  useEffect(() => {
+    const preset = new URLSearchParams(window.location.search).get("temat");
+    if (preset && topicByService[preset]) setTopic(topicByService[preset]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

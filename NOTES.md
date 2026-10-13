@@ -1,5 +1,11 @@
 # NOTES — Business Quest
 
+## 2026-10-13 (sesja: podstrony usług)
+
+- Zbudowane `/uslugi/rekrutacje`, `/uslugi/sparing-partner`, `/uslugi/procesy-hr` (trasa `src/app/uslugi/[slug]`, treść w `src/data/services.ts`, cennik w `ServicePricing.tsx`). Źródło: Google Doc „Karta usługi | Twój pierwszy zespół HR", zakładka „Opisy produktów na stronę"; poprawione tylko literówki/interpunkcja.
+- Linki: karty na stronie głównej („Szczegóły i cennik"), stopka, `/kontakt?temat=<id>` preselekcjonuje temat formularza. Redirecty WP: `hr-na-godziny` → procesy-hr, `rekrutacja-do-sprzedazy` → rekrutacje; `/uslugi` → `/#uslugi` (307).
+- Brakuje 4. podstrony „Twój pierwszy zespół HR" (klient jeszcze nie napisał). Do wyjaśnienia z klientem: „Pakiety od 5 do 20 godzin" vs tabela 1/10/20 h; success fee 4-10% czego (zakładka Cennik mówi: rocznego wynagrodzenia); tabela rekrutacji różni się od tej w zakładce „Cennik".
+
 ## 2026-06-19 (sesja: poprawki Zespół + Hero, deploy)
 
 - **Sekcja Zespół**: usunięto bio ze strony głównej (desktop+mobile) — zostają imię/rola/LinkedIn + placeholder przycisk „Poczytaj więcej" (pusty, docelowo → strona „O nas"). Większe zdjęcia (PANEL_H `clamp(340px,46vh,560px)`), więcej miejsca na efekt scroll-split.

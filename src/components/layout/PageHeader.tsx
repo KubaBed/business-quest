@@ -55,7 +55,7 @@ export default function PageHeader({
         <div className={`max-w-3xl ${centered ? "mx-auto" : ""}`}>
           {crumbs && crumbs.length > 0 && (
             <nav
-              className={`fade-blur-up flex items-center gap-2 text-sm text-brand-muted mb-6 ${
+              className={`fade-blur-up flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-brand-muted mb-6 ${
                 centered ? "justify-center" : ""
               }`}
               aria-label="Ścieżka"

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { services } from "@/data/services";
@@ -118,6 +119,7 @@ export default function ServicesSection() {
             <BentoCard className="h-full flex flex-col">
               <CardHead title={sparing.title} desc={sparing.description} />
               <BulletList items={sparing.bullets} />
+              <MoreLink href={`/uslugi/${sparing.slug}`} className="mb-6" />
               <div className="mt-auto pt-6 rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5">
                 <ChatMockup />
               </div>
@@ -131,6 +133,7 @@ export default function ServicesSection() {
                 <div>
                   <CardHead title={procesy.title} desc={procesy.description} />
                   <BulletList items={procesy.bullets} cols2 />
+                  <MoreLink href={`/uslugi/${procesy.slug}`} />
                 </div>
                 <div className="rounded-2xl bg-gradient-to-br from-orange/[0.07] to-magenta/[0.05] p-6">
                   <ProcessMockup />
@@ -146,6 +149,7 @@ export default function ServicesSection() {
                 <div>
                   <CardHead title={rekrutacje.title} desc={rekrutacje.description} />
                   <BulletList items={rekrutacje.bullets} cols2 />
+                  <MoreLink href={`/uslugi/${rekrutacje.slug}`} />
                 </div>
                 <div className="rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5">
                   <RecruitMockup />
@@ -186,5 +190,29 @@ function BulletList({ items, cols2 = false }: { items: string[]; cols2?: boolean
         </li>
       ))}
     </ul>
+  );
+}
+
+function MoreLink({ href, className = "" }: { href: string; className?: string }) {
+  return (
+    <Link
+      href={href}
+      className={`group mt-6 inline-flex items-center gap-2 text-magenta-deep font-semibold text-[15px] hover:gap-3 transition-all ${className}`}
+    >
+      Szczegóły i cennik
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
+    </Link>
   );
 }
