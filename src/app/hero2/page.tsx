@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import HeroSectionFirewatch from "@/components/sections/HeroSectionFirewatch";
 import ValueProposition from "@/components/sections/ValueProposition";
 import ServicesSection from "@/components/sections/ServicesSection";
@@ -8,6 +9,11 @@ import CtaSection from "@/components/sections/CtaSection";
 
 /* Alternate landing — firewatch (illustrated cinemagraph) hero variant.
    Same sections as `/`, only the hero differs. */
+// Wariant testowy: poza indeksem, żeby nie dublował strony głównej.
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+};
+
 export default function Hero2() {
   return (
     <>

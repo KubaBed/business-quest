@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import PageHeader from "@/components/layout/PageHeader";
 import CtaBanner from "@/components/sections/CtaBanner";
 import { sortedPosts, type Post } from "@/data/posts";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Blog — businessQuest",
   description:
     "Praktyczne wpisy o rekrutacji, zarządzaniu zespołem i HR dla mikro i małych firm. Bez teorii — z doświadczenia.",
-};
+  path: "/blog",
+});
 
 function Arrow() {
   return (

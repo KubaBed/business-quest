@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageMetadata, organizationId, breadcrumbSchema, SITE_URL } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/layout/PageHeader";
@@ -16,10 +18,13 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const post = getPost(params.slug);
   if (!post) return { title: "Wpis nie znaleziony — businessQuest" };
-  return {
+  return pageMetadata({
     title: `${post.title} — businessQuest`,
     description: post.excerpt,
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.date,
+  });
 }
 
 export default function BlogPostPage({ params }: Params) {
@@ -28,8 +33,32 @@ export default function BlogPostPage({ params }: Params) {
 
   const related = sortedPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
+  const url = `${SITE_URL}/blog/${post.slug}`;
+
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          datePublished: post.date,
+          inLanguage: "pl-PL",
+          url,
+          mainEntityOfPage: url,
+          image: `${SITE_URL}/opengraph-image.png`,
+          author: { "@id": organizationId },
+          publisher: { "@id": organizationId },
+        }}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Start", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
+      />
       <PageHeader
         eyebrow={post.category}
         crumbs={[

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import PageHeader from "@/components/layout/PageHeader";
 import ContactForm from "@/components/sections/ContactForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Kontakt — businessQuest",
   description:
     "Porozmawiajmy o Twoim zespole. Umów bezpłatną, niezobowiązującą rozmowę — wspólnie zobaczymy, czy i jak możemy pomóc.",
-};
+  path: "/kontakt",
+});
 
 const CONTACT_EMAIL = "zuzanna.wozniak@businessquest.pl";
 

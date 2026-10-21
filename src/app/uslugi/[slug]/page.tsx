@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
+import { pageMetadata, organizationId, breadcrumbSchema, SITE_URL } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/layout/PageHeader";
@@ -39,10 +41,11 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const service = getService(params.slug);
   if (!service) return { title: "Usługa nie znaleziona | businessQuest" };
-  return {
+  return pageMetadata({
     title: `${service.name} | businessQuest`,
     description: service.metaDescription,
-  };
+    path: `/uslugi/${service.slug}`,
+  });
 }
 
 function ArrowRight() {
@@ -76,6 +79,24 @@ export default function ServicePage({ params }: Params) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: service.name,
+          description: service.metaDescription,
+          url: `${SITE_URL}/uslugi/${service.slug}`,
+          provider: { "@id": organizationId },
+          areaServed: { "@type": "Country", name: "Polska" },
+          inLanguage: "pl-PL",
+        }}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Start", path: "/" },
+          { name: service.name, path: `/uslugi/${service.slug}` },
+        ])}
+      />
       <PageHeader
         eyebrow="Usługi"
         crumbs={[

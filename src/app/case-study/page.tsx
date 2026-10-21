@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import PageHeader from "@/components/layout/PageHeader";
 import CtaBanner from "@/components/sections/CtaBanner";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Case study — businessQuest",
   description:
     "Realne historie współpracy: rekrutacje nietypowych ról, sprzedaż w kanale partnerskim i stałe wsparcie HR dla rosnących firm.",
-};
+  path: "/case-study",
+});
 
 function Arrow() {
   return (

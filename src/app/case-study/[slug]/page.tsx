@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/layout/PageHeader";
@@ -16,10 +18,12 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const study = getCaseStudy(params.slug);
   if (!study) return { title: "Case study nie znalezione — businessQuest" };
-  return {
+  return pageMetadata({
     title: `${study.title} — businessQuest`,
     description: study.excerpt,
-  };
+    path: `/case-study/${study.slug}`,
+    type: "article",
+  });
 }
 
 export default function CaseStudyDetailPage({ params }: Params) {
@@ -30,6 +34,13 @@ export default function CaseStudyDetailPage({ params }: Params) {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Start", path: "/" },
+          { name: "Case study", path: "/case-study" },
+          { name: study.title, path: `/case-study/${study.slug}` },
+        ])}
+      />
       <PageHeader
         eyebrow={study.service}
         crumbs={[

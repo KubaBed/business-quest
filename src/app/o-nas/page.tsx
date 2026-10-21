@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import LogoStrip from "@/components/sections/LogoStrip";
@@ -6,11 +7,12 @@ import CtaBanner from "@/components/sections/CtaBanner";
 import FounderHero from "@/components/sections/FounderHero";
 import { team } from "@/data/team";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "O nas — businessQuest",
   description:
     "Jesteśmy zespołem, który prowadzi tematy ludzi razem z właścicielami mikro i małych firm. Proste, użyteczne wsparcie HR — bez budowania całego działu.",
-};
+  path: "/o-nas",
+});
 
 const principles = [
   {

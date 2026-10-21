@@ -33,6 +33,9 @@ const legacyMap = {
   "case-study-wsparcie-hd": "/case-study/wsparcie-hr-managera-contman",
 
   "hr-na-godziny": "/uslugi/procesy-hr",
+  "pakiet-basic-16": "/uslugi/procesy-hr",
+  "pakiet-standard-32h": "/uslugi/procesy-hr",
+  "pakiet-enterprise-64h": "/uslugi/procesy-hr",
   "interim-manager": "/#uslugi",
   warsztaty: "/#uslugi",
   "warsztaty-mtq": "/#uslugi",
@@ -69,6 +72,10 @@ const nextConfig = {
       { source: "/tag/:path*", destination: "/blog", permanent: true },
       { source: "/author/:path*", destination: "/blog", permanent: true },
       { source: "/feed", destination: "/blog", permanent: true },
+      // Stare sitemapy WordPressa (mogą wisieć zgłoszone w Search Console).
+      { source: "/sitemap_index.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/wp-sitemap.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/sitemap.rss", destination: "/sitemap.xml", permanent: true },
     ];
   },
 };

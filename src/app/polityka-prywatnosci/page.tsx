@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import PageHeader from "@/components/layout/PageHeader";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Polityka prywatności - businessQuest",
   description:
     "Jak Business Quest sp. z o.o. przetwarza dane osobowe osób, które kontaktują się z nami przez stronę, e-mail i formularze.",
-};
+  path: "/polityka-prywatnosci",
+});
 
 const CONTACT_EMAIL = "zuzanna.wozniak@businessquest.pl";
 
