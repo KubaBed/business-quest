@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const footerLinks = {
   uslugi: [
-    { label: "Rekrutacje i zatrudnianie", href: "/uslugi/rekrutacje" },
-    { label: "Sparing partner", href: "/uslugi/sparing-partner" },
-    { label: "Procesy HR", href: "/uslugi/procesy-hr" },
+    { label: "Rekrutacja i zatrudnienie", href: "/uslugi/rekrutacje" },
+    { label: "Twój HR sparing partner", href: "/uslugi/sparing-partner" },
+    { label: "Wdrożenie i prowadzenie procesów HR", href: "/uslugi/procesy-hr" },
   ],
   firma: [
     { label: "O nas", href: "/o-nas" },

@@ -6,6 +6,7 @@ import QualificationSection from "@/components/sections/QualificationSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import TeamSection from "@/components/sections/TeamSection";
 import CtaSection from "@/components/sections/CtaSection";
+import CooperationModels from "@/components/sections/CooperationModels";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <ServicesSection />
       <TeamSection />
       <QualificationSection />
+      <CooperationModels />
       <TestimonialsSection />
       <CtaSection />
     </>

@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import CtaBanner from "@/components/sections/CtaBanner";
+import StepText from "@/components/ui/StepText";
 import ServicePricing from "@/components/sections/ServicePricing";
 import DotGrid from "@/components/decor/DotGrid";
 import ServiceIcon from "@/components/decor/ServiceIcons";
@@ -121,11 +122,9 @@ export default function ServicePage({ params }: Params) {
                 ))}
               </div>
             </ScrollReveal>
-            {service.process && (
-              <ScrollReveal delay={0.15} className="mt-4 lg:mt-0">
-                <ProcessSteps {...service.process} />
-              </ScrollReveal>
-            )}
+            <ScrollReveal delay={0.15} className="mt-4 lg:mt-0">
+              <ProcessSteps {...service.process} />
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -302,17 +301,18 @@ export default function ServicePage({ params }: Params) {
 type CaseStudy = (typeof caseStudies)[number];
 
 function ProcessSteps({
-  label,
+  title,
   steps,
+  note,
+  labeled = false,
   variant = "sequence",
   icons,
-}: NonNullable<Service["process"]>) {
-  if (variant === "options") {
-    return (
-      <div className="rounded-[1.25rem] border border-brand-border bg-brand-bg-subtle p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-muted mb-5">
-          {label}
-        </p>
+}: Service["process"]) {
+  return (
+    <div className="rounded-[1.25rem] border border-brand-border bg-brand-bg-subtle p-6">
+      <h3 className="text-lg font-bold text-brand-text leading-snug mb-5">{title}</h3>
+
+      {variant === "options" ? (
         <ul className="space-y-3">
           {steps.map((step, i) => (
             <li key={step} className="flex items-center gap-3">
@@ -323,22 +323,17 @@ function ProcessSteps({
                   <span className="block w-2 h-2 rounded-full bg-magenta" />
                 )}
               </span>
-              <span className="text-[15px] leading-snug text-brand-text font-medium">
-                {step}
+              <span
+                className={`text-[15px] leading-snug ${
+                  labeled ? "text-brand-body" : "text-brand-text font-medium"
+                }`}
+              >
+                <StepText text={step} labeled={labeled} />
               </span>
             </li>
           ))}
         </ul>
-      </div>
-    );
-  }
-
-  return (
-    <div className="rounded-[1.25rem] border border-brand-border bg-brand-bg-subtle p-6">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-muted mb-5">
-        {label}
-      </p>
-      <div>
+      ) : (
         <ol className="relative space-y-4">
           {steps.map((step, i) => {
             const last = i === steps.length - 1;
@@ -367,7 +362,13 @@ function ProcessSteps({
             );
           })}
         </ol>
-      </div>
+      )}
+
+      {note && (
+        <p className="mt-5 pt-4 border-t border-brand-border text-[14px] leading-relaxed text-brand-muted">
+          {note}
+        </p>
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { services } from "@/data/services";
+import StepText from "@/components/ui/StepText";
 import { RecruitMockup, ChatMockup, ProcessMockup } from "@/components/decor/ServiceMockups";
 
 /* ---------- Sekcja ---------- */
@@ -30,7 +31,7 @@ export default function ServicesSection() {
           <ScrollReveal className="lg:col-span-1">
             <BentoCard className="h-full flex flex-col">
               <CardHead title={sparing.title} desc={sparing.description} />
-              <BulletList items={sparing.bullets} />
+              <BulletList items={sparing.process.steps} />
               <MoreLink href={`/uslugi/${sparing.slug}`} className="mb-6" />
               <div className="mt-auto pt-6 rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5">
                 <ChatMockup />
@@ -38,13 +39,13 @@ export default function ServicesSection() {
             </BentoCard>
           </ScrollReveal>
 
-          {/* Procesy HR — szeroki, po prawej */}
+          {/* Procesy HR, szeroki, po prawej */}
           <ScrollReveal delay={0.1} className="lg:col-span-2">
             <BentoCard className="h-full">
               <div className="grid md:grid-cols-2 gap-8 items-center h-full">
                 <div>
                   <CardHead title={procesy.title} desc={procesy.description} />
-                  <BulletList items={procesy.bullets} cols2 />
+                  <BulletList items={procesy.process.steps} labeled={procesy.process.labeled} />
                   <MoreLink href={`/uslugi/${procesy.slug}`} />
                 </div>
                 <div className="rounded-2xl bg-gradient-to-br from-orange/[0.07] to-magenta/[0.05] p-6">
@@ -60,7 +61,7 @@ export default function ServicesSection() {
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
                   <CardHead title={rekrutacje.title} desc={rekrutacje.description} />
-                  <BulletList items={rekrutacje.bullets} cols2 />
+                  <BulletList items={rekrutacje.process.steps} cols2 />
                   <MoreLink href={`/uslugi/${rekrutacje.slug}`} />
                 </div>
                 <div className="rounded-2xl bg-gradient-to-br from-magenta/[0.06] to-purple/[0.06] p-5">
@@ -92,13 +93,21 @@ function CardHead({ title, desc }: { title: string; desc: string }) {
   );
 }
 
-function BulletList({ items, cols2 = false }: { items: string[]; cols2?: boolean }) {
+function BulletList({
+  items,
+  cols2 = false,
+  labeled = false,
+}: {
+  items: string[];
+  cols2?: boolean;
+  labeled?: boolean;
+}) {
   return (
     <ul className={`mt-5 grid gap-x-6 gap-y-2.5 ${cols2 ? "sm:grid-cols-2" : ""}`}>
       {items.map((b) => (
-        <li key={b} className="flex items-center gap-2.5 text-brand-body text-[14px]">
-          <span className="block w-1.5 h-1.5 rounded-full bg-magenta flex-shrink-0" />
-          {b}
+        <li key={b} className="flex items-baseline gap-2.5 text-brand-body text-[14px] leading-snug">
+          <span className="block w-1.5 h-1.5 rounded-full bg-magenta flex-shrink-0 -translate-y-px" />
+          <StepText text={b} labeled={labeled} />
         </li>
       ))}
     </ul>

@@ -11,9 +11,10 @@ const CONTACT_EMAIL = "zuzanna.wozniak@businessquest.pl";
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
 
 const topics = [
-  "Rekrutacja",
-  "Sparing partner / trudna decyzja",
-  "Procesy HR i struktura zespołu",
+  "Rekrutacja i zatrudnienie",
+  "Twój HR sparing partner",
+  "Wdrożenie i prowadzenie procesów HR",
+  "Outsourcing HR - Twój Pierwszy Zespół HR",
   "Coś innego",
 ];
 
@@ -22,6 +23,7 @@ const topicByService: Record<string, string> = {
   rekrutacje: topics[0],
   sparing: topics[1],
   procesy: topics[2],
+  outsourcing: topics[3],
 };
 
 type Status = "idle" | "sending" | "sent" | "error" | "mailto";

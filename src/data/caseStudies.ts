@@ -106,7 +106,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Dedykowane wsparcie HR Managera w ramach „HR na godziny”",
     client: "Contman",
     industry: "IT — low-code i BPM",
-    service: "HR na godziny",
+    service: "Outsourcing HR - Twój Pierwszy Zespół HR",
     excerpt:
       "Płynne przejęcie obowiązków HR Managerki w firmie technologicznej — od rekrutacji po strategię. Współpraca, która z 3-miesięcznego testu przerodziła się w ponad 1,5 roku.",
     challengeOneLine:
@@ -116,7 +116,7 @@ export const caseStudies: CaseStudy[] = [
     facts: [
       { label: "Klient", value: "Contman" },
       { label: "Branża", value: "IT (low-code, BPM)" },
-      { label: "Zakres", value: "HR na godziny · Rekrutacja · Warsztaty" },
+      { label: "Zakres", value: "Outsourcing HR · Rekrutacja · Warsztaty" },
       { label: "Czas", value: "Ponad 1,5 roku" },
     ],
     metrics: [
@@ -177,7 +177,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Operacyjne wsparcie Zarządu w obszarze ludzkim",
     client: "Appchance",
     industry: "Software house",
-    service: "HR na godziny",
+    service: "Outsourcing HR - Twój Pierwszy Zespół HR",
     excerpt:
       "Od pojedynczych rekrutacji do stałego, operacyjnego wsparcia Zarządu — uporządkowanie procesów ludzi w rosnącym software housie w 7 miesięcy.",
     challengeOneLine:
@@ -187,7 +187,7 @@ export const caseStudies: CaseStudy[] = [
     facts: [
       { label: "Klient", value: "Appchance" },
       { label: "Branża", value: "Software house" },
-      { label: "Zakres", value: "HR na godziny · Rekrutacja · Strategia" },
+      { label: "Zakres", value: "Outsourcing HR · Rekrutacja · Strategia" },
       { label: "Czas", value: "7 miesięcy" },
     ],
     metrics: [

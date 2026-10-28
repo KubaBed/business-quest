@@ -1,7 +1,11 @@
 // Treść podstron usług pochodzi z dokumentu klienta „Karta usługi | Twój pierwszy
-// zespół HR", zakładka „Opisy produktów na stronę" (stan z 2026-10-13).
+// zespół HR", zakładka „Opisy produktów na stronę" (stan z 2026-10-13, nazwy usług
+// i karty "process" ze zmian z 2026-10-21).
 // Poprawione tylko literówki i interpunkcja; zakresy liczbowe zapisane z "-".
-// Pola id/icon/title/description/bullets zasilają karty na stronie głównej.
+// Pola id/icon/title/description i process.steps zasilają karty na stronie głównej.
+
+/** Nazwa modelu godzinowego, jednakowa w całym serwisie. */
+export const OUTSOURCING_NAME = "Outsourcing HR - Twój Pierwszy Zespół HR";
 
 export type ServiceIconName =
   | "target"
@@ -53,7 +57,7 @@ export type PricingBlock =
       packages: PricePackage[];
       note?: string;
     }
-  | { kind: "text"; title: string; paragraphs: string[]; chips?: string[] };
+  | { kind: "text"; title: string; subtitle?: string; paragraphs: string[]; chips?: string[] };
 
 export interface Service {
   id: string;
@@ -62,7 +66,6 @@ export interface Service {
   /** Tytuł karty na stronie głównej. */
   title: string;
   description: string;
-  bullets: string[];
   /** Nagłówek podstrony (H1). */
   name: string;
   tagline: string;
@@ -70,11 +73,15 @@ export interface Service {
   intro: string[];
   /**
    * Karta obok opisu, słowami z treści klienta: "sequence" to kroki procesu
-   * połączone linią, "options" to lista elementów z ikonami.
+   * połączone linią, "options" to lista elementów z ikonami. Punkty idą też
+   * na kartę usługi na stronie głównej.
    */
-  process?: {
-    label: string;
+  process: {
+    title: string;
     steps: string[];
+    note?: string;
+    /** Punkty w formie "Etap: opis", nazwa etapu pogrubiona. */
+    labeled?: boolean;
     variant?: "sequence" | "options";
     icons?: ServiceIconName[];
   };
@@ -94,16 +101,10 @@ export const services: Service[] = [
     id: "rekrutacje",
     slug: "rekrutacje",
     icon: "Users",
-    title: "Rekrutacje i zatrudnianie",
+    title: "Rekrutacja i zatrudnienie",
     description:
       "Prowadzimy procesy, które zwykle zjadają najwięcej Twojego czasu i energii.",
-    bullets: [
-      "przygotowanie ogłoszeń rekrutacyjnych",
-      "selekcja kandydatów",
-      "organizacja procesu rozmów",
-      "wsparcie w decyzji o zatrudnieniu",
-    ],
-    name: "Rekrutacje i zatrudnianie",
+    name: "Rekrutacja i zatrudnienie",
     tagline: "Prowadzimy rekrutację za Ciebie. Ty podejmujesz decyzję.",
     metaDescription:
       "Prowadzimy rekrutację za Ciebie: od profilu roli i ogłoszenia, przez selekcję, po rozmowy i shortlistę z rekomendacją. Decyzję o zatrudnieniu podejmujesz Ty.",
@@ -112,14 +113,15 @@ export const services: Service[] = [
       "Bierzemy na siebie prowadzenie procesu: od ustalenia, kogo naprawdę potrzebujesz, przez ogłoszenie i selekcję, po rozmowy i rekomendację. Ostateczną decyzję o zatrudnieniu podejmujesz Ty. Podejmujesz ją na podstawie uporządkowanego procesu skupionego wokół celu biznesowego, który jest dla Ciebie ważny.",
     ],
     process: {
-      label: "Prowadzenie procesu",
+      title: "Od potrzeby do decyzji",
       steps: [
-        "Ustalenie, kogo naprawdę potrzebujesz",
-        "Ogłoszenie i selekcja",
-        "Rozmowy",
-        "Rekomendacja",
-        "Ostateczną decyzję o zatrudnieniu podejmujesz Ty",
+        "Ustalamy, kogo naprawdę potrzebujesz",
+        "Docieramy do kandydatów: ogłoszenia i headhunting",
+        "Dobieramy narzędzia selekcji do roli",
+        "Prowadzimy rozmowy i rekomendujemy najlepsze osoby",
+        "Ty decydujesz, kogo zatrudnić",
       ],
+      note: "Dbamy, żeby proces był płynny dla Ciebie i przyjazny dla kandydatów.",
     },
     offeringsLabel: "Zakres usługi",
     offerings: [
@@ -176,7 +178,8 @@ export const services: Service[] = [
       },
       {
         kind: "text",
-        title: "HR na godziny: rekrutacja w ramach pakietu",
+        title: OUTSOURCING_NAME,
+        subtitle: "Rekrutacja w\u00a0pakiecie godzinowym",
         paragraphs: [
           "Jeśli rekrutacja jest jednym z kilku tematów, którymi się dla Ciebie zajmujemy, wchodzi w pakiet godzinowy: 16 h obejmuje jedną rekrutację, 32 h dwie, a 64 h trzy. Powyżej tego ustalamy stałą opłatę za zatrudnienie.",
         ],
@@ -185,7 +188,7 @@ export const services: Service[] = [
     ],
     pricingAside: {
       text: "Pakiety godzinowe opisujemy szczegółowo przy usłudze",
-      linkLabel: "Wdrożenie i operacyjne prowadzenie procesów HR",
+      linkLabel: "Wdrożenie i prowadzenie procesów HR",
       href: "/uslugi/procesy-hr#cennik",
     },
     start: {
@@ -205,17 +208,10 @@ export const services: Service[] = [
     id: "sparing",
     slug: "sparing-partner",
     icon: "MessageCircle",
-    title: "Twój sparing partner w decyzjach personalnych",
+    title: "Twój HR sparing partner",
     description:
       "Druga perspektywa w momentach, w których trudno decydować w pojedynkę.",
-    bullets: [
-      "trudne rozmowy z pracownikami",
-      "zmiana roli lub zakresu odpowiedzialności",
-      "sytuacje konfliktowe w zespole",
-      "decyzje o rozstaniu z pracownikiem",
-      "rozmowy o wynagrodzeniach i zmianach w zespole",
-    ],
-    name: "Twój sparing partner",
+    name: "Twój HR sparing partner",
     tagline:
       "Poszerzona perspektywa przy decyzjach, których nie chcesz podejmować sam.",
     metaDescription:
@@ -225,13 +221,16 @@ export const services: Service[] = [
       "Jesteśmy po to, żeby te decyzje miały drugą perspektywę: perspektywę kogoś z doświadczeniem z wielu firm i z dystansem do Twojej sytuacji. Czasem to jedna rozmowa przed trudnym spotkaniem. Czasem stały kontakt przez kilka miesięcy, bo tematów jest więcej.",
     ],
     process: {
-      label: "Druga perspektywa",
+      title: "Szersza perspektywa w trudnym lub ważnym momencie",
       variant: "options",
       steps: [
-        "Jedna rozmowa przed trudnym spotkaniem",
-        "Stały kontakt przez kilka miesięcy",
+        "więcej możliwych rozwiązań",
+        "mniej ryzyka",
+        "spokojniej w rozmowie",
+        "decyzja, za którą stoisz",
       ],
-      icons: ["chat", "calendar"],
+      icons: ["check", "check", "check", "check"],
+      note: "Jednorazowo lub na stałe.",
     },
     offeringsLabel: "Przykłady",
     offerings: [
@@ -280,7 +279,7 @@ export const services: Service[] = [
     ],
     pricingAside: {
       text: "Jeśli przewidujesz, że tematów będzie więcej niż same rozmowy, sprawdź",
-      linkLabel: "pakiety HR na godziny",
+      linkLabel: OUTSOURCING_NAME,
       href: "/uslugi/procesy-hr#cennik",
     },
     start: {
@@ -302,33 +301,29 @@ export const services: Service[] = [
     id: "procesy",
     slug: "procesy-hr",
     icon: "Layers",
-    title: "Procesy HR — skuteczność operacyjna zespołu",
+    title: "Wdrożenie i prowadzenie procesów HR",
     description: "Porządkujemy sposób pracy zespołu, gdy firma rośnie.",
-    bullets: [
-      "doprecyzowanie zakresów odpowiedzialności",
-      "uporządkowanie struktury zespołu",
-      "ścieżki rozwoju",
-      "podstawowe zasady współpracy",
-    ],
-    name: "Wdrożenie i operacyjne prowadzenie procesów HR",
+    name: "Wdrożenie i prowadzenie procesów HR",
     tagline:
       "Porządkujemy sposób pracy zespołu tak, żeby nie każda decyzja wracała do Ciebie.",
     metaDescription:
-      "Porządkujemy sposób pracy zespołu w małej firmie: odpowiedzialności, strukturę, ścieżki rozwoju, zasady współpracy i oceny pracownicze. HR na godziny od 16 h.",
+      "Porządkujemy sposób pracy zespołu w małej firmie: odpowiedzialności, strukturę, ścieżki rozwoju, zasady współpracy i oceny pracownicze. Outsourcing HR w pakietach od 16 h.",
     intro: [
       "To, co działało przy trzech osobach, przestaje działać przy ośmiu. Zadania zaczynają wisieć między ludźmi, decyzje wracają na Twoje biurko, a kiedy coś nie zostaje zrobione, słyszysz: „myślałam, że robi to ktoś inny”.",
       "Porządkujemy sposób pracy zespołu: zakresy odpowiedzialności, strukturę, ścieżki rozwoju i zasady współpracy. Wprowadzamy tylko te rozwiązania, które realnie ułatwiają pracę i które jesteście w stanie utrzymać bez nas. Małe firmy nie potrzebują rozbudowanych systemów HR. Potrzebują jasności.",
     ],
     process: {
-      label: "Porządkujemy sposób pracy zespołu",
+      title: "Efektywnie zaopiekowany zespół na każdym etapie",
       variant: "options",
       steps: [
-        "Zakresy odpowiedzialności",
-        "Struktura",
-        "Ścieżki rozwoju",
-        "Zasady współpracy",
+        "Wdrożenie: dobry start nowej osoby",
+        "Codzienna praca: jasne zakresy, struktura i zasady współpracy",
+        "Rozwój: ocena, feedback, wynagrodzenia i ścieżki rozwoju",
+        "Zaangażowanie: to, co sprawia, że dobrzy ludzie zostają",
+        "Rozstanie: odejście z szacunkiem i wnioskami na przyszłość",
       ],
-      icons: ["checklist", "org", "trendingUp", "fileText"],
+      icons: ["users", "checklist", "trendingUp", "star", "logout"],
+      labeled: true,
     },
     offeringsLabel: "Przykłady",
     offerings: [
@@ -366,8 +361,8 @@ export const services: Service[] = [
     pricing: [
       {
         kind: "packages",
-        title: "HR na godziny w modelu Freelancer HR",
-        subtitle: "Wsparcie operacyjne",
+        title: OUTSOURCING_NAME,
+        subtitle: "Wsparcie operacyjne w\u00a0pakietach Freelancer HR",
         packages: [
           { name: "16 h", price: "4 000 zł", rate: "250 zł/h", extra: "1 rekrutacja" },
           { name: "32 h", price: "6 400 zł", rate: "200 zł/h", extra: "2 rekrutacje" },
@@ -403,6 +398,29 @@ export const services: Service[] = [
     ],
   },
 ];
+
+// Blok pod sekcją „W jakich sytuacjach możemy Ci pomóc?" na stronie głównej
+// (zmiany z dokumentu klienta z 2026-10-21).
+export const cooperationModels = {
+  title: "Jak możemy współpracować?",
+  intro: "W każdym z tych obszarów możesz wybrać jedną z dwóch form.",
+  models: [
+    {
+      id: "projekt",
+      title: "Projekt HR z jasnym celem",
+      text: "Na start ustalamy jeden konkretny efekt i dowozimy go w umówionym czasie. Wiesz z góry, co dostaniesz i kiedy.",
+      fit: "chcesz zrekrutować konkretną osobę, stworzyć strukturę stanowisk albo uporządkować zakresy odpowiedzialności.",
+    },
+    {
+      id: "outsourcing",
+      title: OUTSOURCING_NAME,
+      text: "Ustalamy miesięczną pulę godzin na pracę strategiczną i bieżącą. Na regularnych spotkaniach statusowych wspólnie decydujemy, czym zajmujemy się w danym miesiącu.",
+      fit: "potrzebujesz stałego wsparcia HR, ale nie całego etatu, a priorytety zmieniają się z miesiąca na miesiąc.",
+      link: { label: "Zobacz pakiety godzinowe", href: "/uslugi/procesy-hr#cennik" },
+    },
+  ],
+  cta: { text: "Nie wiesz, od czego zacząć?", label: "Porozmawiajmy", href: "/kontakt" },
+};
 
 export function getService(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);
