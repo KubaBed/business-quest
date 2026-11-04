@@ -160,10 +160,10 @@ export const services: Service[] = [
           "Success fee",
         ],
         rows: [
-          ["Junior / mid", "3 500-4 000 zł", "3 500-4 000 zł", "4-10%"],
-          ["Mid / senior", "4 000-5 500 zł", "4 000-5 500 zł", "4-10%"],
-          ["Senior / manager", "5 500-6 000 zł", "5 500-6 000 zł", "4-10%"],
-          ["Manager", "6 000-8 000 zł", "6 000-8 000 zł", "4-10%"],
+          ["Junior / mid", "3 500-4 000 zł", "3 500-4 000 zł", "4-10% rocznego wynagrodzenia"],
+          ["Mid / senior", "4 000-5 500 zł", "4 000-5 500 zł", "4-10% rocznego wynagrodzenia"],
+          ["Senior / manager", "5 500-6 000 zł", "5 500-6 000 zł", "4-10% rocznego wynagrodzenia"],
+          ["Manager", "6 000-8 000 zł", "6 000-8 000 zł", "4-10% rocznego wynagrodzenia"],
         ],
         note: "Widełki zależą od trudności roli i sytuacji na rynku. Ustalamy je przed startem, a nie w trakcie.",
         // Opis etapów z zakładki „Cennik" w dokumencie klienta.
@@ -274,7 +274,7 @@ export const services: Service[] = [
           { name: "10 h", price: "3 000 zł", rate: "300 zł/h" },
           { name: "20 h", price: "5 600 zł", rate: "280 zł/h" },
         ],
-        note: "Pakiety od 5 do 20 godzin, do wykorzystania w ciągu kwartału. Godziny wykorzystujesz wtedy, kiedy ich potrzebujesz. Nie musisz planować spotkań z góry.",
+        note: "Przy zakupie pakietu konsultacje są do wykorzystania w ciągu kwartału. Godziny wykorzystujesz wtedy, kiedy ich potrzebujesz. Nie musisz planować spotkań z góry.",
       },
     ],
     pricingAside: {
@@ -370,14 +370,6 @@ export const services: Service[] = [
         ],
         note: "Przy większej liczbie rekrutacji ustalamy dodatkowo stałą opłatę za zatrudnienie, od 2 000 zł netto za osobę.",
       },
-      {
-        kind: "text",
-        title: "Model elastyczny: stała współpraca",
-        paragraphs: [
-          "Stałe wynagrodzenie miesięczne, które wymiennie przeznaczasz na godziny konsultacji, opłatę rekrutacyjną albo szkolenie dla zespołu. Dobre rozwiązanie, kiedy wiesz, że tematy ludzi będą wracać regularnie, ale nie wiesz jeszcze, które z nich. Wycena po warsztacie kick-starter.",
-        ],
-        chips: ["Godziny konsultacji", "Opłata rekrutacyjna", "Szkolenie dla zespołu"],
-      },
     ],
     start: {
       title: "Warsztat kick-starter",
@@ -399,17 +391,21 @@ export const services: Service[] = [
   },
 ];
 
-// Blok pod sekcją „W jakich sytuacjach możemy Ci pomóc?" na stronie głównej
-// (zmiany z dokumentu klienta z 2026-10-21).
+// Blok między „Co zyskujesz?" a „W jakich obszarach działamy?" na stronie głównej
+// (dokument klienta z 2026-10-21, kolejność i tekst od Marty z 2026-11-02).
 export const cooperationModels = {
   title: "Jak możemy współpracować?",
-  intro: "W każdym z tych obszarów możesz wybrać jedną z dwóch form.",
+  intro: "Nasi klienci najczęściej wybierają jedną z dwóch opcji.",
   models: [
     {
       id: "projekt",
       title: "Projekt HR z jasnym celem",
       text: "Na start ustalamy jeden konkretny efekt i dowozimy go w umówionym czasie. Wiesz z góry, co dostaniesz i kiedy.",
       fit: "chcesz zrekrutować konkretną osobę, stworzyć strukturę stanowisk albo uporządkować zakresy odpowiedzialności.",
+      link: {
+        label: "Zapoznaj się z obszarami poniżej i wybierz najlepszą opcję dla Twojej organizacji",
+        href: "/#uslugi",
+      },
     },
     {
       id: "outsourcing",
@@ -419,7 +415,7 @@ export const cooperationModels = {
       link: { label: "Zobacz pakiety godzinowe", href: "/uslugi/procesy-hr#cennik" },
     },
   ],
-  cta: { text: "Nie wiesz, od czego zacząć?", label: "Porozmawiajmy", href: "/kontakt" },
+  cta: { text: "Potrzebujesz inaczej dostosowanej formy współpracy?", label: "Porozmawiajmy", href: "/kontakt" },
 };
 
 export function getService(slug: string): Service | undefined {

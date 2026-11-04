@@ -3,7 +3,7 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import Button from "@/components/ui/Button";
 import { cooperationModels } from "@/data/services";
 
-/** Dwie formy współpracy w kolorowym panelu, pod sekcją „W jakich sytuacjach możemy Ci pomóc?". */
+/** Dwie formy współpracy w kolorowym panelu, między „Co zyskujesz?" a „W jakich obszarach działamy?". */
 export default function CooperationModels() {
   const { title, intro, models, cta } = cooperationModels;
 
@@ -55,6 +55,7 @@ export default function CooperationModels() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         aria-hidden
+                        className="flex-shrink-0"
                       >
                         <path d="M5 12h14M13 6l6 6-6 6" />
                       </svg>

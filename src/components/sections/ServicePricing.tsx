@@ -153,9 +153,9 @@ function PriceTable({ columns, rows }: { columns: string[]; rows: string[][] }) 
             <p className="font-bold text-brand-text mb-3">{row[0]}</p>
             <dl className="space-y-2">
               {columns.slice(1).map((c, i) => (
-                <div key={c} className="flex items-baseline justify-between gap-4 text-[15px]">
+                <div key={c} className="flex flex-wrap items-baseline justify-between gap-x-4 text-[15px]">
                   <dt className="text-brand-muted">{c}</dt>
-                  <dd className="text-brand-text font-medium whitespace-nowrap tabular-nums">
+                  <dd className="ml-auto text-brand-text font-medium text-right tabular-nums">
                     {row[i + 1]}
                   </dd>
                 </div>

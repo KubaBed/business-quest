@@ -103,7 +103,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "wsparcie-hr-managera-contman",
-    title: "Dedykowane wsparcie HR Managera w ramach „HR na godziny”",
+    title: "Dedykowane wsparcie HR Managera w ramach usługi „Outsourcing HR”",
     client: "Contman",
     industry: "IT — low-code i BPM",
     service: "Outsourcing HR - Twój Pierwszy Zespół HR",
@@ -129,7 +129,7 @@ export const caseStudies: CaseStudy[] = [
         heading: "Kontekst współpracy",
         paragraphs: [
           "Contman od ponad 20 lat dostarcza rozwiązania pozwalające cyfryzować dokumenty i procesy w organizacjach, specjalizuje się także w narzędziach low-code i business process management w Polsce i na świecie.",
-          "Współpracę rozpoczęliśmy w 2022 roku, kiedy ówczesna HR Managerka szukała osoby na swoje miejsce. Po kilku rozmowach rekrutacyjnych nie znalazła kandydatki odpowiadającej na wszystkie potrzeby firmy, więc postawiła na inną formę współpracy — „HR na godziny”. Po spotkaniu próbnym zdecydowaliśmy się na 3-miesięczny test, który z czasem przerodził się w stałą współpracę trwającą już ponad 1,5 roku.",
+          "Współpracę rozpoczęliśmy w 2022 roku, kiedy ówczesna HR Managerka szukała osoby na swoje miejsce. Po kilku rozmowach rekrutacyjnych nie znalazła kandydatki odpowiadającej na wszystkie potrzeby firmy, więc postawiła na inną formę współpracy — „Outsourcing HR”. Po spotkaniu próbnym zdecydowaliśmy się na 3-miesięczny test, który z czasem przerodził się w stałą współpracę trwającą już ponad 1,5 roku.",
         ],
       },
       {
@@ -147,7 +147,7 @@ export const caseStudies: CaseStudy[] = [
         heading: "Rozwiązanie",
         bullets: [
           "zaangażowanie liderów już na etapie kick-offu — spotkanie nie tylko z współwłaścicielem i HR Managerką, ale też z kluczowymi liderami",
-          "start w modelu „HR na godziny” — powtarzalne wsparcie operacyjne połączone z mniejszymi projektami wdrożeniowymi",
+          "start w modelu „Outsourcing HR” — powtarzalne wsparcie operacyjne połączone z mniejszymi projektami wdrożeniowymi",
           "konsultant z doświadczeniem w firmach IT, rozumiejący ich kontekst biznesowy",
           "budowanie relacji z zespołem poprzez regularne spotkania 1on1 i zbieranie feedbacku na bieżąco",
         ],
@@ -200,7 +200,7 @@ export const caseStudies: CaseStudy[] = [
         heading: "Kontekst współpracy",
         paragraphs: [
           "Appchance to software house specjalizujący się w projektowaniu i budowie aplikacji mobilnych oraz webowych. Łączy biznesowy profesjonalizm z nieformalnymi relacjami, a skuteczność w realizacji celów — z brakiem sztywnej hierarchii.",
-          "Współpracę rozpoczęliśmy od kilku procesów rekrutacyjnych, a z czasem — ze względu na potrzebę ułożenia procesów wewnętrznych — rozszerzyliśmy ją o usługę „HR na godziny”.",
+          "Współpracę rozpoczęliśmy od kilku procesów rekrutacyjnych, a z czasem — ze względu na potrzebę ułożenia procesów wewnętrznych — rozszerzyliśmy ją o usługę „Outsourcing HR”.",
         ],
       },
       {
@@ -219,7 +219,7 @@ export const caseStudies: CaseStudy[] = [
       {
         heading: "Rozwiązanie",
         bullets: [
-          "rozpoczęcie współpracy w modelu „HR na godziny” — stałe, operacyjne wsparcie z porządkowaniem procesów",
+          "rozpoczęcie współpracy w modelu „Outsourcing HR” — stałe, operacyjne wsparcie z porządkowaniem procesów",
           "konsultant z doświadczeniem w firmach IT, rozumiejący ich kontekst biznesowy",
           "audyt dotychczasowych działań w obszarze ludzkim i wyznaczenie priorytetów",
           "zaangażowanie liderów we wprowadzane zmiany poprzez spotkania 1on1",

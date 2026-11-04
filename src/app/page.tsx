@@ -14,10 +14,10 @@ export default function Home() {
       <HeroSection />
       <ProblemSection />
       <ValueProposition />
+      <CooperationModels />
       <ServicesSection />
       <TeamSection />
       <QualificationSection />
-      <CooperationModels />
       <TestimonialsSection />
       <CtaSection />
     </>
