@@ -9,6 +9,7 @@ import QualificationSection from "@/components/sections/QualificationSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import TeamSection from "@/components/sections/TeamSection";
 import CtaSection from "@/components/sections/CtaSection";
+import CooperationModels from "@/components/sections/CooperationModels";
 
 // Tytuł i opis dziedziczone z layoutu; tu tylko canonical.
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function Home() {
       <HeroSection />
       <ProblemSection />
       <ValueProposition />
+      <CooperationModels />
       <ServicesSection />
       <TeamSection />
       <QualificationSection />

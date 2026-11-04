@@ -54,9 +54,12 @@ export default function TeamSection() {
   const xRight = useTransform(scrollYProgress, [0.12, 0.52], [0, 130]);
   const yCenter = useTransform(scrollYProgress, [0.12, 0.52], [0, -28]); // CEO wyżej
   const radius = useTransform(scrollYProgress, [0.12, 0.52], [0, 20]);
-  // Podpisy pojawiają się po rozjeździe, pod każdym zdjęciem
-  const capOpacity = useTransform(scrollYProgress, [0.52, 0.8], [0, 1]);
-  const capY = useTransform(scrollYProgress, [0.52, 0.8], [16, 0]);
+  // Podpisy pojawiają się po rozjeździe, pod każdym zdjęciem.
+  // Funkcja zamiast tablicy zakresów: dla opacity z tablicą framer-motion 12 przenosi
+  // animację na natywny ScrollTimeline całej strony i gubi target sekcji, więc podpisy
+  // nie dochodziły do pełnego krycia.
+  const capOpacity = useTransform(scrollYProgress, (p) => Math.min(Math.max((p - 0.5) / 0.14, 0), 1));
+  const capY = useTransform(scrollYProgress, [0.5, 0.64], [16, 0]);
 
   const xByIndex = [xLeft, undefined, xRight];
 
