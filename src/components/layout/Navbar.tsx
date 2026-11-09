@@ -183,7 +183,7 @@ function ServicesMenu({ label, services }: { label: string; services: NavService
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout>>();
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const pathname = usePathname();
   const onServicePage = pathname?.startsWith("/uslugi/");
 

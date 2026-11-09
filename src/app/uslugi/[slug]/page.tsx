@@ -23,7 +23,7 @@ import { services, getService, type Service } from "@/data/services";
 import { caseStudies } from "@/data/caseStudies";
 
 interface Params {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export const dynamicParams = false;
@@ -39,8 +39,9 @@ export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-  const service = getService(params.slug);
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params;
+  const service = getService(slug);
   if (!service) return { title: "Usługa nie znaleziona | businessQuest" };
   return pageMetadata({
     title: `${service.name} | businessQuest`,
@@ -67,8 +68,9 @@ function ArrowRight() {
   );
 }
 
-export default function ServicePage({ params }: Params) {
-  const service = getService(params.slug);
+export default async function ServicePage({ params }: Params) {
+  const { slug } = await params;
+  const service = getService(slug);
   if (!service) notFound();
 
   const contactHref = `/kontakt?temat=${service.id}`;

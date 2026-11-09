@@ -8,15 +8,16 @@ import CtaBanner from "@/components/sections/CtaBanner";
 import { posts, getPost, sortedPosts } from "@/data/posts";
 
 interface Params {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-  const post = getPost(params.slug);
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPost(slug);
   if (!post) return { title: "Wpis nie znaleziony — businessQuest" };
   return pageMetadata({
     title: `${post.title} — businessQuest`,
@@ -27,8 +28,9 @@ export function generateMetadata({ params }: Params): Metadata {
   });
 }
 
-export default function BlogPostPage({ params }: Params) {
-  const post = getPost(params.slug);
+export default async function BlogPostPage({ params }: Params) {
+  const { slug } = await params;
+  const post = getPost(slug);
   if (!post) notFound();
 
   const related = sortedPosts.filter((p) => p.slug !== post.slug).slice(0, 2);

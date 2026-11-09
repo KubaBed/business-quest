@@ -8,15 +8,16 @@ import CtaBanner from "@/components/sections/CtaBanner";
 import { caseStudies, getCaseStudy } from "@/data/caseStudies";
 
 interface Params {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-  const study = getCaseStudy(params.slug);
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params;
+  const study = getCaseStudy(slug);
   if (!study) return { title: "Case study nie znalezione — businessQuest" };
   return pageMetadata({
     title: `${study.title} — businessQuest`,
@@ -26,8 +27,9 @@ export function generateMetadata({ params }: Params): Metadata {
   });
 }
 
-export default function CaseStudyDetailPage({ params }: Params) {
-  const study = getCaseStudy(params.slug);
+export default async function CaseStudyDetailPage({ params }: Params) {
+  const { slug } = await params;
+  const study = getCaseStudy(slug);
   if (!study) notFound();
 
   const related = caseStudies.filter((c) => c.slug !== study.slug).slice(0, 2);
