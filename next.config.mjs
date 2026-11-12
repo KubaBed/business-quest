@@ -51,6 +51,19 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Brandkit (/brand) udostępniany linkiem, poza indeksem: także pliki PNG/ZIP z /brand/*.
+  async headers() {
+    return [
+      {
+        source: "/brand/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }],
+      },
+      {
+        source: "/brand",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }],
+      },
+    ];
+  },
   async redirects() {
     return [
       ...legacyPosts.map((slug) => ({

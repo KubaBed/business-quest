@@ -1,0 +1,38 @@
+/* businessQuest - kolory i czcionka strony businessquest.pl (stan: listopad 2026)
+   Czcionka: Outfit (Google Fonts, licencja SIL OFL): https://fonts.google.com/specimen/Outfit */
+
+:root {
+  /* Akcenty */
+  --color-magenta: #F7087F;       /* główny: przyciski, linki, wyróżnienia */
+  --color-magenta-deep: #C20066;  /* tekst w kolorze marki na białym tle */
+  --color-magenta-light: #FF5AAD; /* przycisk po najechaniu */
+  --color-magenta-dim: #FFB3D1;   /* delikatne tła i akcenty */
+  --color-purple: #8B3FE8;
+  --color-red: #FB3B2F;
+  --color-orange: #FF6B2B;
+  --color-orange-light: #FFAB82;
+
+  /* Tekst */
+  --color-text: #0E0E10;
+  --color-text-body: #3F3F46;
+  --color-text-muted: #71717A;
+
+  /* Tła i linie */
+  --color-bg: #FFFFFF;
+  --color-bg-subtle: #F7F7F8;
+  --color-bg-cream: #F7F2EA;
+  --color-bg-plum: #160910;
+  --color-border: #ECECEE;
+  --color-line: #D9D9DE;
+
+  /* Kolor w pliku logo */
+  --color-logo: #EF087A;
+
+  /* Gradienty */
+  --gradient-magenta: linear-gradient(160deg, #F7087F 0%, #8B3FE8 100%);
+  --gradient-orange: linear-gradient(160deg, #FB3B2F 0%, #FF8A3D 100%);
+  --gradient-brand: linear-gradient(135deg, #F7087F 0%, #FF6B2B 100%);
+
+  /* Czcionka */
+  --font-sans: "Outfit", sans-serif;
+}
