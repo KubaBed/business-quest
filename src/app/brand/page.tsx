@@ -95,8 +95,6 @@ function SectionHead({ label, title, lead }: { label: string; title: string; lea
   );
 }
 
-const CONTACT_EMAIL = "zuzanna.wozniak@businessquest.pl";
-
 const wrap = "max-w-7xl 2xl:max-w-[1440px] mx-auto px-6 lg:px-8";
 
 export default function BrandPage() {
@@ -145,7 +143,7 @@ export default function BrandPage() {
             {logos.map((l) => (
               <div key={l.file} className="rounded-2xl bg-white border border-brand-border overflow-hidden">
                 <div className={`aspect-[16/9] flex items-center justify-center ${l.bg}`}>
-                  <Image src={`/brand/${l.file}`} alt={l.label} width={500} height={150} className="w-3/4 h-auto" />
+                  <Image src={`/brand/podglad/${l.file}`} alt={l.label} width={1600} height={158} className="w-3/4 h-auto" />
                 </div>
                 <div className="p-4 flex flex-wrap items-center justify-between gap-2">
                   <p className="text-sm font-semibold text-brand-text">{l.label}</p>
@@ -157,14 +155,6 @@ export default function BrandPage() {
               </div>
             ))}
           </div>
-          <p className="mt-6 text-sm text-brand-muted">
-            Logo mamy tylko w PNG o szerokości 500 px. Jeśli potrzebujesz większego pliku do druku albo wersji
-            wektorowej (SVG, PDF), napisz do nas:{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-magenta-deep font-semibold hover:underline">
-              {CONTACT_EMAIL}
-            </a>
-            .
-          </p>
         </div>
       </section>
 
